@@ -17,6 +17,9 @@ switch ($params[0]) {
 	case 'login':
 		include "account/login.php";
 		break;
+	case 'logout':
+		include "account/logout.php";
+		break;
 }
 
 
