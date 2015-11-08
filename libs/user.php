@@ -25,6 +25,9 @@ function user_register($login, $password, $permission, $name, $secondname, $clas
 	    case teacher:
 	        $dbineed='teachers';
 	        break;
+	    case parent:
+	        $dbineed='parents';
+	        break;
 	}
 	if(!user_get_params($login)){
 		$udb = $database->insert("users", [
@@ -69,6 +72,9 @@ function user_get_params($login){
 	    case teacher:
 	        $dbineed='teachers';
 	        break;
+	    case parent:
+	        $dbineed='parents';
+	        break;
 	}
 return db_get($dbineed, ["Login", "Name", "SecondName", "Class"], ["Login[=]" => $login])[0];
 }
@@ -81,6 +87,9 @@ function user_get_by_list($in='student'){
 	        break;
 	    case teacher:
 	        $dbineed='teachers';
+	        break;
+	    case parent:
+	        $dbineed='parents';
 	        break;
 	}
 return db_get($dbineed, ["Login", "Name", "SecondName", "Class"]);

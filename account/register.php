@@ -21,8 +21,9 @@ include "../theme.php";
 <input type="hidden" name="act" value="reg">
 <input type="text" name="login" placeholder="LOGIN"required><br>
 <input type="text" name="password" placeholder="PASSWORD"required><br>
-<input type="radio" name="permission" value="student"required>student
-<input type="radio" name="permission" value="teacher"required>teacher<br>
+<label><input type="radio" name="permission" value="student"required>student</label>
+<label><input type="radio" name="permission" value="teacher"required>teacher</label>
+<label><input type="radio" name="permission" value="parent"required>parent</label><br>
 <br>
 <input type="text" name="name" placeholder="Name"required><br>
 <input type="text" name="second" placeholder="Second name"required><br>
