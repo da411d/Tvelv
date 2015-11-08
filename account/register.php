@@ -15,7 +15,6 @@ if($_POST['act']== "reg" AND $_POST['login'] ){
 	}
 	echo user_add_secret($_POST['login'], json_encode($arr));
 }
-include "../theme.php";
 ?>
 <form method="post">
 <input type="hidden" name="act" value="reg">
