@@ -1,8 +1,9 @@
 <script src="script.js"></script>
+<link rel="stylesheet" href="style.css" />
 <base href="http://localhost/Tvelv/#">
 <body onload="onLoad()" onhashchange="onHashChange()">
 
-<div class="header" style="position:fixed;width:100%;background:#fc0;height:64px;top:0px;left:0px;">
+<div class="header">
 	<span class="h1" id="header">Tvelv</span>
 	<nav>
 		<a href="#profile">Профіль</a>
@@ -13,4 +14,4 @@
 	</nav>
 
 </div>
-<div class="main" id="main" style="margin-top:60px;padding:16px;background:#bfbfbf;width:80%;margin-left:10%;">
+<div class="main" id="main">

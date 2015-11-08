@@ -1,7 +1,12 @@
 <? include "../libs/main.php";?>
 <style>
-	body{color:#fafafa;}
-	table{max-width: 100%;border-collapse:collapse;border-color:#9E9E9E;background:#047DFC;font-size:83%;}
+body{
+	color:#fafafa;
+	margin:0px;
+	font-family: Arial;
+	font-size:120%;
+}
+	table{width: 100%;border-collapse:collapse;border-color:#9E9E9E;background:#047DFC;font-size:83%;}
 	table, table tr, table td, table th{border: 2px solid #9E9E9E;}
 	@media (max-width: 480px){
 		table *{display:none;}

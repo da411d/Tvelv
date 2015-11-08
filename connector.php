@@ -9,12 +9,14 @@ if(strpos($in, '/')){
 }else{
 	$params =  [$in];
 }
-if(!get_logined()){
+if(!get_logined() AND $params[0]!='login'){
 	include "account/profile.php";
 	$request = [
 		$header,			//Header
 		$main			//innerHTML
 	];
+	echo json_encode($request);
+	exit;
 }
 
 switch ($params[0]) {
@@ -22,6 +24,7 @@ switch ($params[0]) {
 	case 'profile':
 		include "account/profile.php";
 		break;
+
 		case 'login':
 		include "account/login.php";
 		break;
