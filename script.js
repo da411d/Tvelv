@@ -33,14 +33,21 @@ function onHashChange(){
 }
 
 function Load(){
-	req = connect(parser(window.location, 'hash'));
+	t = parser(window.location, 'hash');
+	t = t.substring(1, t.length);
+	req = connect('a='+t);
+	document.getElementById('header').innerHTML = req[0];
+	document.getElementById('main').innerHTML = req[1];
+}
+
+function eLoad(t){
+	req = connect(t);
 	document.getElementById('header').innerHTML = req[0];
 	document.getElementById('main').innerHTML = req[1];
 }
 
 function connect(t){
-	t = t.substring(1, t.length);
-	html = ajax('connector.php?a='+t);
+	html = ajax('connector.php?'+t);
 	html = JSON.parse(html);
 	return html;
 }

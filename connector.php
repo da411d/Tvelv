@@ -11,9 +11,12 @@ if(strpos($in, '/')){
 }
 
 switch ($params[0]) {
-case 'account':
-    include "account.php";
-    break;
+	case 'profile':
+		include "account/profile.php";
+		break;
+	case 'login':
+		include "account/login.php";
+		break;
 }
 
 
