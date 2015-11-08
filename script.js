@@ -51,3 +51,24 @@ function connect(t){
 	html = JSON.parse(html);
 	return html;
 }
+
+
+
+
+
+
+
+
+
+
+
+
+function createTable(t) {
+	var table = document.createElement('table')
+	obj = JSON.parse(t);
+	obj = obj.table;
+	for(i=0;i<obj.length;++i){
+		table.innerHTML += "<tr><td>" +obj[i].Date + "<td>" + obj[i].Time + "<td>" + obj[i].Class + "<td>" + obj[i].Student + "<td>" + obj[i].Teacher + "<td>" + obj[i].Mark + "<td>" + obj[i].Info + "</tr>";
+	}
+	return table;
+}

@@ -5,7 +5,11 @@
 <div class="header" style="position:fixed;width:100%;background:#fc0;height:64px;top:0px;left:0px;">
 	<span class="h1" id="header">Tvelv</span>
 	<nav>
+		<a href="#profile">Профіль</a>
+		<a href="#marks">Оцінки</a>
+		<a href="#settings">Налаштування</a>
 		<a href="#logout">Вихід</a>
+
 	</nav>
 
 </div>

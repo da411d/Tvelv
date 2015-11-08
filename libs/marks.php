@@ -30,6 +30,10 @@ function mark_change($date ,$class, $student, $teacher, $mark, $info){
 
 function mark_get_by_params($param = array()){
 	$database = db_connect();
+	return db_get("days", ["Date","Time", "LastEdit", "Class", "Student", "Teacher", "Mark", "Info"], $param);
+}
 
-return db_get("days", ["Date","Time", "LastEdit", "Class", "Student", "Teacher", "Mark", "Info"], $param);
+function mark_get_all(){
+	$database = db_connect();
+	return db_get("days", ["Date","Time", "LastEdit", "Class", "Student", "Teacher", "Mark", "Info"], []);
 }
