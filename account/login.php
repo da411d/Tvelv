@@ -3,7 +3,7 @@ if($_GET['a']=="login" AND $_GET['b'] AND $_GET['c']){
 	if(user_login($_GET['b'], $_GET['c'])){
 		login_me($_GET['b']);
 		$header = 'Зачекайте...';
-		$main =  "<img src=\"https://vk.com/images/blank.gif\" onload=\"window.location = '#profile';window.location.reload();\" hidden>";
+		$main =  "<img src=\"blank.gif\" onload=\"window.location = '#profile';window.location.reload();\" hidden>";
 	}else{
 		$header = 'Ти не ввійшов!';
 		$main = "Неправильний пароль!<br><label>Логін: <input type=\"text\" id=\"login\" value=\"".$_GET['b']."\"></label><br>

@@ -25,6 +25,9 @@ function parser(loc, param){
 }
 
 function onLoad(){
+	if(!window.location.hash){
+	window.location.hash='#profile';
+	}
 	Load();
 }
 
@@ -46,8 +49,16 @@ function eLoad(t){
 	document.getElementById('main').innerHTML = req[1];
 }
 
+function rand(mi, ma){return Math.floor(Math.random() * (ma - mi + 1) + mi);}
+
 function connect(t){
-	html = ajax('connector.php?'+t);
+	u = 'connector.php?'+t;
+	if (u.match(/\?/)) {
+		u += '&z='+rand(1000000, 9999999);
+	} else {
+		u += '?z='+rand(1000000, 9999999);
+	}
+	html = ajax(u);
 	html = JSON.parse(html);
 	return html;
 }
