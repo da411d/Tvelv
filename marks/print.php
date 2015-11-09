@@ -1,10 +1,11 @@
 <? include "../libs/main.php";?>
 <style>
 body{
+	background:transparent;
 	color:#fafafa;
-	margin:0px;
+	margin: 0px;
 	font-family: 'Lato Thin', Arial;
-	font-size:130%;
+	font-size: 150%;
 }
 	table{width: 100%;border-collapse:collapse;border-color:#9E9E9E;background:#047DFC;font-size:83%;}
 	table, table tr, table td, table th{border: 2px solid #9E9E9E;}
@@ -12,6 +13,14 @@ body{
 		table *{display:none;}
 		table::before{content:'Таблиця не доступна на таких маленьких екранах.';display:block;padding:8px;}
 	}
+
+input, textarea, select{
+	padding:4px;
+	border:0px solid transparent;
+	background:#fafafa;
+	border-radius:0px;
+}
+label{font-size:120%;width:80%;}
 </style>
 <script>
 	function onChange(e){
@@ -20,7 +29,6 @@ body{
 		document.getElementById('params').submit();
 	}
 </script>
-<div class="main">
 <table>
 <tr>
 <th>Дата<br><input type="date" name="Date" value="Дата" onchange="onChange(this)"required>

@@ -12,9 +12,15 @@ google.setOnLoadCallback(drawStats);
 
 function drawStats(){
 	<?php
-	$marks = mark_get_by_params(
-		['Student[=]' => get_logined()]
-	);
+	if(is_teacher()){
+		$marks = mark_get_by_params(
+			['Teacher[=]' => get_logined()]
+		);
+	}else{
+		$marks = mark_get_by_params(
+			['Student[=]' => get_logined()]
+		);
+	}
 	$arr = [0,0,0,0,0,0,0,0,0,0,0,0,0];
 	foreach($marks as $a){
 		$arr[$a['Mark']]++;

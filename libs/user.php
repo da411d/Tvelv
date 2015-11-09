@@ -96,7 +96,7 @@ return db_get($dbineed, ["Login", "Name", "SecondName", "Class"]);
 }
 
 function is_teacher($login=''){
-	if($login){
+	if(!$login){
 		$login = get_logined();
 	}
 	if(db_get("users", ["Permission"], ["Login[=]" => $login])[0]['Permission']=='teacher'){
