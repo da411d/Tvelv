@@ -20,7 +20,6 @@ if(!get_logined() AND $params[0]!='login'){
 }
 
 switch ($params[0]) {
-//Дії з акаутном: вхід, вихід, перегляд і т.п.
 	case 'profile':
 		include "account/profile.php";
 		break;
@@ -41,9 +40,12 @@ switch ($params[0]) {
 		include "account/chpwd.php";
 		break;
 
-//Оцінки
 	case 'marks':
 		include "marks/get.php";
+		break;
+
+	case 'stats':
+		include "plugins/stats/get.php";
 		break;
 
 }
