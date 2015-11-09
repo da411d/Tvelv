@@ -1,7 +1,7 @@
 <?
 include "../../libs/main.php";
 ?>
-<style>div{margin-bottom:32px;border-radius:3px;height:35%;}body{margin:16px;}</style>
+<style>div{margin-top:16px;margin-bottom:16px;height:35%;}body{margin:16px;font-family: 'Lato Thin', Arial;}</style>
 <script type="text/javascript" src="https://www.google.com/jsapi"></script>
 <script type="text/javascript">
 google.load('visualization', '1', {

@@ -3,8 +3,8 @@
 body{
 	color:#fafafa;
 	margin:0px;
-	font-family: Arial;
-	font-size:120%;
+	font-family: 'Lato Thin', Arial;
+	font-size:130%;
 }
 	table{width: 100%;border-collapse:collapse;border-color:#9E9E9E;background:#047DFC;font-size:83%;}
 	table, table tr, table td, table th{border: 2px solid #9E9E9E;}

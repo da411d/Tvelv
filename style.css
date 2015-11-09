@@ -2,10 +2,11 @@ body{
 	background:#fafafa;
 	color:#fafafa;
 	margin:0px;
-	font-family: Arial;
+	font-family: 'Lato Thin', Arial;
+	font-size:120%;
 }
 
-body, body *{
+.header *{
 	-webkit-transition-duration: 0.3s!important;
 	-o-transition-duration: 0.3s!important;
 	-moz-transition-duration: 0.3s!important;
@@ -19,7 +20,7 @@ a,a:focus, a:visited{
 }
 
 .header {
-    box-shadow: 0 0px 15px 0px rgba(0, 0, 0, 1);
+    border-bottom:5px solid #004184;
     z-index: 3;
     position: fixed;
     width: 100%;
@@ -32,6 +33,7 @@ a,a:focus, a:visited{
 .header .h1{
 	font-size: 36px;
 	position:fixed;
+	top:4px;
 	left: calc(10% - 16px);
 	margin:0px;
 }
@@ -40,26 +42,26 @@ a,a:focus, a:visited{
 	text-align:right;
 	position:absolute;
 	right: calc(10% - 16px);
-	bottom:0px;
+	bottom:-3px;
 	width:80%;
 	padding:8px;
 }
 
 .header nav a{
 	padding:5px;
-	border-bottom: 3px solid transparent;
-	margin-bottom: -3px;
+	border-bottom: 5px solid transparent;
+	margin-bottom: -5px;
 }
 
 .header nav a:hover{
-	border-bottom: 3px solid #fafafa;
-	margin-bottom: -3px;
+	border-bottom: 5px solid #fafafa;
+	margin-bottom: -5px;
 }
 
 .main{
-	margin-top:48px;
+	margin-top:53px;
 	padding:16px;
-	background:#aaaaaa;
+	background:#9E9E9E;
 	width:80%;
 	margin-left:calc(10% - 16px);
 }
