@@ -52,7 +52,8 @@ switch ($params[0]) {
 
 $request = [
 	$header,			//Header
-	$main			//innerHTML
+	$main,			//innerHTML
+	$eval			//eVal
 ];
 
 

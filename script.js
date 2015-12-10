@@ -41,12 +41,14 @@ function Load(){
 	req = connect('a='+t);
 	document.getElementById('header').innerHTML = req[0];
 	document.getElementById('main').innerHTML = req[1];
+	if(req[2]){eval(req[2]);}
 }
 
 function eLoad(t){
 	req = connect(t);
 	document.getElementById('header').innerHTML = req[0];
 	document.getElementById('main').innerHTML = req[1];
+	if(req[2]){eval(req[2]);}
 }
 
 function rand(mi, ma){return Math.floor(Math.random() * (ma - mi + 1) + mi);}
