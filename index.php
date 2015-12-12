@@ -1,6 +1,6 @@
 <script src="script.js"></script>
 <link rel="stylesheet" href="style.css" />
-<base href="http://localhost/Tvelv/#">
+<base href="http://<?=$_SERVER['SERVER_NAME'];?>/#">
 <body onload="onLoad()" onhashchange="onHashChange()">
 
 <div class="header">
