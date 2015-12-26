@@ -7,13 +7,19 @@ body{
 	font-family: 'Lato Thin', Arial;
 	font-size: 150%;
 }
-	table{width: 100%;border-collapse:collapse;border-color:#9E9E9E;background:#047DFC;font-size:83%;}
+	table{width: 100%;border-collapse:collapse;border-color:#9E9E9E;background:#3F9DFF;font-size:83%;}
 	table, table tr, table td, table th{border: 2px solid #9E9E9E;}
 	@media (max-width: 480px){
 		table *{display:none;}
 		table::before{content:'Таблиця не доступна на таких маленьких екранах.';display:block;padding:8px;}
 	}
 
+tr:nth-child(2n) {
+	background-color: #74B8FF;
+}
+tr:hover{
+	background-color: #047DFC;
+}
 input, textarea, select{
 	padding:4px;
 	border:0px solid transparent;

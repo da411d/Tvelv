@@ -2,7 +2,7 @@
 function mark_add($date, $class, $student, $teacher, $mark, $info){
 	$database = db_connect();
 
-	return $database->insert("days", [
+	return $database->insert("marks", [
 			"Date" => $date,
 			"Time" => date("H:i"),
 			"Class" => $class,
@@ -16,7 +16,7 @@ function mark_add($date, $class, $student, $teacher, $mark, $info){
 function mark_change($date ,$class, $student, $teacher, $mark, $info){
 	$database = db_connect();
 
-		return $database->update("days", [
+		return $database->update("marks", [
 			"Mark" => $mark,
 			"LastEdit" => date("H:i"),
 			"Info" => $info
@@ -30,10 +30,10 @@ function mark_change($date ,$class, $student, $teacher, $mark, $info){
 
 function mark_get_by_params($param = array()){
 	$database = db_connect();
-	return db_get("days", ["Date","Time", "LastEdit", "Class", "Student", "Teacher", "Mark", "Info"], $param);
+	return db_get("marks", ["Date","Time", "LastEdit", "Class", "Student", "Teacher", "Mark", "Info"], $param);
 }
 
 function mark_get_all(){
 	$database = db_connect();
-	return db_get("days", ["Date","Time", "LastEdit", "Class", "Student", "Teacher", "Mark", "Info"], []);
+	return db_get("marks", ["Date","Time", "LastEdit", "Class", "Student", "Teacher", "Mark", "Info"], []);
 }
