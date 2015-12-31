@@ -1,5 +1,6 @@
-<script src="script.js"></script>
-<link rel="stylesheet" href="style.css" />
+<script src="js/script.js"></script>
+<script src="js/crypt.js"></script>
+<link rel="stylesheet" href="css/style.css" />
 <base href="http://<?=$_SERVER['SERVER_NAME'];?>/#">
 <body onload="onLoad()" onhashchange="onHashChange()">
 
