@@ -6,7 +6,8 @@ function db_connect(){
 		'server' => 'localhost',
 		'username' => 'mysql',
 		'password' => 'li3oGE',
-		'charset' => 'utf8_unicode_ci'
+		'charset' => 'utf8_unicode_ci',
+		'prefix' => 'Tvelv_6rWvDg2SPi24mdJ3_'
 	]);
 	return $db;
 }
