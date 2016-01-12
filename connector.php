@@ -45,15 +45,15 @@ if(get_logined()){
 }
 
 $request = array(
-	$header,			//Header
-	$main,			//innerHTML
-	$eval			//eVal
+	'header'    => $header,		//Header
+	'main'        => $main,		//innerHTML
+	'eval'         => $eval			//eVal
 );
 
 $return = json_encode($request);
 $return = 'XQvI24mDj3XQvI24mDj3vI24vI24====='.$return.'=====XQvI24mDj3vXQvI24mDj3vI24I24';
 $return = base64_encode($return);
-//$return = rtrim($return, '=');
+$return = rtrim($return, '=');
 $return = str_replace('=', 'vI24mDj3', $return);
 
 function getRandStr(){return rtrim(base64_encode(mt_rand()) ,'=');}$secret = getRandStr();
