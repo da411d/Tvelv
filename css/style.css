@@ -48,11 +48,17 @@ a,a:focus, a:visited{
 }
 
 .header nav a{
-	padding:5px;
+	padding:6px;
 	border-bottom: 5px solid transparent;
 	margin-bottom: -5px;
 }
-
+.header nav img.icon {
+	width: 1em;
+	height: 1em;
+	border: none;
+	vertical-align: middle;
+	margin: 0px 1px!important;
+}
 .header nav a:hover{
 	border-bottom: 5px solid #fafafa;
 	margin-bottom: -5px;
