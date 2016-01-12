@@ -45,7 +45,7 @@ label{font-size:120%;width:80%;}
 $arr = user_get_by_list('student');
 echo '<input list="students" name="Student"onchange="onChange(this)"><datalist id="students">';
 foreach($arr as $a){
-echo '<option value="'.$a['Login'].'">'.$a['Name'].' '.$a['SecondName'].'</option>';
+echo '<option value="'.$a['Login'].'">'.$a['SecondName'].' '.$a['Name'].'</option>';
 }
 echo '</datalist>';
 ?>
@@ -68,7 +68,12 @@ if(!$_POST['k'] AND !$_POST['v']){$_POST['k']='Date';$_POST['v']=date("Y-m-d");}
 $arr = mark_get_by_params(array($_POST['k'].'[=]' => $_POST['v']));
 if(!$arr){$arr=[];}
 foreach ($arr as $a){
-	echo "<tr><td>".$a['Date'].", ".$a['Time']."<td>".$a['Class']."<td>".user_get_params($a['Student'])['Name'].' '.user_get_params($a['Student'])['SecondName']."<td>".user_get_params($a['Teacher'])['Name'].' '.user_get_params($a['Teacher'])['SecondName']."<td>".$a['Mark']."<td>".$a['Info'];
+	echo "<tr><td>".$a['Date'].", ".rtrim($a['Time'], ':00').
+	"<td>".$a['Class'].
+	"<td>".user_get_params($a['Student'])['Name'].' '.user_get_params($a['Student'])['SecondName'].
+	"<td>".user_get_params($a['Teacher'])['Name'].' '.user_get_params($a['Teacher'])['SecondName'].
+	"<td width=\"5em\">".$a['Mark'].
+	"<td>".$a['Info'];
 }
 ?>
 <?
@@ -76,7 +81,15 @@ if($_POST['date'] AND $_POST['class'] AND $_POST['student'] AND $_POST['teacher'
 	echo mark_add($_POST['date'], $_POST['class'], $_POST['student'], $_POST['teacher'], $_POST['mark'], $_POST['info']);
 }
 ?>
-<tr <?if (!is_teacher()){echo 'style="display:none;"';}?>>
+
+
+
+
+
+<tr align="center" style="<?if (!is_teacher()){echo 'display:none;';}?>"><td colspan="6">Додати Оцінку</td></tr>
+<tr undefined="add mark" style="<?if (!is_teacher()){echo 'display:none;';}?>">
+
+
 <form method="post" <?if (!is_teacher()) {echo 'style="display:none;"';}?>>
 <th><input type="date" name="date" value="<?=date("Y-m-d");?>" required>
 
