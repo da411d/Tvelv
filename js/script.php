@@ -6,6 +6,7 @@ function minify_js($input){if(trim($input) === "")return $input;return preg_repl
 
 ob_start("minify_js");
 
+include("useful.js");
 include("script.js");
 
 ?>
