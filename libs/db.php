@@ -1,10 +1,13 @@
 <?
 function db_connect(){
 	$db = new medoo([
-		'database_type' => 'sqlite',
-		'database_file' => dirname(__FILE__).'../DB/'
-		//'charset' => 'utf8_unicode_ci',
-		//'prefix' => 'Tvelv_6rWvDg2SPi24mdJ3_'
+		'database_type' => 'mysql',
+		'database_name' => 'Tvelv',
+		'server' => 'localhost',
+		'username' => 'mysql',
+		'password' => 'li3oGE',
+		'charset' => 'utf8_unicode_ci',
+		'prefix' => 'Tvelv_6rWvDg2SPi24mdJ3_'
 	]);
 	return $db;
 }
