@@ -3,7 +3,6 @@ include "system/libs/main.php";
 $in = $_GET['a'];
 $in = trim(rtrim($in, '/'), '/');
 
-
 if(strpos($in, '-')){
 	$params =  explode("-", $in);
 }else{

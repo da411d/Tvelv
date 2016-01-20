@@ -112,11 +112,23 @@ function getUserPermission($login = FALSE){
 	if(!$login){
 		$login = get_logined();
 	}
-	if(db_get("users", ["Permission"], ["Login[=]" => $login])[0]['Permission']!=fa){
+	if(db_get("users", ["Permission"], ["Login[=]" => $login])[0]['Permission']){
 		return db_get("users", ["Permission"], ["Login[=]" => $login])[0]['Permission'];
 	}else{
 		return 0;
 	}
+}
+
+function getUserClassmates($login = FALSE){
+	if(!$login){
+		$login = get_logined();
+	}
+	if(getUserPermission() == 'student'){
+		$class = db_get("students", ["Login", "Name", "SecondName", "Class"], ["Login[=]" => $login])[0]["Class"];
+	}else{
+		return false;
+	}
+	return db_get("students", ["Login", "Name", "SecondName"], ["Class[=]" => $class]);
 }
 
 
