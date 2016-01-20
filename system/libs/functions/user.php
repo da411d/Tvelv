@@ -63,6 +63,7 @@ function user_change_password($login, $password, $new){
 	}
 }
 
+//############USER GET ############
 function user_get_params($login){
 	$database = db_connect();
 	switch (db_get("users", ["Permission"], ["Login[=]" => $login])[0]['Permission']) {
@@ -95,6 +96,7 @@ function user_get_by_list($in='student'){
 return db_get($dbineed, ["Login", "Name", "SecondName", "Class"]);
 }
 
+
 function is_teacher($login=''){
 	if(!$login){
 		$login = get_logined();
@@ -105,6 +107,19 @@ function is_teacher($login=''){
 		return 0;
 	}
 }
+
+function getUserPermission($login = FALSE){
+	if(!$login){
+		$login = get_logined();
+	}
+	if(db_get("users", ["Permission"], ["Login[=]" => $login])[0]['Permission']!=fa){
+		return db_get("users", ["Permission"], ["Login[=]" => $login])[0]['Permission'];
+	}else{
+		return 0;
+	}
+}
+
+
 //############USER SECRET QUESTION############
 function user_add_secret($login, $secret){
 	$database = db_connect();

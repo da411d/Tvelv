@@ -9,5 +9,7 @@ if(!get_logined()){
 	$eval = "window.location.hash = '#login';window.location.reload();";
 }else{
 	$header = 'Профіль';
-	$main =  'Привіт, '.user_get_params($login)['Name'].' '.user_get_params($login)['SecondName'].'!';
+	$main =  '<h1>Привіт, '.user_get_params($login)['Name'].' '.user_get_params($login)['SecondName'].'!</h1>';
 }
+
+$main .= '';

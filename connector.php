@@ -4,7 +4,7 @@ $in = $_GET['a'];
 $in = trim(rtrim($in, '/'), '/');
 
 
-if(strpos($in, '/')){
+if(strpos($in, '-')){
 	$params =  explode("-", $in);
 }else{
 	$params =  [$in];
@@ -12,12 +12,7 @@ if(strpos($in, '/')){
 
 if(get_logined()){
 	switch ($params[0]) {
-		case 'profile':
-			if(isset($params[1])){
-				include "system/account/profile.php";
-			}else{
-				include "system/account/my_profile.php";
-			}
+		case 'profile':if(isset($params[1])){include "system/account/profile.php";}else{include "system/account/my_profile.php";}
 			break;
 
 		case 'login':

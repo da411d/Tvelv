@@ -14,6 +14,7 @@ function Load(){
 	t = t.substring(1, t.length);
 	req = connect('a='+t);
 	document.getElementById('header').innerHTML = req['header'];
+	document.title = req['header'];
 	document.getElementById('main').innerHTML = req['main'];
 	if(req['eval']){
 		eval(req['eval']);
@@ -23,6 +24,7 @@ function Load(){
 function eLoad(t){
 	req = connect(t);
 	document.getElementById('header').innerHTML = req['header'];
+	document.title = req['header'];
 	document.getElementById('main').innerHTML = req['main'];
 	if(req['eval']){
 		eval(req['eval']);
