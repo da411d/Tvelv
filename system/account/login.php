@@ -1,4 +1,4 @@
-<? include "libs/main.php";
+<? include dirname(__FILE__)."/../libs/main.php";
 
 if($_GET['a']=="login" AND $_GET['b'] AND $_GET['c']){
 	if(user_login($_GET['b'], $_GET['c'])){

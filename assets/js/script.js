@@ -15,14 +15,18 @@ function Load(){
 	req = connect('a='+t);
 	document.getElementById('header').innerHTML = req['header'];
 	document.getElementById('main').innerHTML = req['main'];
-	if(req['eval']){eval(req['eval']);}
+	if(req['eval']){
+		eval(req['eval']);
+	}
 }
 
 function eLoad(t){
 	req = connect(t);
 	document.getElementById('header').innerHTML = req['header'];
 	document.getElementById('main').innerHTML = req['main'];
-	if(req['eval']){eval(req['eval']);}
+	if(req['eval']){
+		eval(req['eval']);
+	}
 }
 
 function connect(t){

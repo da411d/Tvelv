@@ -1,5 +1,5 @@
 <?
-include "../../libs/main.php";
+include dirname(__FILE__)."/../../libs/main.php";
 ?>
 <style>div{margin-top:16px;margin-bottom:16px;height:35%;}body{margin:16px;font-family: 'Lato Thin', Arial;}</style>
 <script type="text/javascript" src="https://www.google.com/jsapi"></script>

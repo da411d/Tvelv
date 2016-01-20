@@ -1,11 +1,11 @@
 <?
-include "libs/main.php";
+include "system/libs/main.php";
 $in = $_GET['a'];
 $in = trim(rtrim($in, '/'), '/');
 
 
 if(strpos($in, '/')){
-	$params =  explode("/", $in);
+	$params =  explode("-", $in);
 }else{
 	$params =  [$in];
 }
@@ -13,19 +13,23 @@ if(strpos($in, '/')){
 if(get_logined()){
 	switch ($params[0]) {
 		case 'profile':
-			include "account/profile.php";
+			if(isset($params[1])){
+				include "system/account/profile.php";
+			}else{
+				include "system/account/my_profile.php";
+			}
 			break;
 
-			case 'login':
-			include "account/login.php";
+		case 'login':
+			include "system/account/login.php";
 			break;
 
 		case 'logout':
-			include "account/logout.php";
+			include "system/account/logout.php";
 			break;
 
 		case 'settings':
-			include "account/settings.php";
+			include "system/account/settings.php";
 			break;
 
 		case 'chpwd':
@@ -33,15 +37,15 @@ if(get_logined()){
 			break;
 
 		case 'marks':
-			include "marks/get.php";
+			include "system/marks/get.php";
 			break;
 
 		case 'stats':
-			include "plugins/stats/get.php";
+			include "system/plugins/stats/get.php";
 			break;
 	}
 }else{
-	include "account/login.php";
+	include "system/account/login.php";
 }
 
 $request = array(

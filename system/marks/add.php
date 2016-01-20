@@ -1,5 +1,6 @@
-<? include "../libs/main.php";
-include "../theme.php";?>
+<? 
+include dirname(__FILE__)."/../libs/main.php";
+?>
 <h1>ADD MARK</h1>
 <?
 if($_POST['date'] AND $_POST['class'] AND $_POST['student'] AND $_POST['teacher'] AND $_POST['mark']){

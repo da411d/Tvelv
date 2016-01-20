@@ -1,4 +1,6 @@
-<? include "../libs/main.php";?>
+<? 
+include dirname(__FILE__)."/../libs/main.php";
+?>
 
 <h1>Register</h1>
 <?

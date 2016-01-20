@@ -1,5 +1,5 @@
 <? 
-include "libs/main.php";
+include dirname(__FILE__)."/../libs/main.php";
 
 $form =  "<br><label>Логін: <input type=\"text\" id=\"login\" value=\"".get_logined()."\" readonly></label><br>
 				<label>Пароль: <input type=\"password\" id=\"pass\"></label><br>

@@ -1,5 +1,5 @@
 <? 
-include "libs/main.php";
+include dirname(__FILE__)."/../libs/main.php";
 
 $login = get_logined();
 

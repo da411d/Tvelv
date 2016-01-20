@@ -1,4 +1,4 @@
-<? include "../libs/main.php";?>
+<? include dirname(__FILE__)."/../libs/main.php";?>
 <style>
 body{
 	background:transparent;
