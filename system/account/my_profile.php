@@ -51,7 +51,7 @@ if(count($MyMarks)>0){
 	}
 	
 	$infoHTML .= '<b>Середня оцінка: </b> <span class="m'.round($summ/$interations, 0).'">'.round($summ/$interations, 1).'</span><br>';
-	$infoHTML .= '<b>Найвижча оцінка: </b> <span class="m'.$max.'">'.$max.'</span><br>';
+	$infoHTML .= '<b>Найвища оцінка: </b> <span class="m'.$max.'">'.$max.'</span><br>';
 	$infoHTML .= '<b>Найнижча оцінка: </b> <span class="m'.$min.'">'.$min.'</span><br>';
 	
 	$main .= $infoHTML;
