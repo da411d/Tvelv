@@ -13,7 +13,7 @@
 		<a href="#logout"><img src="/assets/images/icons/logout.svg" class="icon">Вихід</a>
 
 	</nav>
-
+<div id="loader"></div>
 </div>
 <div class="main" id="main">
 </div>

@@ -171,3 +171,40 @@ label{font-size:120%;width:80%;}
 .m13{
 	background: #7ADC37;
 }
+
+
+
+
+
+#loader {
+	width: 20vw;
+	height: 5px;
+	opacity:0;
+	background: #fafafa;
+	position:absolute;
+	bottom:-5px;
+	-webkit-animation-name: load;
+	animation-name: load;
+	-webkit-animation-duration: 2s;
+	animation-duration: 2s;
+	-webkit-animation-iteration-count: infinite;
+	animation-iteration-count: infinite;
+	-webkit-animation-timing-function: linear;
+	animation-timing-function: linear;
+}
+#loader.active{
+	opacity:1!important;
+}
+@-webkit-keyframes load {
+	0%{
+		left: -10vw;
+		width: 5vw;
+	}
+	50%{
+		width: 20vw;
+	}
+	100%{
+		left: 100vw;
+		width: 5vw;
+	}
+}

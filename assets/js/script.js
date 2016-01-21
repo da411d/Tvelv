@@ -2,11 +2,15 @@ function onLoad(){
 	if(!window.location.hash){
 	window.location.hash='#profile';
 	}
+	document.getElementById('loader').setAttribute('class', 'active');
 	Load();
+	document.getElementById('loader').setAttribute('class', 'notactive');
 }
 
 function onHashChange(){
+	document.getElementById('loader').setAttribute('class', 'active');
 	Load();
+	document.getElementById('loader').setAttribute('class', 'notactive');
 }
 
 function Load(){
@@ -15,14 +19,13 @@ function Load(){
 	req = connect('a='+t);
 	if(req['header']){
 		document.getElementById('header').innerHTML = req['header'];
-	document.title = req['header'];
+		document.title = req['header'];
 	}
 	if(req['main']){
 		document.getElementById('main').innerHTML = req['main'];
 	}
 	if(req['eval']){
 		eval(req['eval']);
-		console.log(req['eval']);
 	}
 }
 
@@ -37,7 +40,6 @@ function eLoad(t){
 	}
 	if(req['eval']){
 		eval(req['eval']);
-		console.log(req['eval']);
 	}
 }
 
