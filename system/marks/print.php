@@ -42,7 +42,7 @@ label{font-size:120%;width:80%;}
 <th>Група<br><select size="1" name="class"onchange="onChange(this)"> <option disabled selected>Оберіть параметр</option> <option value="11">11</option> <option value="12">12</option> <option value="13">13</option> <option value="21">21</option> <option value="22">22</option> <option value="23">23</option> <option value="31">31</option> <option value="32">32</option> <option value="33">33</option> </select>
 
 <th>Ліцеїст<br><?
-$arr = user_get_by_list('student');
+$arr = getUserByList('student');
 echo '<input list="students" name="Student"onchange="onChange(this)"><datalist id="students">';
 foreach($arr as $a){
 echo '<option value="'.$a['Login'].'">'.$a['SecondName'].' '.$a['Name'].'</option>';
@@ -51,7 +51,7 @@ echo '</datalist>';
 ?>
 
 <th>Вчитель<br><?
-$arr = user_get_by_list('teacher');
+$arr = getUserByList('teacher');
 echo '<input list="teachers" name="Teacher"onchange="onChange(this)"><datalist id="teachers">';
 foreach($arr as $a){
 echo '<option value="'.$a['Login'].'">'.$a['Name'].' '.$a['SecondName'].'</option>';
@@ -65,20 +65,20 @@ echo '</datalist>';
 
 <?
 if(!$_POST['k'] AND !$_POST['v']){$_POST['k']='Date';$_POST['v']=date("Y-m-d");}
-$arr = mark_get_by_params(array($_POST['k'].'[=]' => $_POST['v']));
+$arr = getMarksByParams(array($_POST['k'].'[=]' => $_POST['v']));
 if(!$arr){$arr=[];}
 foreach ($arr as $a){
 	echo "<tr><td>".$a['Date'].", ".rtrim($a['Time'], ':00').
 	"<td>".$a['Class'].
-	"<td>".user_get_params($a['Student'])['Name'].' '.user_get_params($a['Student'])['SecondName'].
-	"<td>".user_get_params($a['Teacher'])['Name'].' '.user_get_params($a['Teacher'])['SecondName'].
+	"<td>".getInfoAboutUser($a['Student'])['Name'].' '.getInfoAboutUser($a['Student'])['SecondName'].
+	"<td>".getInfoAboutUser($a['Teacher'])['Name'].' '.getInfoAboutUser($a['Teacher'])['SecondName'].
 	"<td width=\"5em\">".$a['Mark'].
 	"<td>".$a['Info'];
 }
 ?>
 <?
-if($_POST['date'] AND $_POST['class'] AND $_POST['student'] AND $_POST['teacher'] AND $_POST['mark'] AND $_POST['teacher']==get_logined()){
-	echo mark_add($_POST['date'], $_POST['class'], $_POST['student'], $_POST['teacher'], $_POST['mark'], $_POST['info']);
+if($_POST['date'] AND $_POST['class'] AND $_POST['student'] AND $_POST['teacher'] AND $_POST['mark'] AND $_POST['teacher']==getLoginedUsername()){
+	echo addMark($_POST['date'], $_POST['class'], $_POST['student'], $_POST['teacher'], $_POST['mark'], $_POST['info']);
 }
 ?>
 
@@ -86,17 +86,17 @@ if($_POST['date'] AND $_POST['class'] AND $_POST['student'] AND $_POST['teacher'
 
 
 
-<tr align="center" style="<?if (!is_teacher()){echo 'display:none;';}?>"><td colspan="6">Додати Оцінку</td></tr>
-<tr undefined="add mark" style="<?if (!is_teacher()){echo 'display:none;';}?>">
+<tr align="center" style="<?if (!isTeacher()){echo 'display:none;';}?>"><td colspan="6">Додати Оцінку</td></tr>
+<tr undefined="add mark" style="<?if (!isTeacher()){echo 'display:none;';}?>">
 
 
-<form method="post" <?if (!is_teacher()) {echo 'style="display:none;"';}?>>
+<form method="post" <?if (!isTeacher()) {echo 'style="display:none;"';}?>>
 <th><input type="date" name="date" value="<?=date("Y-m-d");?>" required>
 
 <th><select size="1" name="class"required> <option disabled selected>Оберіть параметр</option> <option value="11">11</option> <option value="12">12</option> <option value="13">13</option> <option value="21">21</option> <option value="22">22</option> <option value="23">23</option> <option value="31">31</option> <option value="32">32</option> <option value="33">33</option> </select>
 
 <th><?
-$arr = user_get_by_list('student');
+$arr = getUserByList('student');
 echo '<input list="students" name="student"required><datalist id="students">';
 foreach($arr as $a){
 		echo '<option value="'.$a['Login'].'">'.$a['Name'].' '.$a['SecondName'].'</option>';
@@ -105,8 +105,8 @@ echo '</datalist>';
 ?>
 
 <th><?
-if(is_teacher()){
-	$login = get_logined();
+if(isTeacher()){
+	$login = getLoginedUsername();
 }
 echo '<input type="hidden" name="teacher" value="'.$login.'"required><input value="'.$login.'"required readonly>';
 ?>
@@ -115,7 +115,7 @@ echo '<input type="hidden" name="teacher" value="'.$login.'"required><input valu
 
 <th>
 <input type="text" name="info" placeholder="info">
-<tr colspan="6" <?if (!is_teacher()) {echo 'style="display:none;"';}?>>
+<tr colspan="6" <?if (!isTeacher()) {echo 'style="display:none;"';}?>>
 <td colspan="6"><input type="submit"value="Додати" style="width:100%;">
 </tr></form>
 

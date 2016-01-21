@@ -4,7 +4,7 @@ include dirname(__FILE__)."/../libs/main.php";
 <h1>ADD MARK</h1>
 <?
 if($_POST['date'] AND $_POST['class'] AND $_POST['student'] AND $_POST['teacher'] AND $_POST['mark']){
-	echo mark_add($_POST['date'], $_POST['class'], $_POST['student'], $_POST['teacher'], $_POST['mark'], $_POST['info']);
+	echo addMark($_POST['date'], $_POST['class'], $_POST['student'], $_POST['teacher'], $_POST['mark'], $_POST['info']);
 }
 ?>
 <form method="post">

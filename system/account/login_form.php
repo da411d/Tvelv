@@ -10,4 +10,4 @@ $main = "	<label>Логін: <input type=\"text\" id=\"login\" value=\"".$_GET['
 		";
 
 
-$eval = "if(window.location.hash!='#login'){window.location.hash='login';}document.getElementById('login').focus();document.getElementById('navbar').innerHTML = '<a href=\"#login\"> <img src=\"/images/icons/login.svg\" class=\"icon\">Вхід</a>';";
+$eval = "if(window.location.hash!='#login'){window.location.hash='login';}document.getElementById('login').focus();document.getElementById('navbar').innerHTML = '<a href=\"#login\"> <img src=\"/assets/images/icons/login.svg\" class=\"icon\">Вхід</a>';";

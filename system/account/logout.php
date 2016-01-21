@@ -1,6 +1,6 @@
 <? 
 	include dirname(__FILE__)."/../libs/main.php";
-	leave();leave();
+	Leave();Leave();
 
 	$header = 'Ти не ввійшов!';
 	$main = "";

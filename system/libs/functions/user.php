@@ -1,6 +1,6 @@
 <?		
 //############USER REGISTER############
-function user_login($login, $password){
+function isPasswordCorrect($login, $password){
 	$database = db_connect();
 
 	$test = db_get("users", ["Login","Password","Salt"], ["Login[=]" => $login]);
@@ -12,7 +12,7 @@ function user_login($login, $password){
 	}
 }
 
-function user_register($login, $password, $permission, $name, $secondname, $class){
+function registerUser($login, $password, $permission, $name, $secondname, $class){
 	$database = db_connect();
 
 	$salt=md5(mt_rand());
@@ -29,7 +29,7 @@ function user_register($login, $password, $permission, $name, $secondname, $clas
 	        $dbineed='parents';
 	        break;
 	}
-	if(!user_get_params($login)){
+	if(!getInfoAboutUser($login)){
 		$udb = $database->insert("users", [
 				"Login" => $login,
 				"Password" => _crypt($password, $salt),
@@ -47,7 +47,7 @@ function user_register($login, $password, $permission, $name, $secondname, $clas
 	if($udb and $ddb){return true;}else{return false;}
 }
 
-function user_change_password($login, $password, $new){
+function editUserPassword($login, $password, $new){
 	$database = db_connect();
 
 	$test = db_get("users", ["Login","Password","Salt"], ["Login[=]" => $login]);
@@ -63,8 +63,9 @@ function user_change_password($login, $password, $new){
 	}
 }
 
+
 //############USER GET ############
-function user_get_params($login){
+function getInfoAboutUser($login){
 	$database = db_connect();
 	switch (db_get("users", ["Permission"], ["Login[=]" => $login])[0]['Permission']) {
 	    case student:
@@ -80,7 +81,7 @@ function user_get_params($login){
 return db_get($dbineed, ["Login", "Name", "SecondName", "Class"], ["Login[=]" => $login])[0];
 }
 
-function user_get_by_list($in='student'){
+function getUserByList($in='student'){
 	$database = db_connect();
 	switch ($in) {
 	    case student:
@@ -97,9 +98,9 @@ return db_get($dbineed, ["Login", "Name", "SecondName", "Class"]);
 }
 
 
-function is_teacher($login=''){
+function isTeacher($login=''){
 	if(!$login){
-		$login = get_logined();
+		$login = getLoginedUsername();
 	}
 	if(db_get("users", ["Permission"], ["Login[=]" => $login])[0]['Permission']=='teacher'){
 		return 1;
@@ -110,7 +111,7 @@ function is_teacher($login=''){
 
 function getUserPermission($login = FALSE){
 	if(!$login){
-		$login = get_logined();
+		$login = getLoginedUsername();
 	}
 	if(db_get("users", ["Permission"], ["Login[=]" => $login])[0]['Permission']){
 		return db_get("users", ["Permission"], ["Login[=]" => $login])[0]['Permission'];
@@ -119,10 +120,7 @@ function getUserPermission($login = FALSE){
 	}
 }
 
-function getUserClassmates($login = FALSE){
-	if(!$login){
-		$login = get_logined();
-	}
+function getUserClassmates($login){
 	if(getUserPermission() == 'student'){
 		$class = db_get("students", ["Login", "Name", "SecondName", "Class"], ["Login[=]" => $login])[0]["Class"];
 	}else{
@@ -133,12 +131,12 @@ function getUserClassmates($login = FALSE){
 
 
 //############USER SECRET QUESTION############
-function user_add_secret($login, $secret){
+function addUserSecret($login, $secret){
 	$database = db_connect();
 
 	$salt=md5(mt_rand());
 
-	if(!user_get_params($login)){
+	if(!getInfoAboutUser($login)){
 		return $database->insert("2steplogin", [
 				"Login" => $login,
 				"Secret" => _crypt($secret, $salt),
@@ -148,13 +146,12 @@ function user_add_secret($login, $secret){
 	}
 }
 
-function user_get_secret($login){
+function getUserSecret($login){
 	$database = db_connect();
-
-return db_get('2steplogin', ["Secret", "Salt", "temp"], ["Login[=]" => $login])[0];
+	return db_get('2steplogin', ["Secret", "Salt", "temp"], ["Login[=]" => $login])[0];
 }
 
-function user_change_secret($login, $secret){
+function editUserSecret($login, $secret){
 	$database = db_connect();
 
 	$salt=md5(mt_rand());

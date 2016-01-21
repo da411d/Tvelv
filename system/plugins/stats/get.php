@@ -1,4 +1,4 @@
 <?
 include dirname(__FILE__)."/../../libs/main.php";
 $header = 'Статистика';
-$main = "<style>body{overflow:hidden;font-family: 'Lato Thin', Arial;}.main{width:calc(80% + 31px);padding:0px;padding-right:1px;margin-top:53px;}</style><iframe src=\"http://Tvelv/system/plugins/stats/print.php\" style=\"width:100%;height:calc(100% - 48px);border:0px solid transparent\">";
+$main = '<style>.main{overflow:hidden}</style><iframe src="http://Tvelv/system/plugins/stats/print.php" style="width: calc(100% + 30px);height: calc(100% + 31px);border: 0px solid transparent;margin: -16px -16px 1px -15px;">';

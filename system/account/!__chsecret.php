@@ -1,6 +1,6 @@
 <? 
 include "../libs/main.php";
-$_POST['login'] = get_logined();
+$_POST['login'] = getLoginedUsername();
 
 if($_POST['act']=='cancel'){header("Location: profile.php");exit;}
 
@@ -16,14 +16,13 @@ if($_POST['login'] AND $_POST['secret_answer_1'] AND $_POST['secret_question_1']
 	header("Location: profile.php");
 }
 
-include "../theme.php";
 ?>
 <form method="post">
 <div id="secret">
 </div>
 <?php
 if($_POST['login']){
-$secret = user_get_secret($_POST['login']);
+$secret = getUserSecret($_POST['login']);
 $mysecret = _decrypt($secret[Secret], $secret[Salt]);
 $arr = json_decode($mysecret, true);
 $i=0;

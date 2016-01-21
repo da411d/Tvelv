@@ -13,21 +13,31 @@ function Load(){
 	t = parser(window.location, 'hash');
 	t = t.substring(1, t.length);
 	req = connect('a='+t);
-	document.getElementById('header').innerHTML = req['header'];
+	if(req['header']){
+		document.getElementById('header').innerHTML = req['header'];
 	document.title = req['header'];
-	document.getElementById('main').innerHTML = req['main'];
+	}
+	if(req['main']){
+		document.getElementById('main').innerHTML = req['main'];
+	}
 	if(req['eval']){
 		eval(req['eval']);
+		console.log(req['eval']);
 	}
 }
 
 function eLoad(t){
 	req = connect(t);
-	document.getElementById('header').innerHTML = req['header'];
-	document.title = req['header'];
-	document.getElementById('main').innerHTML = req['main'];
+	if(req['header']){
+		document.getElementById('header').innerHTML = req['header'];
+		document.title = req['header'];
+	}
+	if(req['main']){
+		document.getElementById('main').innerHTML = req['main'];
+	}
 	if(req['eval']){
 		eval(req['eval']);
+		console.log(req['eval']);
 	}
 }
 

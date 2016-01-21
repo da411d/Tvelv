@@ -6,7 +6,7 @@ include dirname(__FILE__)."/../libs/main.php";
 <?
 //AND $_POST['password'] AND $_POST['permission']
 if($_POST['act']== "reg" AND $_POST['login'] ){
-	echo user_register($_POST['login'], $_POST['password'], $_POST['permission'],  $_POST['name'], $_POST['second'], $_POST['class']);
+	echo registerUser($_POST['login'], $_POST['password'], $_POST['permission'],  $_POST['name'], $_POST['second'], $_POST['class']);
 	$arr=[];
 	for($i=1;$i<=$_POST['num'];++$i){
 		$tmp=[

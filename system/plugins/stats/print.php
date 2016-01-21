@@ -12,13 +12,13 @@ google.setOnLoadCallback(drawStats);
 
 function drawStats(){
 	<?php
-	if(is_teacher()){
-		$marks = mark_get_by_params(
-			['Teacher[=]' => get_logined()]
+	if(isTeacher()){
+		$marks = getMarksByParams(
+			['Teacher[=]' => getLoginedUsername()]
 		);
 	}else{
-		$marks = mark_get_by_params(
-			['Student[=]' => get_logined()]
+		$marks = getMarksByParams(
+			['Student[=]' => getLoginedUsername()]
 		);
 	}
 	$arr = [0,0,0,0,0,0,0,0,0,0,0,0,0];
@@ -42,7 +42,7 @@ function drawStats(){
 	    ], 'Статистика оцінок');
 
 	<?php
-	$marks = mark_get_by_params(
+	$marks = getMarksByParams(
 		['Class[=]' => 31]
 	);
 	$arr = [0,0,0,0,0,0,0,0,0,0,0,0,0];
@@ -66,7 +66,7 @@ function drawStats(){
 	    ], 'Статистика всіх оцінок групи');
 
 	<?php
-	$marks = mark_get_all();
+	$marks = getAllMarks();
 	$arr = [0,0,0,0,0,0,0,0,0,0,0,0,0];
 	foreach($marks as $a){
 		$arr[$a['Mark']]++;

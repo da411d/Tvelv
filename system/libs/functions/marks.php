@@ -1,5 +1,5 @@
 <?
-function mark_add($date, $class, $student, $teacher, $mark, $info){
+function addMark($date, $class, $student, $teacher, $mark, $info){
 	$database = db_connect();
 
 	return $database->insert("marks", [
@@ -13,7 +13,7 @@ function mark_add($date, $class, $student, $teacher, $mark, $info){
 		]);
 }
 
-function mark_change($date ,$class, $student, $teacher, $mark, $info){
+function editMark($date ,$class, $student, $teacher, $mark, $info){
 	$database = db_connect();
 
 		return $database->update("marks", [
@@ -28,12 +28,12 @@ function mark_change($date ,$class, $student, $teacher, $mark, $info){
 		]);
 }
 
-function mark_get_by_params($param = array()){
+function getMarksByParams($param = array()){
 	$database = db_connect();
 	return db_get("marks", ["Date","Time", "LastEdit", "Class", "Student", "Teacher", "Mark", "Info"], $param);
 }
 
-function mark_get_all(){
+function getAllMarks(){
 	$database = db_connect();
 	return db_get("marks", ["Date","Time", "LastEdit", "Class", "Student", "Teacher", "Mark", "Info"], []);
 }

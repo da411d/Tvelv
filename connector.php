@@ -9,7 +9,7 @@ if(strpos($in, '-')){
 	$params =  [$in];
 }
 
-if(get_logined()){
+if(getLoginedUsername()){
 	switch ($params[0]) {
 		case 'profile':if(isset($params[1])){include "system/account/profile.php";}else{include "system/account/my_profile.php";}
 			break;
@@ -27,7 +27,7 @@ if(get_logined()){
 			break;
 
 		case 'chpwd':
-			include "account/chpwd.php";
+			include "system/account/chpwd.php";
 			break;
 
 		case 'marks':

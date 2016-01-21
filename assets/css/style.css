@@ -71,6 +71,7 @@ a,a:focus, a:visited{
 	width: calc(100vw - 144px);
 	margin-left: 48px;
 	height: calc(100vh - 85px);
+	overflow-y: scroll;
 }
 
 input, textarea, select{
@@ -83,8 +84,10 @@ input, textarea, select{
 }
 label{font-size:120%;width:80%;}
 .right_block{
-	float:right;
-	width:40%;
+	position: fixed;
+	right: 96px;
+	top: 64px;
+	width: calc(35% - 64px);
 	background: #047DFC;
 	padding: 16px;
 }
@@ -103,4 +106,68 @@ label{font-size:120%;width:80%;}
 }
 .right_block a.li:hover:before{
 	padding-right: 6px;
+}
+.mark_block {
+	border-bottom: 5px solid #004184;
+	z-index: 3;
+	width: calc(50% - 32px);
+	background: #047DFC;
+	height: 48px;
+	padding: 16px;
+	margin:8px;
+}
+.coment{
+	display:block;
+	margin: 8px 0px;
+	padding: 0px 8px;
+	border-left: 5px solid #004184;
+}
+.arrow{
+	padding: 8px;
+}
+.mark{
+	float:right;
+	font-size:130%;
+	padding:8px;
+	margin:-15px;
+	background: #CB2237;
+}
+.m1{
+	background: #CB2237;
+}
+.m2{
+	background: #DC3338;
+}
+.m3{
+	background: #EA4438;
+}
+.m4{
+	background: #F25437;
+}
+.m5{
+	background: #E46538;
+}
+.m6{
+	background: #D37738;
+}
+.m7{
+	background: #C58837;
+}
+.m8{
+	background: #B59936;
+}
+.m9{
+	background: #A7AC38;
+}
+.m10{
+	background: #97BA38;
+}
+.m11{
+	background: #88CC37;
+}
+.m12{
+	background: #7ADC37;
+}
+.m13{
+	background: #7ADC37;
 }
