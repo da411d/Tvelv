@@ -176,10 +176,10 @@ label{font-size:120%;width:80%;}
 
 
 
-#loader {
+#!!!!loader {
 	width: 20vw;
 	height: 5px;
-	opacity:0;
+	opacity:1;
 	background: #fafafa;
 	position:absolute;
 	bottom:-5px;
@@ -191,9 +191,6 @@ label{font-size:120%;width:80%;}
 	animation-iteration-count: infinite;
 	-webkit-animation-timing-function: linear;
 	animation-timing-function: linear;
-}
-#loader.active{
-	opacity:1!important;
 }
 @-webkit-keyframes load {
 	0%{

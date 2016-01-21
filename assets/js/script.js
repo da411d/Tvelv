@@ -1,16 +1,18 @@
+function commonLoad(){
+	document.title = 'Завантаження';
+	Load();
+	
+}
+
 function onLoad(){
 	if(!window.location.hash){
-	window.location.hash='#profile';
+		window.location.hash='#profile';
 	}
-	document.getElementById('loader').setAttribute('class', 'active');
-	Load();
-	document.getElementById('loader').setAttribute('class', 'notactive');
+	commonLoad();
 }
 
 function onHashChange(){
-	document.getElementById('loader').setAttribute('class', 'active');
-	Load();
-	document.getElementById('loader').setAttribute('class', 'notactive');
+	commonLoad();
 }
 
 function Load(){
