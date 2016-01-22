@@ -3,7 +3,7 @@ $login = getLoginedUsername();
 
 if(!getLoginedUsername()){
 	$title= 'Зачекайте...';
-	echo "<script>window.location = '/login';window.location.reload();</script>";
+	header('Location: /login');
 }else{
 	$title = 'Профіль';
 }
@@ -17,7 +17,7 @@ if(getUserClassmates($login) AND !isTeacher()){
 	
 	echo '<h1>Мої однокласники</h1>';
 	foreach($myClassmates as $c){
-		echo '<a href="#profile-'.$c['Login'].'" class="li">'.$c['Name'].' '.$c['SecondName'].'</a>';
+		echo '<a href="viewprofile?u='.$c['Login'].'" class="li">'.$c['Name'].' '.$c['SecondName'].'</a>';
 	}
 	echo $classmatesHTML;
 }

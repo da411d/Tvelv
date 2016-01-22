@@ -1,18 +1,15 @@
-<? 
-include dirname(__FILE__)."/../libs/main.php";
+<?
+$login = get['_'];
 
-$login = $params[1];
+echo $login;
 
 if(!getLoginedUsername()){
-	$header = 'Зачекайте...';
-	$main =  "";
-	$eval = "window.location.hash = '#login';window.location.reload();";
+	header('Location: /login');
 }elseif($login==getLoginedUsername()){
-	$header = 'Зачекайте...';
-	$main =  "";
-	$eval = "window.location.hash = '#profile';window.location.reload();";
+	header('Location: /profile');
 }else{
-	$header = 'Профіль';
+
+	$title = 'Профіль';
 
 	$main =  '<h1>'.getInfoAboutUser($login)['Name'].' '.getInfoAboutUser($login)['SecondName'];
 	if(getUserPermission($login)=='teacher'){
@@ -59,3 +56,5 @@ if(!getLoginedUsername()){
 
 include "getMarkslist.php";
 $main .= $MarksBlock;
+
+echo $main;

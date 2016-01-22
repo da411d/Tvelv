@@ -5,12 +5,6 @@
 	}else{
 		echo '<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Frameset//EN" "http://www.w3.org/TR/html4/frameset.dtd">';
 	}
-
-	if(IS_DEV){
-		echo '<html lang="ua">';
-	}else{
-		echo '<html manifest="http://'.SERVER_NAME.'/default.appcache" lang="ua">';
-	}
 ?>
 
 <?php

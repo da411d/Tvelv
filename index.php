@@ -54,9 +54,8 @@ ob_start("callback");
 			http_response_code(404);
 
 		}
-
 			ob_start(function($content){$GLOBALS['innerHTML'] = $content;});
-			include($url);
+				include($url);
 			ob_end_flush();
 		echo '<h1>'.$title.'</h1>';
 		echo $innerHTML;

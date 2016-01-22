@@ -97,7 +97,7 @@
 	padding: 24px;
 	width: calc(100vw - 144px);
 	margin-left: 48px;
-	padding-top: 60px;
+	padding-top: 72px;
 	display: block;
 }
 
@@ -188,7 +188,13 @@ h2 {
 	width: calc(35% - 64px);
 	padding: 16px;
 }
-
+@media (max-width: _reticle_hugescreen_barier_) {
+	.right_block{
+		width: calc(100% - 32px);
+		padding: 16px;
+		position:static;
+	}
+}
 .right_block a.li:hover:before{
 	padding-right: 6px;
 }

@@ -10,9 +10,9 @@ $svg = '<svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http:
 
 $MarksBlock = '';
 foreach($arr as $a){
-	$MarksBlock .= '<div class="mark_block"><a href="/profile?'.$a['Teacher'].'" class="teacher">';
+	$MarksBlock .= '<div class="mark_block"><a href="/viewprofile?_='.$a['Teacher'].'" class="teacher">';
 	$MarksBlock .= getInfoAboutUser($a['Teacher'])['Name'].' '.getInfoAboutUser($a['Teacher'])['SecondName'];
-	$MarksBlock .= '</a><span class="arrow">'.$svg.'</span><a href="/profile?'.$a['Student'].'" class="student">';
+	$MarksBlock .= '</a><span class="arrow">'.$svg.'</span><a href="/viewprofile?_='.$a['Student'].'" class="student">';
 	$MarksBlock .= getInfoAboutUser($a['Student'])['Name'].' '.getInfoAboutUser($a['Student'])['SecondName'];
 	$MarksBlock .= '</a><span class="mark m'.$a['Mark'].'">'.$a['Mark'].'</span>';
 	if($a['Info']){

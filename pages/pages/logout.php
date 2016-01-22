@@ -1,3 +1,3 @@
 <? 
 	Leave();Leave();
-	header('Loacation: login');
+	header('Location: /login');
