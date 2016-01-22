@@ -4,5 +4,4 @@ ErrorDocument 403 "Forbidden"
 
 Header set Cache-Control "max-age=604800, public"
 
-RewriteEngine On
-RewriteRule ^script.js$ script.php [L,QSA]
+RewriteRule ^script.js?(.*)$ script.php?$1 [L,QSA]

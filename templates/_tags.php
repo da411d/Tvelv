@@ -1,0 +1,3 @@
+<meta name="description"  itemprop="description" id="meta-tag-description" property="og: description" content="<?= str_replace('"', "''",$description);?>" >
+<meta property="og: image" content="http://<?=SERVER_NAME;?>/<?=SITEDIR;?>placeholder.png?p=<?=urlencode(base64_encode($param));?>"/>
+<meta property="og:image" content="http://<?=SERVER_NAME;?>/<?=SITEDIR;?>placeholder.png?p=<?=urlencode(base64_encode($param));?>"/>

@@ -1,0 +1,19 @@
+DirectoryIndex index.php index.cgi index.html
+ErrorDocument 401 "Unauthorized"
+ErrorDocument 403 "Forbidden"
+
+Header add "Cache-Control" "max-age=3600" env=VERSIONED_FILE
+
+RewriteEngine On
+ErrorDocument 401 /?param=401
+ErrorDocument 403 /?param=403
+ErrorDocument 404 /?param=404
+ErrorDocument 500 /?param=500
+ErrorDocument 400 /?param=400
+ErrorDocument 414 /?param=414
+
+RewriteRule ^placeholder.png$ placeholder.php [L,QSA]
+
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteRule ^(.*)$ index.php?param=$1 [L,QSA]
