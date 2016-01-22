@@ -68,8 +68,8 @@
 			foreach ($arr as $a){
 				echo "<tr><td>".$a['Date'].", ".rtrim($a['Time'], ':00').
 				"<td>".$a['Class'].
-				"<td>".getInfoAboutUser($a['Student'])['Name'].' '.getInfoAboutUser($a['Student'])['SecondName'].
-				"<td>".getInfoAboutUser($a['Teacher'])['Name'].' '.getInfoAboutUser($a['Teacher'])['SecondName'].
+				"<td><a href=\"viewprofile?_=".$a['Student']."\">".getInfoAboutUser($a['Student'])['Name'].' '.getInfoAboutUser($a['Student'])['SecondName']."</a>".
+				"<td><a href=\"viewprofile?_=".$a['Student']."\">".getInfoAboutUser($a['Teacher'])['Name'].' '.getInfoAboutUser($a['Teacher'])['SecondName']."</a>".
 				"<td width=\"5em\">".$a['Mark'].
 				"<td>".$a['Info'];
 			}

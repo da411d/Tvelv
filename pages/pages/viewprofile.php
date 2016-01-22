@@ -1,7 +1,5 @@
 <?
-$login = get['_'];
-
-echo $login;
+$login = $_GET['_'];
 
 if(!getLoginedUsername()){
 	header('Location: /login');
@@ -11,23 +9,30 @@ if(!getLoginedUsername()){
 
 	$title = 'Профіль';
 
-	$main =  '<h1>'.getInfoAboutUser($login)['Name'].' '.getInfoAboutUser($login)['SecondName'];
+	echo '<h1>'.getInfoAboutUser($login)['Name'].' '.getInfoAboutUser($login)['SecondName'];
 	if(getUserPermission($login)=='teacher'){
-		$main .= '<sup style="background:#ff7777;padding:4px;font-size:50%;">Вчитель</sup>';
+		echo '<sup style="background:#ff7777;padding:4px;font-size:50%;">Вчитель</sup>';
 	}elseif(getUserPermission($login)=='student'){
-		$main .= '<sup style="background:#7777ff;padding:4px;font-size:50%;">Учень</sup>';
+		echo '<sup style="background:#7777ff;padding:4px;font-size:50%;">Учень</sup>';
 	}elseif(getUserPermission($login)=='parent'){
-		$main .= '<sup style="background:#77ff77;padding:4px;font-size:50%;">Батько/мама</sup>';
+		echo '<sup style="background:#77ff77;padding:4px;font-size:50%;">Батько/мама</sup>';
 	}else{
-		$main .= '<sup style="background:#ff7777;padding:4px;font-size:50%;">'.getUserPermission().'</sup>';
+		echo '<sup style="background:#ff7777;padding:4px;font-size:50%;">'.getUserPermission().'</sup>';
 	}
-	$main .= '</h1>';
+	echo '</h1>';
 
-	$main .= '<div class="right_block">';
-
-	$MyMarks = getMarksByParams(['Student[=]' => $login]);
+	echo '<div class="right_block">';
+	if(isTeacher()){
+		$MyMarks = getMarksByParams(['Teacher[=]' => $login]);
+	}else{
+		$MyMarks = getMarksByParams(['Student[=]' => $login]);
+	}
 	if(count($MyMarks)>0){
-		$infoHTML = '<h1>Інформація про учня:</h1>';
+			if(isTeacher()){
+				echo '<h1>Інформація про вчителя:</h1>';	
+			}else{
+				echo '<h1>Інформація про учня:</h1>';
+			}
 		
 		$max = 0;
 		$min = 999;
@@ -45,16 +50,13 @@ if(!getLoginedUsername()){
 			}
 		}
 		
-		$infoHTML .= '<b>Середня оцінка: </b> <span class="m'.round($summ/$interations, 0).'">'.round($summ/$interations, 1).'</span><br>';
-		$infoHTML .= '<b>Найвища оцінка: </b> <span class="m'.$max.'">'.$max.'</span><br>';
-		$infoHTML .= '<b>Найнижча оцінка: </b> <span class="m'.$min.'">'.$min.'</span><br>';
+		echo '<b>Середня оцінка: </b> <span class="m'.round($summ/$interations, 0).'">'.round($summ/$interations, 1).'</span><br>';
+		echo '<b>Найвища оцінка: </b> <span class="m'.$max.'">'.$max.'</span><br>';
+		echo '<b>Найнижча оцінка: </b> <span class="m'.$min.'">'.$min.'</span><br>';
 		
 	}
-	$infoHTML .= '</div>';
-	$main .= $infoHTML;
+	echo '</div>';
 }
 
 include "getMarkslist.php";
-$main .= $MarksBlock;
-
-echo $main;
+echo $MarksBlock;

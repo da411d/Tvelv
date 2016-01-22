@@ -1,2 +1,2 @@
-<?$title="Заголовок
-";?>
+<?
+header('Location: /profile');
