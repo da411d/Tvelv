@@ -1,4 +1,8 @@
 <?
+if(!in_array(getLoginedUsername(), json_decode(ADMIN_ID))){
+	header('Location: /403');
+	exit();
+}
 $title = "Імпорт";
 function pwdGen(){
 	$a = array('q', 'w', 'r', 't', 'p', 's', 'd', 'f', 'g', 'h', 'j', 'k', 'l', 'z', 'x', 'c', 'v', 'b', 'n');
@@ -22,6 +26,7 @@ if($_FILES['uploadfile'] AND !$_FILES['uploadfile']['error']){
 	$json = file_get_contents($_FILES['uploadfile']['tmp_name']);
 	$arr = json_decode($json, true);
 	$printHTML = '<head><meta charset="utf-8"></head><body onload="window.print()">';
+	echo '<div id="pwds">';
 	foreach($arr as $a){
 		if($a['Login'] AND $a['Name'] AND $a['SecondName'] AND $a['Class'] AND $a['Permission']){
 			$pwd = pwdGen();
@@ -49,9 +54,11 @@ if($_FILES['uploadfile'] AND !$_FILES['uploadfile']['error']){
 		}else{
 			echo  "FAILED! ".$a['Login'].' '.$a['Name'].' '.$a['SecondName'].' '.$a['Class'].' '.$pwd."<br>";
 		}
+		echo "</div>";
 	}
 	if($notempty){
-		echo '<a href="data:text/html;base64,'.base64_encode($printHTML).'" target="_blank">Роздрукувати</a>';
+		echo '<p><a href="data:text/html;base64,'.base64_encode($printHTML).'" target="_blank">Роздрукувати</a></p>';
+		echo '<p><a href="javascript:download(\'imported.txt\', document.getElementById(\'pwds\').innerText)">Завантажити (txt)</a></p>';
 	}
 }else{
 	?>

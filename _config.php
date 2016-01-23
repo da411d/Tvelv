@@ -6,6 +6,8 @@ define('SITEDIR', '');
 
 define('DB_SECRET', '6rWvDg2SPi24mdJ3');
 
+define('ADMIN_ID', '["da411d","dersm"]');
+
 
 $DEVEPLORER_IP = array("93.175.205.27");
 if (in_array($_SERVER['REMOTE_ADDR'], $DEVEPLORER_IP)) {

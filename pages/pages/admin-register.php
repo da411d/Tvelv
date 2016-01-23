@@ -1,5 +1,8 @@
 <? 
-include dirname(__FILE__)."/../libs/main.php";
+if(!in_array(getLoginedUsername(), json_decode(ADMIN_ID))){
+	header('Location: /403');
+	exit();
+}
 ?>
 
 <h1>Register</h1>
