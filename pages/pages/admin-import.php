@@ -21,6 +21,7 @@ function pwdGen(){
 if($_FILES['uploadfile'] AND !$_FILES['uploadfile']['error']){
 	$json = file_get_contents($_FILES['uploadfile']['tmp_name']);
 	$arr = json_decode($json, true);
+	$printHTML = '<head><meta charset="utf-8"></head><body onload="window.print()">';
 	foreach($arr as $a){
 		if($a['Login'] AND $a['Name'] AND $a['SecondName'] AND $a['Class'] AND $a['Permission']){
 			$pwd = pwdGen();
@@ -33,12 +34,24 @@ if($_FILES['uploadfile'] AND !$_FILES['uploadfile']['error']){
 				"<b>Логін: </b>".$a['Login']."<br>".
 				"<b>Пароль: </b>".$pwd."<br>".
 				"</p>";
+
+				$printHTML .= "<p>".
+				"<b>Ім'я: </b>".$a['Name'].' '.$a['SecondName']."<br>".
+				"<b>Група: </b> Л-".$a['Class']."<br>".
+				"<b>Тип: </b> ".$a['Permission']."<br>".
+				"<b>Логін: </b>".$a['Login']."<br>".
+				"<b>Пароль: </b>".$pwd."<br>".
+				"</p>";
+				$notempty = 1;
 			}else{
 				echo  "FAILED! ".$a['Login'].' '.$a['Name'].' '.$a['SecondName'].' '.$a['Class'].' '.$pwd."<br>";
 			}
 		}else{
 			echo  "FAILED! ".$a['Login'].' '.$a['Name'].' '.$a['SecondName'].' '.$a['Class'].' '.$pwd."<br>";
 		}
+	}
+	if($notempty){
+		echo '<a href="data:text/html;base64,'.base64_encode($printHTML).'" target="_blank">Роздрукувати</a>';
 	}
 }else{
 	?>
