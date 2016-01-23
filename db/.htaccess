@@ -4,4 +4,5 @@ ErrorDocument 403 "Forbidden"
 
 Header add "Cache-Control" "max-age=3600" env=VERSIONED_FILE
 RewriteEngine On
+RewriteCond %{REQUEST_FILENAME} -f
 RewriteRule ^(.*).db$ fake-db.txt [L,QSA]
