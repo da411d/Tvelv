@@ -106,20 +106,14 @@ a{
 }
 
 input,
-textarea {
+textarea,
+select {
 	padding: 8px;
 	border: 1px solid _theme_main_dark_color_;
-	box-shadow: 0 0px 0 0px #004184;
-	font-size: 120%;
+	font-size: 110%;
 	background: _theme_text_color_;
 	color: _theme_main_dark_color_;
-	min-width: 80%;
-	max-width: 100%;
 	border-radius: 0px;
-}
-input:hover, input:focus,
-textarea:hover, textarea:focus  {
-	box-shadow: 0 4px 0 0px #004184;
 }
 
 table {
