@@ -1,0 +1,4 @@
+RewriteEngine On
+RewriteRule  api.js api.js.php
+RewriteRule  image captcha.php
+RewriteRule  code code.php

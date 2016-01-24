@@ -1,0 +1,13 @@
+DirectoryIndex index.php index.cgi index.html
+ErrorDocument 401 "Unauthorized"
+ErrorDocument 403 "Forbidden"
+
+##Options All -Indexes
+
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteRule ^(.*)Captcha/(.*)$ Captcha/_$1Captcha/$2 [L,QSA]
+
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteRule ^(.*)Captcha Captcha/_$1Captcha/ [L,QSA]
