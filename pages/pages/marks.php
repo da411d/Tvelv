@@ -42,27 +42,37 @@
 			<th>Група
 				<br>
 				<select size="1" name="Class" onchange="onChange(this)" value="<?=$_POST['class'];?>">
-					<option disabled selected>Оберіть параметр</option>
-					<option value="11">11</option>
-					<option value="12">12</option>
-					<option value="13">13</option>
-					<option value="21">21</option>
-					<option value="22">22</option>
-					<option value="23">23</option>
-					<option value="31">31</option>
-					<option value="32">32</option>
-					<option value="33">33</option>
+					<option value="false"disabled selected>Оберіть параметр</option>
+					<option value="11">Л-11</option>
+					<option value="12">Л-12</option>
+					<option value="13">Л-13</option>
+					<option value="21">Л-21</option>
+					<option value="22">Л-22</option>
+					<option value="23">Л-23</option>
+					<option value="31">Л-31</option>
+					<option value="32">Л-32</option>
+					<option value="33">Л-33</option>
 				</select>
 			</th>
 			<th>Ліцеїст
 				<br>
 				<?
 					$arr = getUserByList('student');
-					echo '<input list="students" name="Student" onchange="onChange(this)" value="'.$_POST['Student'].'"><datalist id="students">';
-					foreach($arr as $a){
-						echo '<option value="'.$a['Login'].'">'.$a['SecondName'].' '.$a['Name'].'</option>';
+					usort($arr, function($a, $b){return strnatcmp($a['SecondName'], $b['SecondName']);});
+					echo '<select size="1" name="Student" onchange="onChange(this)">';
+					echo '<option value="false"selected>';
+					if($_POST['Student'] AND $_POST['Student']!='false'){
+						echo "Очистити";
+					}else{
+						echo "Оберіть параметр";
 					}
-					echo '</datalist>';
+					echo '</option>';
+
+					foreach($arr as $a){
+						if($a['Login']==$_POST['Student']){$selected='selected';}else{$selected='';}
+						echo '<option value="'.$a['Login'].'"'.$selected.'>'.$a['SecondName'].' '.$a['Name'].'</option>';
+					}
+					echo '</select>';
 				?>
 			</th>
 
@@ -70,11 +80,21 @@
 				<br>
 				<?
 					$arr = getUserByList('teacher');
-					echo '<input list="teachers" name="Teacher" onchange="onChange(this)" value="'.$_POST['Teacher'].'"><datalist id="teachers">';
-					foreach($arr as $a){
-						echo '<option value="'.$a['Login'].'">'.$a['Name'].' '.$a['SecondName'].'</option>';
+					usort($arr, function($a, $b){return strnatcmp($a['SecondName'], $b['SecondName']);});
+					echo '<select size="1" name="Teacher" onchange="onChange(this)">';
+					echo '<option value="false"selected>';
+					if($_POST['Teacher'] AND $_POST['Teacher']!='false'){
+						echo "Очистити";
+					}else{
+						echo "Оберіть параметр";
 					}
-					echo '</datalist>';
+					echo '</option>';
+
+					foreach($arr as $a){
+						if($a['Login']==$_POST['Teacher']){$selected='selected';}else{$selected='';}
+						echo '<option value="'.$a['Login'].'"'.$selected.'>'.$a['SecondName'].' '.$a['Name'].'</option>';
+					}
+					echo '</select>';
 				?>
 			</th>
 
@@ -89,14 +109,18 @@
 				$arrOfParams = [];
 
 				if($_POST['Date']){$arrOfParams['Date'] = $_POST['Date'];}
-				if($_POST['Class']){$arrOfParams['Class'] = $_POST['Class'];}
+				if($_POST['Class'] AND $_POST['Class']!='Оберіть параметр'){$arrOfParams['Class'] = $_POST['Class'];}
 				if($_POST['Student']){$arrOfParams['Student'] = $_POST['Student'];}
 				if($_POST['Teacher']){$arrOfParams['Teacher'] = $_POST['Teacher'];}
 				if($_POST['Mark']){$arrOfParams['Mark'] = $_POST['Mark'];}
 
 				$arr = getMarksByParams($arrOfParams);
 				if(!$arr){$arr=[];}
-
+				usort($arr, function($a, $b){
+					$t1 = strtotime($a['Date'].' '.$a['Time']);
+					$t2 = strtotime($b['Date'].' '.$b['Time']);
+					return $t2 - $t1;
+				});
 				foreach ($arr as $a){
 					$time = explode('-', $a['Date']);
 					echo "<tr><td>".$time[2].'/'.$time[1].'/'.$time[0].", ".rtrim($a['Time'], ':00').
@@ -125,25 +149,29 @@
 			<th>
 				<select size="1" name="class" required>
 					<option disabled selected>Оберіть параметр</option>
-					<option value="11">11</option>
-					<option value="12">12</option>
-					<option value="13">13</option>
-					<option value="21">21</option>
-					<option value="22">22</option>
-					<option value="23">23</option>
-					<option value="31">31</option>
-					<option value="32">32</option>
-					<option value="33">33</option>
+					<option value="11">Л-11</option>
+					<option value="12">Л-12</option>
+					<option value="13">Л-13</option>
+					<option value="21">Л-21</option>
+					<option value="22">Л-22</option>
+					<option value="23">Л-23</option>
+					<option value="31">Л-31</option>
+					<option value="32">Л-32</option>
+					<option value="33">Л-33</option>
 				</select>
 			</th>
 			<th>
 				<?
 					$arr = getUserByList('student');
-					echo '<input list="students" name="student"required><datalist id="students">';
+					usort($arr, function($a, $b){return strnatcmp($a['SecondName'], $b['SecondName']);});
+					echo '<select size="1" name="student">';
+					echo '<option value="false"selected>Оберіть параметр</option>';
+
 					foreach($arr as $a){
-						echo '<option value="'.$a['Login'].'">'.$a['Name'].' '.$a['SecondName'].'</option>';
+						if($a['Login']==$_POST['Student']){$selected='selected';}else{$selected='';}
+						echo '<option value="'.$a['Login'].'"'.$selected.'>'.$a['SecondName'].' '.$a['Name'].'</option>';
 					}
-					echo '</datalist>';
+					echo '</select>';
 				?>
 			</th>
 			<th>
