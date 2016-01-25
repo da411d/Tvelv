@@ -5,7 +5,7 @@ include dirname(__FILE__).'/../_curvature_library.php';
 $width = 375;
 $height = 250;
 $tilt = rand(-5,5);
-$textsize = rand(17,20);
+$textsize = rand(20,23);
 
 
 $im = imagecreatetruecolor($width, $height); 

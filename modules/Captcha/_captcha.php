@@ -61,7 +61,7 @@ if(isset($_GET['request'])){
 	$request = '';
 }
 $request = mb_convert_case($request, MB_CASE_LOWER, "UTF-8"); 
-$request = str_replace(array('/', ' ', "\r", "\n", "'", '-'), '', $request);
+$request = str_replace(array('/', ' ', "\r", "\n", "'", '-', ',', '.', '-', '_', '"', '!', '?'), '', $request);
 $request = toQwerty($request);
 
 $in = $request;
@@ -90,7 +90,7 @@ if (isset($in) AND isset($out) AND $in AND $out AND $percent>75){
 }else{
 	include dirname(__FILE__).'/_'.$name.'Captcha/image.php';
 	$answer = mb_convert_case($answer, MB_CASE_LOWER, "UTF-8"); 
-	$answer = strtolower(str_replace(array('/', ' ', '\r', '\n', "'", '-'), '', $answer));
+	$answer = strtolower(str_replace(array('/', ' ', "\r", "\n", "'", '-', ',', '.', '-', '_', '"', '!', '?'), '', $answer));
 	$answer = toQwerty($answer);
 
 	$cookiename = modulate(md5($_SERVER['REMOTE_ADDR'].$_SERVER['HTTP_USER_AGENT']).md5(date("Ydmd")));

@@ -5,7 +5,12 @@ if(getLoginedUsername()){
 }
 $login = $_POST['b'];
 $pwd = $_POST['c'];
-$captcha_url = "http://app.blastorq.pp.ua/".$CaptchaName."Captcha/tester.php?ip=".$_SERVER['REMOTE_ADDR']."&r=".$_POST[$CaptchaName."CaptchaRequest"];
+if(getAttempts($login)<=7){
+	$CaptchaName = 'Rex';
+}else{
+	$CaptchaName = 'Strange';
+}
+$captcha_url = "http://".SERVER_NAME.'/'.SITEDIR."modules/".$CaptchaName."Captcha/tester.php?ip=".$_SERVER['REMOTE_ADDR']."&r=".$_POST[$CaptchaName."CaptchaRequest"];
 function checkCaptcha($captcha_url){
 	if(file_get_contents($captcha_url)=="true"){return true;}return false;
 }
@@ -46,9 +51,10 @@ if($login AND $pwd){
 
 	<?
 		if(getAttempts($login)>2){
-			echo '<script src="http://app.blastorq.pp.ua/'.$CaptchaName.'Captcha/api.js"></script>';
-			echo '<div id="'.$CaptchaName.'Captcha"><script type="text/javascript">'.$CaptchaName.'Captcha(\''.$CaptchaName.'Captcha\')</script></div>';
-		}
+			echo '<p>Ти ввійшов(-ла) невдало '.getAttempts($login).' разів. Тобі треба ввести капчу.';
+			echo '<script src="http://'.SERVER_NAME.'/'.SITEDIR.'modules/'.$CaptchaName.'Captcha/api.js"></script>';
+			echo '<div id="'.$CaptchaName.'Captcha"><script type="text/javascript">'.$CaptchaName.'Captcha(\''.$CaptchaName.'Captcha\')</script></div></p>';
+		}else{echo getAttempts($login);}
 	?>
 	
 	<p><input type="submit"value="Ввійти!"></p>
