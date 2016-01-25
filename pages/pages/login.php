@@ -3,15 +3,33 @@
 if(getLoginedUsername()){
 	header('Location: /profile');
 }
+$login = $_POST['b'];
+$pwd = $_POST['c'];
+$captcha_url = "http://app.blastorq.pp.ua/".$CaptchaName."Captcha/tester.php?ip=".$_SERVER['REMOTE_ADDR']."&r=".$_POST[$CaptchaName."CaptchaRequest"];
+function checkCaptcha($captcha_url){
+	if(file_get_contents($captcha_url)=="true"){return true;}return false;
+}
 
-if($_POST['b'] AND $_POST['c']){
-	if(isPasswordCorrect($_POST['b'], $_POST['c'])){
-		loginMe($_POST['b']);
+if(getAttempts($login)<=2){
+	$allow = true;
+}else{
+	if(checkCaptcha($captcha_url)){
+		$allow = true;
+	}else{
+		$allow = false;
+	}
+}
+
+if($login AND $pwd){
+	if(isPasswordCorrect($login, $pwd) AND $allow){
+		resetAttempts($login);
+		loginMe($login);
 		$title = 'Зачекайте...';
 		header('Location: /profile');
 	}else{
+		addAttemptsOne($login);
 		$main = "Неправильний пароль!<br>".$main;
-		$eval = "<script>document.getElementById('pass').focus()</script>";
+		$eval = "document.getElementById('pass').focus()";
 	}
 }
 ?>
@@ -26,10 +44,18 @@ if($_POST['b'] AND $_POST['c']){
 		<p><input type="password" id="pass" name="c" onkeydown="if(event.keyCode == 13){eLoad('a=login&b='+document.getElementById('login').value+'&c='+document.getElementById('pass').value);}" ></p>
 	</label>
 
+	<?
+		if(getAttempts($login)>2){
+			echo '<script src="http://app.blastorq.pp.ua/'.$CaptchaName.'Captcha/api.js"></script>';
+			echo '<div id="'.$CaptchaName.'Captcha"><script type="text/javascript">'.$CaptchaName.'Captcha(\''.$CaptchaName.'Captcha\')</script></div>';
+		}
+	?>
+	
 	<p><input type="submit"value="Ввійти!"></p>
 </form>
 <input type="hidden" id="login" name="a" value="<?=base64_encode(sha1('HELLO'.$_SERVER['REMOTE_ADDR'].getdate()).sha1($_SERVER['REMOTE_ADDR'].getdate()));?>">
 <script>
 document.getElementById('login').focus();
-document.getElementById('navbar').innerHTML = '<a href="#login"> <img src="/assets/images/icons/login.svg" class="icon">Вхід</a>';
+document.getElementById('nav').innerHTML = '<a href="#login"> <img src="/assets/images/icons/login.svg" class="icon">Вхід</a>';
+<?=$eval;?>
 </script>

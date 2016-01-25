@@ -1,5 +1,5 @@
 <?		
-//############USER REGISTER############
+//Перевіряє правильність паролю
 function isPasswordCorrect($login, $password){
 	sleep(3);
 	$database = db_connect();
@@ -13,6 +13,7 @@ function isPasswordCorrect($login, $password){
 	}
 }
 
+//Реєструє користувача
 function registerUser($login, $password, $permission, $name, $secondname, $class){
 	$database = db_connect();
 
@@ -45,9 +46,10 @@ function registerUser($login, $password, $permission, $name, $secondname, $class
 				"Class" => $class
 			]);
 		}
-	if($udb and $ddb){return true;}else{return false;}
+	if($udb AND $ddb){return true;}else{return false;}
 }
 
+//Змінити пароль
 function editUserPassword($login, $password, $new){
 	$database = db_connect();
 
@@ -65,7 +67,7 @@ function editUserPassword($login, $password, $new){
 }
 
 
-//############USER GET ############
+//Отримати доні про користувача
 function getInfoAboutUser($login){
 	$database = db_connect();
 	switch (db_get("users", ["Permission"], ["Login[=]" => $login])[0]['Permission']) {
@@ -82,6 +84,7 @@ function getInfoAboutUser($login){
 return db_get($dbineed, ["Login", "Name", "SecondName", "Class"], ["Login[=]" => $login])[0];
 }
 
+//Отримати список всіх учнів/вчителів/батьків
 function getUserByList($in='student'){
 	$database = db_connect();
 	switch ($in) {
@@ -98,7 +101,7 @@ function getUserByList($in='student'){
 return db_get($dbineed, ["Login", "Name", "SecondName", "Class"]);
 }
 
-
+//Перевіряє чи є користувач вчителем
 function isTeacher($login=''){
 	if(!$login){
 		$login = getLoginedUsername();
@@ -110,6 +113,7 @@ function isTeacher($login=''){
 	}
 }
 
+//Повертає права користувача
 function getUserPermission($login = FALSE){
 	if(!$login){
 		$login = getLoginedUsername();
@@ -121,6 +125,7 @@ function getUserPermission($login = FALSE){
 	}
 }
 
+//Повертає список однокласників
 function getUserClassmates($login){
 	if(getUserPermission() == 'student'){
 		$class = db_get("students", ["Login", "Name", "SecondName", "Class"], ["Login[=]" => $login])[0]["Class"];
@@ -131,7 +136,7 @@ function getUserClassmates($login){
 }
 
 
-//############USER SECRET QUESTION############
+//Редагує секретні питання(Цю функцію я відключив але потім планую включити)
 function addUserSecret($login, $secret){
 	$database = db_connect();
 
@@ -147,11 +152,13 @@ function addUserSecret($login, $secret){
 	}
 }
 
+//Повертає список секретних питань і відпрвіді
 function getUserSecret($login){
 	$database = db_connect();
 	return db_get('2steplogin', ["Secret", "Salt", "temp"], ["Login[=]" => $login])[0];
 }
 
+//Додає секретні питання
 function editUserSecret($login, $secret){
 	$database = db_connect();
 
