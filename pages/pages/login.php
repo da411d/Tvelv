@@ -54,7 +54,7 @@ if($login AND $pwd){
 			echo '<p>Ти ввійшов(-ла) невдало '.getAttempts($login).' разів. Тобі треба ввести капчу.';
 			echo '<script src="http://'.SERVER_NAME.'/'.SITEDIR.'modules/'.$CaptchaName.'Captcha/api.js"></script>';
 			echo '<div id="'.$CaptchaName.'Captcha"><script type="text/javascript">'.$CaptchaName.'Captcha(\''.$CaptchaName.'Captcha\')</script></div></p>';
-		}else{echo getAttempts($login);}
+		}
 	?>
 	
 	<p><input type="submit"value="Ввійти!"></p>
