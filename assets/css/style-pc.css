@@ -182,11 +182,13 @@ h2 {
 }
 
 .right_block{
-	position: fixed;
+	position: absolute;
 	right: 64px;
 	top: 96px;
 	width: calc(35% - 64px);
 	padding: 16px;
+	max-height: 100%;
+	overflow-y: auto;
 }
 @media (max-width: _reticle_hugescreen_barier_) {
 	.right_block{
