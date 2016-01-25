@@ -1,4 +1,5 @@
 <?php
+include dirname(__FILE__).'/../../_config.php';
 function callback($content){
 	$content = str_replace(" - ","-", $content);
 	$content = str_replace("	","", $content);
@@ -26,7 +27,7 @@ img{cursor:pointer;width:100%;max-height:300px;box-shadow: 0 0 50px 7px rgba(255
 <script>
 function inputtest(){
 	if(document.getElementById('input').value.length>1){
-		document.getElementById('image').src = 'http://app.blastorq.pp.ua/<?=$name;?>Captcha/image?k=<?=$_GET['k'];?>&request='+document.getElementById('input').value+'&rand='+Math.floor((Math.random() * 100) + 1);
+		document.getElementById('image').src = '//<?=SERVER_NAME.'/'.SITEDIR;?>modules/<?=$name;?>Captcha/image?k=<?=$_GET['k'];?>&request='+document.getElementById('input').value+'&rand='+Math.floor((Math.random() * 100) + 1);
 		document.getElementById('input').value=''; 
 	}else{
 		return false;
@@ -38,6 +39,6 @@ if(k=='KL'){e.value=e.value.replace("й","q"),e.value=e.value.replace("ц","w"),
 if(k=='LK'){e.value=e.value.replace("q","й"),e.value=e.value.replace("w","ц"),e.value=e.value.replace("e","у"),e.value=e.value.replace("r","к"),e.value=e.value.replace("t","е"),e.value=e.value.replace("y","н"),e.value=e.value.replace("u","г"),e.value=e.value.replace("i","ш"),e.value=e.value.replace("o","щ"),e.value=e.value.replace("p","з"),e.value=e.value.replace("[","х"),e.value=e.value.replace("]","ї"),e.value=e.value.replace("a","ф"),e.value=e.value.replace("s","і"),e.value=e.value.replace("d","в"),e.value=e.value.replace("f","а"),e.value=e.value.replace("g","п"),e.value=e.value.replace("h","р"),e.value=e.value.replace("j","о"),e.value=e.value.replace("k","л"),e.value=e.value.replace("l","д"),e.value=e.value.replace(";","ж"),e.value=e.value.replace("'","є"),e.value=e.value.replace("z","я"),e.value=e.value.replace("x","ч"),e.value=e.value.replace("c","с"),e.value=e.value.replace("v","м"),e.value=e.value.replace("b","и"),e.value=e.value.replace("n","т"),e.value=e.value.replace("m","ь"),e.value=e.value.replace(",","б"),e.value=e.value.replace(".","ю");}
 }
 </script>
-<img id="image" width="100%" alt="Error. Try again later..." src="http://app.blastorq.pp.ua/<?=$name;?>Captcha/image" onclick="this.src='http://app.blastorq.pp.ua/<?=$name;?>Captcha/image?k=<?=$_GET['k'];?>&rand='+Math.floor((Math.random() * 100) + 1)">
+<img id="image" width="100%" alt="Error. Try again later..." src="//<?=SERVER_NAME.'/'.SITEDIR;?>modules/<?=$name;?>Captcha/image" onclick="this.src='//<?=SERVER_NAME.'/'.SITEDIR;?>modules/<?=$name;?>Captcha/image?k=<?=$_GET['k'];?>&rand='+Math.floor((Math.random() * 100) + 1)">
 
 <input id="input" type="text" onblur="inputtest()" onkeydown="if(event.keyCode == 13){inputtest()};" onkeyup="validInput(this,'<?if(isset($convertion) AND $convertion=='LK'){echo 'LK';}else{echo 'KL';}?>')" placeholder="<?=$alt;?>" required spellcheck="false">

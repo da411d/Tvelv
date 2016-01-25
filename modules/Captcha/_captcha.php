@@ -1,5 +1,5 @@
 <?php
-error_reporting(0);
+//error_reporting(0);
 function modulate($in){
 	$in = base64_encode($in);
 	$in = trim($in,"=");
@@ -82,11 +82,11 @@ if (isset($in) AND isset($out) AND $in AND $out AND $percent>75){
 	imagefilledrectangle($im,0,0,1,2,ImageColorAllocatealpha($im,rand(0,100), rand(120,200), rand(0,100), 0));
 	Header ('Content-type: image/png');
 	imagepng($im);
-	imagedestroy($im);
 
 	$t = fopen(dirname(__FILE__).'/sessions/session_'.$ip.'_'.$_answer, 'c');
 	fwrite($t, time());
 	fclose($t);
+	
 }else{
 	include dirname(__FILE__).'/_'.$name.'Captcha/image.php';
 	$answer = mb_convert_case($answer, MB_CASE_LOWER, "UTF-8"); 
@@ -96,8 +96,8 @@ if (isset($in) AND isset($out) AND $in AND $out AND $percent>75){
 	$cookiename = modulate(md5($_SERVER['REMOTE_ADDR'].$_SERVER['HTTP_USER_AGENT']).md5(date("Ydmd")));
 	$code = _crypt($answer, 'Cod');
 	SetCookie($cookiename, $code);
-	//SetCookie($answer.'_', $answer.'_');//DEBUG
 
 	imgInit($im);
+
 }
 ?>
