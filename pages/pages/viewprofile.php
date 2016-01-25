@@ -22,7 +22,7 @@ if(!getLoginedUsername()){
 	echo '</h1>';
 
 	echo '<div class="right_block">';
-	if(isTeacher()){
+	if(isTeacher($login)){
 		$MyMarks = getMarksByParams(['Teacher[=]' => $login]);
 	}else{
 		$MyMarks = getMarksByParams(['Student[=]' => $login]);
