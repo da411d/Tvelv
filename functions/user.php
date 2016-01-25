@@ -1,7 +1,7 @@
 <?		
 //Перевіряє правильність паролю
 function isPasswordCorrect($login, $password){
-	sleep(3);
+	sleep(2);
 	$database = db_connect();
 
 	$test = db_get("users", ["Login","Password","Salt"], ["Login[=]" => $login]);
