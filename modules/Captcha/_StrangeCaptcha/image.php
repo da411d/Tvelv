@@ -95,7 +95,7 @@ $l = rand(20,30);
 for($i=-1;$i<$width/$k+1;++$i){
 	for($ii=-1;$ii<$height/rand(20,30)+1;++$ii){
 		$color4sh = "";
-		$color4sh = imagecolorallocatealpha($im, rand(0,255), rand(0,255), rand(0,255), 100);
+		$color4sh = imagecolorallocatealpha($im, rand(0,255), rand(0,255), rand(0,255), 110);
 		imagefilledrectangle($im,($i-1)*$k+rand(0,15), ($ii-1)*$l+rand(0,15), ($i+1)*$k+rand(0,15), ($ii+1)*$l+rand(0,15), $color4sh);
 	}
 }
