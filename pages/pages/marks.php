@@ -108,12 +108,11 @@
 			<?
 				$arrOfParams = [];
 
-				if($_POST['Date']){$arrOfParams['Date'] = $_POST['Date'];}
-				if($_POST['Class'] AND $_POST['Class']!='Оберіть параметр'){$arrOfParams['Class'] = $_POST['Class'];}
-				if($_POST['Student']){$arrOfParams['Student'] = $_POST['Student'];}
-				if($_POST['Teacher']){$arrOfParams['Teacher'] = $_POST['Teacher'];}
-				if($_POST['Mark']){$arrOfParams['Mark'] = $_POST['Mark'];}
-
+				if($_POST['Date']){$arrOfParams['Date[=]'] = $_POST['Date'];}
+				if($_POST['Class']){$arrOfParams['Class[=]'] = $_POST['Class'];}
+				if($_POST['Student'] AND $_POST['Student']!='false'){$arrOfParams['Student[=]'] = $_POST['Student'];}
+				if($_POST['Teacher'] AND $_POST['Teacher']!='false'){$arrOfParams['Teacher[=]'] = $_POST['Teacher'];}
+				if($_POST['Mark']){$arrOfParams['Mark[=]'] = $_POST['Mark'];}
 				$arr = getMarksByParams($arrOfParams);
 				if(!$arr){$arr=[];}
 				usort($arr, function($a, $b){
@@ -124,14 +123,11 @@
 				foreach ($arr as $a){
 					$time = explode('-', $a['Date']);
 					echo "<tr><td>".$time[2].'/'.$time[1].'/'.$time[0].", ".rtrim($a['Time'], ':00').
-					"<td>".$a['Class'].
+					"<td>Л-".$a['Class'].
 					"<td><a href=\"viewprofile?_=".$a['Student']."\">".getInfoAboutUser($a['Student'])['Name'].' '.getInfoAboutUser($a['Student'])['SecondName']."</a>".
 					"<td><a href=\"viewprofile?_=".$a['Student']."\">".getInfoAboutUser($a['Teacher'])['Name'].' '.getInfoAboutUser($a['Teacher'])['SecondName']."</a>".
 					"<td width=\"5em\">".$a['Mark'].
 					"<td>".$a['Info'];
-				}
-				if($_POST['date'] AND $_POST['class'] AND $_POST['student'] AND $_POST['teacher'] AND $_POST['mark'] AND $_POST['teacher']==getLoginedUsername()){
-					echo addMark($_POST['date'], $_POST['class'], $_POST['student'], $_POST['teacher'], $_POST['mark'], $_POST['info']);
 				}
 			?>
 		</th>
@@ -139,7 +135,10 @@
 
 
 	<tr align="center" style="<?if (!isTeacher()){echo 'display:none;';}?>">
-		<td colspan="6">Додати Оцінку</td>
+		<td colspan="6">Додати Оцінку<?
+				if($_POST['date'] AND $_POST['class'] AND $_POST['student'] AND $_POST['teacher'] AND $_POST['mark'] AND $_POST['teacher']==getLoginedUsername()){
+					echo addMark($_POST['date'], $_POST['class'], $_POST['student'], $_POST['teacher'], $_POST['mark'], $_POST['info']);
+				}?></td>
 	</tr>
 	<tr undefined="add mark" style="<?if (!isTeacher()){echo 'display:none;';}?>">
 		<form method="post" <?if (!isTeacher()) {echo 'style="display:none;"';}?>>

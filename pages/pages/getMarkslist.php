@@ -9,6 +9,11 @@ $svg = '<svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http:
 <polygon points="94.35,0 58.65,35.7 175.95,153 58.65,270.3 94.35,306 247.35,153" fill="#fafafa"/></svg>';
 
 $MarksBlock = '';
+usort($arr, function($a, $b){
+	$t1 = strtotime($a['Date'].' '.$a['Time']);
+	$t2 = strtotime($b['Date'].' '.$b['Time']);
+	return $t2 - $t1;
+});
 foreach($arr as $a){
 	$MarksBlock .= '<div class="mark_block"><a href="/viewprofile?_='.$a['Teacher'].'" class="teacher">';
 	$MarksBlock .= getInfoAboutUser($a['Teacher'])['Name'].' '.getInfoAboutUser($a['Teacher'])['SecondName'];
@@ -18,6 +23,8 @@ foreach($arr as $a){
 	if($a['Info']){
 		$MarksBlock .= '<div class="coment">'.$a['Info'].'</div>';
 	}
+	$time = explode('-', $a['Date']);
+	$MarksBlock .= '<time>'.$time[2].'/'.$time[1].'/'.$time[0].", ".rtrim($a['Time'], ':00').'</time>';
 	$MarksBlock .= '</div>';
 }
 

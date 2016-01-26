@@ -206,6 +206,7 @@ menu a,
 	margin:-16px;
 	background: #CB2237;
 }
+.mark_block time{display:block;}
 .m1{
 	background: #CB2237;
 }
