@@ -131,7 +131,6 @@
 				if($_POST['Teacher'] AND $_POST['Teacher']!='false'){$arrOfParams['Teacher'] = $_POST['Teacher'];}
 				if($_POST['Mark']){$arrOfParams['Mark'] = $_POST['Mark'];}
 				$arr = getMarksByParams($arrOfParams);
-				print_r($arrOfParams);
 				if(!$arr){$arr=[];}
 				usort($arr, function($a, $b){
 					$t1 = strtotime($a['Date'].' '.$a['Time']);
