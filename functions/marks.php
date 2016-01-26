@@ -37,11 +37,23 @@ function editMark($date ,$class, $student, $teacher, $mark, $info){
 //Повертає список оцінок відфільтрований по параметрах
 function getMarksByParams($param = array()){
 	$database = db_connect();
-	return db_get("marks", ["Date","Time", "LastEdit", "Class", "Student", "Teacher", "Mark", "Info"], $param);
+	return db_get("marks", ["Date","Time", "LastEdit", "Subject", "Class", "Student", "Teacher", "Mark", "Info"], $param);
 }
 
 //Повертає всі оцінки
 function getAllMarks(){
 	$database = db_connect();
-	return db_get("marks", ["Date","Time", "LastEdit", "Class", "Student", "Teacher", "Mark", "Info"], []);
+	return db_get("marks", ["Date","Time", "LastEdit", "Subject", "Class", "Student", "Teacher", "Mark", "Info"], []);
+}
+
+//Повертає всі предмети
+function getAllSubjects(){
+	$database = db_connect();
+	return db_get("subjects", ["SubjectName", "SubjectCaption", "SubjectDescription"], []);
+}
+
+//Повертає назву предмета по ID
+function getSubjectName($param){
+	$database = db_connect();
+	return db_get("subjects", ["SubjectName","SubjectCaption", "SubjectDescription"], ["SubjectName[=]" => $param])[0]["SubjectCaption"];
 }

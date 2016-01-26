@@ -2,9 +2,9 @@
 /*!
  * Medoo database framework
  * http://medoo.in
- * Version 1.0.1
+ * Version 1.0
  *
- * Copyright 2016, Angel Lai
+ * Copyright 2015, Angel Lai
  * Released under the MIT license
  */
 class medoo
@@ -190,7 +190,7 @@ class medoo
 
 	protected function column_quote($string)
 	{
-		return '"' . $this->prefix . str_replace('.', '"."', preg_replace('/(^#|\(JSON\)\s*)/', '', $string)) . '"';
+		return '"' . str_replace('.', '"."', preg_replace('/(^#|\(JSON\)\s*)/', '', $string)) . '"';
 	}
 
 	protected function column_push($columns)
@@ -332,35 +332,27 @@ class medoo
 
 					if ($operator == '~' || $operator == '!~')
 					{
-						if ($type != 'array')
+						if ($type == 'string')
 						{
 							$value = array($value);
 						}
 
-						$like_clauses = array();
-
-						foreach ($value as $item)
+						if (!empty($value))
 						{
-							$item = strval($item);
-							$suffix = mb_substr($item, -1, 1);
+							$like_clauses = array();
 
-							if ($suffix === '_')
+							foreach ($value as $item)
 							{
-								$item = substr_replace($item, '%', -1);
-							}
-							elseif ($suffix === '%')
-							{
-								$item = '%' . substr_replace($item, '', -1, 1);
-							}
-							elseif (preg_match('/^(?!%).+(?<!%)$/', $item))
-							{
-								$item = '%' . $item . '%';
+								if (preg_match('/^(?!%).+(?<!%)$/', $item))
+								{
+									$item = '%' . $item . '%';
+								}
+
+								$like_clauses[] = $column . ($operator === '!~' ? ' NOT' : '') . ' LIKE ' . $this->fn_quote($key, $item);
 							}
 
-							$like_clauses[] = $column . ($operator === '!~' ? ' NOT' : '') . ' LIKE ' . $this->fn_quote($key, $item);
+							$wheres[] = implode(' OR ', $like_clauses);
 						}
-
-						$wheres[] = implode(' OR ', $like_clauses);
 					}
 
 					if (in_array($operator, array('>', '>=', '<', '<=')))
@@ -427,12 +419,7 @@ class medoo
 
 			if ($single_condition != array())
 			{
-				$condition = $this->data_implode($single_condition, '');
-
-				if ($condition != '')
-				{
-					$where_clause = ' WHERE ' . $condition;
-				}
+				$where_clause = ' WHERE ' . $this->data_implode($single_condition, '');
 			}
 
 			if (!empty($where_AND))
@@ -583,7 +570,7 @@ class medoo
 
 							foreach ($relation as $key => $value)
 							{
-								$joins[] = $this->prefix . (
+								$joins[] = (
 									strpos($key, '.') > 0 ?
 										// For ['tableB.column' => 'column']
 										'"' . str_replace('.', '"."', $key) . '"' :
@@ -599,7 +586,7 @@ class medoo
 						}
 					}
 
-					$table_join[] = $join_array[ $match[ 2 ] ] . ' JOIN "' . $this->prefix . $match[ 3 ] . '" ' . (isset($match[ 5 ]) ?  'AS "' . $match[ 5 ] . '" ' : '') . $relation;
+					$table_join[] = $join_array[ $match[ 2 ] ] . ' JOIN "' . $match[ 3 ] . '" ' . (isset($match[ 5 ]) ?  'AS "' . $match[ 5 ] . '" ' : '') . $relation;
 				}
 			}
 
@@ -860,14 +847,7 @@ class medoo
 
 		$query = $this->query('SELECT EXISTS(' . $this->select_context($table, $join, $column, $where, 1) . ')');
 
-		if ($query)
-		{
-			return $query->fetchColumn() === '1';
-		}
-		else
-		{
-			require false;
-		}
+		return $query ? $query->fetchColumn() === '1' : false;
 	}
 
 	public function count($table, $join = null, $column = null, $where = null)

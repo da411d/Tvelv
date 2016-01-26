@@ -39,10 +39,29 @@
 				<br>
 				<input type="date" name="Date"onblur="onChange(this)" value="<?if($_POST['Date'])echo $_POST['Date'];else echo"Дата";?>" required>
 			</th>
+			<th>Предмет
+				<br>
+				<?
+					$arr = getAllSubjects();
+					usort($arr, function($a, $b){return strnatcmp($a['SubjectCaption'], $b['SubjectCaption']);});
+					echo '<select size="1" name="Subject" onchange="onChange(this)">';
+					if($_POST['Subject'] AND $_POST['Subject']!='false'){
+						echo '<option selected>Очистити</option>';
+					}else{
+						echo '<option value="false"selected disabled>Оберіть</option>';
+					}
+
+					foreach($arr as $a){
+						if($a['SubjectName']==$_POST['Subject']){$selected='selected';}else{$selected='';}
+						echo '<option value="'.$a['SubjectName'].'" '.$selected.'>'.$a['SubjectCaption'].'</option>';
+					}
+					echo '</select>';
+				?>
+			</th>
 			<th>Група
 				<br>
 				<select size="1" name="Class" onchange="onChange(this)" value="<?=$_POST['class'];?>">
-					<option value="false"disabled selected>Оберіть параметр</option>
+					<option value="false"disabled selected>Оберіть</option>
 					<option value="11">Л-11</option>
 					<option value="12">Л-12</option>
 					<option value="13">Л-13</option>
@@ -60,13 +79,11 @@
 					$arr = getUserByList('student');
 					usort($arr, function($a, $b){return strnatcmp($a['SecondName'], $b['SecondName']);});
 					echo '<select size="1" name="Student" onchange="onChange(this)">';
-					echo '<option value="false"selected>';
 					if($_POST['Student'] AND $_POST['Student']!='false'){
-						echo "Очистити";
+						echo '<option selected>Очистити</option>';
 					}else{
-						echo "Оберіть параметр";
+						echo '<option value="false"selected disabled>Оберіть</option>';
 					}
-					echo '</option>';
 
 					foreach($arr as $a){
 						if($a['Login']==$_POST['Student']){$selected='selected';}else{$selected='';}
@@ -82,13 +99,11 @@
 					$arr = getUserByList('teacher');
 					usort($arr, function($a, $b){return strnatcmp($a['SecondName'], $b['SecondName']);});
 					echo '<select size="1" name="Teacher" onchange="onChange(this)">';
-					echo '<option value="false"selected>';
 					if($_POST['Teacher'] AND $_POST['Teacher']!='false'){
-						echo "Очистити";
+						echo '<option selected>Очистити</option>';
 					}else{
-						echo "Оберіть параметр";
+						echo '<option value="false"selected disabled>Оберіть</option>';
 					}
-					echo '</option>';
 
 					foreach($arr as $a){
 						if($a['Login']==$_POST['Teacher']){$selected='selected';}else{$selected='';}
@@ -106,14 +121,17 @@
 			<th>Коментар</th>
 		</form>
 			<?
+
 				$arrOfParams = [];
 
-				if($_POST['Date']){$arrOfParams['Date[=]'] = $_POST['Date'];}
-				if($_POST['Class']){$arrOfParams['Class[=]'] = $_POST['Class'];}
-				if($_POST['Student'] AND $_POST['Student']!='false'){$arrOfParams['Student[=]'] = $_POST['Student'];}
-				if($_POST['Teacher'] AND $_POST['Teacher']!='false'){$arrOfParams['Teacher[=]'] = $_POST['Teacher'];}
-				if($_POST['Mark']){$arrOfParams['Mark[=]'] = $_POST['Mark'];}
+				if($_POST['Date']){$arrOfParams['Date'] = $_POST['Date'];}
+				if($_POST['Subject'] AND $_POST['Subject']!='false'){$arrOfParams['Subject'] = $_POST['Subject'];}
+				if($_POST['Class']){$arrOfParams['Class'] = $_POST['Class'];}
+				if($_POST['Student'] AND $_POST['Student']!='false'){$arrOfParams['Student'] = $_POST['Student'];}
+				if($_POST['Teacher'] AND $_POST['Teacher']!='false'){$arrOfParams['Teacher'] = $_POST['Teacher'];}
+				if($_POST['Mark']){$arrOfParams['Mark'] = $_POST['Mark'];}
 				$arr = getMarksByParams($arrOfParams);
+				print_r($arrOfParams);
 				if(!$arr){$arr=[];}
 				usort($arr, function($a, $b){
 					$t1 = strtotime($a['Date'].' '.$a['Time']);
@@ -123,9 +141,10 @@
 				foreach ($arr as $a){
 					$time = explode('-', $a['Date']);
 					echo "<tr><td>".$time[2].'/'.$time[1].'/'.$time[0].", ".rtrim($a['Time'], ':00').
+					"<td>".getSubjectName($a['Subject']).
 					"<td>Л-".$a['Class'].
 					"<td><a href=\"viewprofile?_=".$a['Student']."\">".getInfoAboutUser($a['Student'])['Name'].' '.getInfoAboutUser($a['Student'])['SecondName']."</a>".
-					"<td><a href=\"viewprofile?_=".$a['Student']."\">".getInfoAboutUser($a['Teacher'])['Name'].' '.getInfoAboutUser($a['Teacher'])['SecondName']."</a>".
+					"<td><a href=\"viewprofile?_=".$a['Teacher']."\">".getInfoAboutUser($a['Teacher'])['Name'].' '.getInfoAboutUser($a['Teacher'])['SecondName']."</a>".
 					"<td width=\"5em\">".$a['Mark'].
 					"<td>".$a['Info'];
 				}
@@ -147,7 +166,7 @@
 			</th>
 			<th>
 				<select size="1" name="class" required>
-					<option disabled selected>Оберіть параметр</option>
+					<option disabled selected>Оберіть</option>
 					<option value="11">Л-11</option>
 					<option value="12">Л-12</option>
 					<option value="13">Л-13</option>
@@ -164,7 +183,7 @@
 					$arr = getUserByList('student');
 					usort($arr, function($a, $b){return strnatcmp($a['SecondName'], $b['SecondName']);});
 					echo '<select size="1" name="student">';
-					echo '<option value="false"selected>Оберіть параметр</option>';
+					echo '<option value="false"selected>Оберіть</option>';
 
 					foreach($arr as $a){
 						if($a['Login']==$_POST['Student']){$selected='selected';}else{$selected='';}
