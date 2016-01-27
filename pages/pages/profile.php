@@ -18,7 +18,7 @@ if(getUserClassmates($login) AND !isTeacher()){
 	usort($myClassmates , function($a, $b){return strnatcmp($a['Name'], $b['Name']);});
 	echo '<h1>Мої однокласники</h1>';
 	foreach($myClassmates as $c){
-		echo '<a href="viewprofile?u='.$c['Login'].'" class="li">'.$c['Name'].' '.$c['SecondName'].'</a>';
+		echo '<a href="viewprofile?_='.$c['Login'].'" class="li">'.$c['Name'].' '.$c['SecondName'].'</a>';
 	}
 	echo $classmatesHTML;
 }

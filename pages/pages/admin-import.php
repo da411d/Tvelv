@@ -26,9 +26,7 @@ if($_FILES['uploadfile'] AND !$_FILES['uploadfile']['error']){
 	$json = file_get_contents($_FILES['uploadfile']['tmp_name']);
 	$json = file_get_contents("import.json");
 	$json = str_replace(["\r", "\n", "	"], "", $json);
-	echo $json;
 	$arr = json_decode($json, 1);
-	print_r($arr);
 	$printHTML = '<head><meta charset="utf-8"></head><body onload="window.print()">';
 	echo '<div id="pwds">';
 	foreach($arr as $a){

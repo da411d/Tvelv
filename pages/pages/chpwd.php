@@ -1,11 +1,11 @@
 <? 
-if($_GET['b']==getLoginedUsername() AND $_GET['c'] AND $_GET['d']){
-	if(editUserPassword($_GET['b'], $_GET['c'], $_GET['d'])){
+if($_POST['login']==getLoginedUsername() AND $_POST['pass'] AND $_POST['new']){
+	if(editUserPassword($_POST['login'], $_POST['pass'], $_POST['new'])){
 		$title = 'Пароль змінено!';
-		echo "Новий пароль: ".$_GET['d'];
+		echo "Новий пароль: ".$_POST['new'];
 	}else{
 		$title = 'Змінити пароль';
-		echo "Неправильний старий пароль!".$form;
+		echo "Неправильний старий пароль!";
 	}
 }else{
 	$title = 'Змінити пароль';
@@ -15,17 +15,17 @@ if($_GET['b']==getLoginedUsername() AND $_GET['c'] AND $_GET['d']){
 <form method="post">
 <label>
 	<p>Логін:</p>
-	<p><input type="text" id="login" name="b" value="<?=getLoginedUsername()?>" readonly></p>
+	<p><input type="text" name="login" value="<?=getLoginedUsername()?>" readonly></p>
 </label>
 
 <label>
 	<p>Пароль: </p>
-	<p><input type="password" name="c" id="pass"></p>
+	<p><input type="password" name="pass"></p>
 </label>
 
 <label>
 	<p>Новий пароль: </p>
-	<p><input id="new" name="d"></p>
+	<p><input name="new"></p>
 </label>
 
 <p><input type="submit" onclick="eLoad('a=chpwd&b='+document.getElementById('login').value+'&c='+document.getElementById('pass').value+'&d='+document.getElementById('new').value); value="Поїхали!"></p>
