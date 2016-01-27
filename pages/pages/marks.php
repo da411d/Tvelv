@@ -121,7 +121,11 @@
 
 			<th>Оцінка
 				<br>
-				<input type="text" name="Mark" placeholder="mark" onchange="onChange(this)" value="<?=$_POST['Mark'];?>" required>
+				<input  type="number" name="Mark" size="2" max="13" min="1"onchange="this.style.background=['#CB2237', '#DC3338', '#EA4438', '#F25437', '#E46538', '#D37738', '#C58837', '#B59936', '#A7AC38', '#97BA38', '#88CC37', '#7ADC37', '#7ADC37'][parseInt(this.value)-1]" onblur="onChange(this)" style="color:#fafafa;background:<?
+				if($_POST['Mark']){
+					$arr = ['#CB2237', '#DC3338', '#EA4438', '#F25437', '#E46538', '#D37738', '#C58837', '#B59936', '#A7AC38', '#97BA38', '#88CC37', '#7ADC37', '#7ADC37'];
+					echo $arr[$_POST['Mark']];}else{echo "#bfbfbf";}
+				?>;" value="<?=$_POST['Mark'];?>">
 			</th>
 
 			<th>Коментар</th>
@@ -159,35 +163,42 @@
 
 
 	<tr align="center" style="<?if (!isTeacher()){echo 'display:none;';}?>">
-		<td colspan="6">Додати Оцінку<?
-				if($_POST['date'] AND $_POST['class'] AND $_POST['student'] AND $_POST['teacher'] AND $_POST['mark'] AND $_POST['teacher']==getLoginedUsername()){
-					echo addMark($_POST['date'], $_POST['class'], $_POST['student'], $_POST['teacher'], $_POST['mark'], $_POST['info']);
+		<td colspan="7">Додати Оцінку<?
+				if($_POST['subject'] AND $_POST['class'] AND $_POST['student'] AND $_POST['teacher'] AND $_POST['mark'] AND $_POST['teacher']==getLoginedUsername()){
+					echo addMark($_POST['subject'], $_POST['class'], $_POST['student'], $_POST['teacher'], $_POST['mark'], $_POST['info']);
 				}?></td>
 	</tr>
 	<tr undefined="add mark" style="<?if (!isTeacher()){echo 'display:none;';}?>">
 		<form method="post" <?if (!isTeacher()) {echo 'style="display:none;"';}?>>
 			<th>
-				<input type="date" name="date" value="<?=date(" Y-m-d ");?>" required>
+				<input type="date" name="date" value="<?=date("Y-m-d");?>" disabled required>
 			</th>
-			<th>
-				<select size="1" name="class" required>
-					<option disabled selected>Оберіть</option>
-					<option value="11">Л-11</option>
-					<option value="12">Л-12</option>
-					<option value="13">Л-13</option>
-					<option value="21">Л-21</option>
-					<option value="22">Л-22</option>
-					<option value="23">Л-23</option>
-					<option value="31">Л-31</option>
-					<option value="32">Л-32</option>
-					<option value="33">Л-33</option>
+			<th><?
+					$arr = getSubjectPermission();
+					usort($arr, function($a, $b){return strnatcmp($a['SubjectCaption'], $b['SubjectCaption']);});
+					echo '<select size="1" name="subject" required>';
+					foreach($arr as $a){
+						if($a['SubjectName']==$_POST['Subject']){$selected='selected';}else{$selected='';}
+						echo '<option value="'.$a.'" '.$selected.'>'.getSubjectName($a).'</option>';
+					}
+					echo '</select>';
+				?>
+			</th>
+			<th><select size="1" name="class" value="<?=$_POST['Class'];?>" required>
+					<?php
+					$arr = getAllClasses();
+					foreach($arr as $a){
+						if($a['ClassName']==$_POST['Class']){$selected='selected';}else{$selected='';}
+						echo '<option value="'.$a['ClassName'].'"'.$selected.'>'.$a['ClassCaption'].'</option>';
+					}
+					?>
 				</select>
 			</th>
 			<th>
 				<?
 					$arr = getUserByList('student');
 					usort($arr, function($a, $b){return strnatcmp($a['SecondName'], $b['SecondName']);});
-					echo '<select size="1" name="student">';
+					echo '<select size="1" name="student"required>';
 					echo '<option value="false"selected>Оберіть</option>';
 
 					foreach($arr as $a){
@@ -206,13 +217,13 @@
 				?>
 			</th>
 			<th>
-				<input type="text" name="mark" placeholder="mark" required>
+				<input  type="number" name="mark"size="2" max="13" min="1"onchange="this.style.background=['#CB2237', '#DC3338', '#EA4438', '#F25437', '#E46538', '#D37738', '#C58837', '#B59936', '#A7AC38', '#97BA38', '#88CC37', '#7ADC37', '#7ADC37'][parseInt(this.value)-1]" style="color:#fafafa;"value="12">
 			</th>
 			<th>
 				<input type="text" name="info" placeholder="Коментар">
 			</th>
-		<tr colspan="6" <?if (!isTeacher()) {echo 'style="display:none;"';}?>>
-			<td colspan="6">
+		<tr colspan="7" <?if (!isTeacher()) {echo 'style="display:none;"';}?>>
+			<td colspan="7">
 				<input type="submit" value="Додати" style="width:100%;">
 			</td>
 		</tr>

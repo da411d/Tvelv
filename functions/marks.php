@@ -1,12 +1,13 @@
 <?
 //Додає оцінку
-function addMark($date, $class, $student, $teacher, $mark, $info){
+function addMark($subject, $class, $student, $teacher, $mark, $info){
 	$database = db_connect();
 
-	if($date AND $class AND $student AND $teacher AND ($mark OR $info)){
+	if($subject AND $class AND $student AND $teacher AND ($mark OR $info)){
 		return $database->insert("marks", [
-				"Date" => $date,
+				"Date" => date("Y-m-d"),
 				"Time" => date("H:i"),
+				"Subject" => $subject,
 				"Class" => $class,
 				"Student" => $student,
 				"Teacher" => $teacher,
@@ -50,6 +51,15 @@ function getAllMarks(){
 function getAllSubjects(){
 	$database = db_connect();
 	return db_get("subjects", ["SubjectName", "SubjectCaption", "SubjectDescription"], []);
+}
+
+//Повертає права ставити оцінку
+function getSubjectPermission(){
+	$login = getLoginedUsername();
+	$database = db_connect();
+	if(isTeacher()){
+		return json_decode(db_get("teachers", ["SubjectPermission"], ["Login" => $login])[0]["SubjectPermission"], 1);
+	}
 }
 
 //Повертає назву предмета по ID

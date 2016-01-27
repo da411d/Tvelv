@@ -108,9 +108,9 @@ a{
 input,
 textarea,
 select {
-	padding: 8px;
+	padding: 4px;
 	border: 1px solid _theme_main_dark_color_;
-	font-size: 110%;
+	font-size: 100%;
 	background: _theme_text_color_;
 	color: _theme_main_dark_color_;
 	border-radius: 0px;
@@ -188,6 +188,11 @@ menu a,
 .mark_block {
 	border: 1px solid #004184;
 	border-bottom: 5px solid #004184;
+	background: _theme_main_light_color_;
+}
+.addmark{
+	border: 2px solid #004184;
+	border-bottom: 10px solid #004184;
 	background: _theme_main_light_color_;
 }
 .coment{
