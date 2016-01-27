@@ -34,7 +34,7 @@ function checkLogined(){
 	}
 }
 
-//Функція завершує веввію і виходить
+//Функція завершує сессію і виходить
 function Leave(){
 	$cookiename = modulate(md5($_SERVER['REMOTE_ADDR'].$_SERVER['HTTP_USER_AGENT']).md5(date("Ym")));
 	$arr=['b' => '0', 'c' => md5(date("Ymds"))];

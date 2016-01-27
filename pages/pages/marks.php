@@ -136,7 +136,7 @@
 				if($_POST['Student'] AND $_POST['Student']!=''){$arrOfParams['Student'] = $_POST['Student'];}
 				if($_POST['Teacher'] AND $_POST['Teacher']!=''){$arrOfParams['Teacher'] = $_POST['Teacher'];}
 				if($_POST['Mark']){$arrOfParams['Mark'] = $_POST['Mark'];}
-				$arr = getMarksByParams($arrOfParams);
+				$arr = getMarksByParams(['AND' => $arrOfParams]);
 				if(!$arr){$arr=[];}
 				usort($arr, function($a, $b){
 					$t1 = strtotime($a['Date'].' '.$a['Time']);
