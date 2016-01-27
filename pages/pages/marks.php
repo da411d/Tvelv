@@ -45,8 +45,8 @@
 					$arr = getAllSubjects();
 					usort($arr, function($a, $b){return strnatcmp($a['SubjectCaption'], $b['SubjectCaption']);});
 					echo '<select size="1" name="Subject" onchange="onChange(this)">';
-					if($_POST['Subject'] AND $_POST['Subject']!='false'){
-						echo '<option selected>Очистити</option>';
+					if($_POST['Subject'] AND $_POST['Subject']!=''){
+						echo '<option selected value="">Очистити</option>';
 					}else{
 						echo '<option value="false"selected disabled>Оберіть</option>';
 					}
@@ -60,27 +60,33 @@
 			</th>
 			<th>Група
 				<br>
-				<select size="1" name="Class" onchange="onChange(this)" value="<?=$_POST['class'];?>">
-					<option value="false"disabled selected>Оберіть</option>
-					<option value="11">Л-11</option>
-					<option value="12">Л-12</option>
-					<option value="13">Л-13</option>
-					<option value="21">Л-21</option>
-					<option value="22">Л-22</option>
-					<option value="23">Л-23</option>
-					<option value="31">Л-31</option>
-					<option value="32">Л-32</option>
-					<option value="33">Л-33</option>
+				<select size="1" name="Class" onchange="onChange(this)" value="<?=$_POST['Class'];?>">
+					<?php
+					$arr = getAllClasses();
+					if($_POST['Class'] AND $_POST['Class']!=''){
+						echo '<option selected value="">Очистити</option>';
+					}else{
+						echo '<option value="false"selected disabled>Оберіть</option>';
+					}
+					foreach($arr as $a){
+						if($a['ClassName']==$_POST['Class']){$selected='selected';}else{$selected='';}
+						echo '<option value="'.$a['ClassName'].'"'.$selected.'>'.$a['ClassCaption'].'</option>';
+					}
+					?>
 				</select>
 			</th>
 			<th>Ліцеїст
 				<br>
 				<?
-					$arr = getUserByList('student');
+					if($_POST['Class']){
+						$arr = getUsersByClass($_POST['Class']);
+					}else{
+						$arr = getUserByList('student');
+					}
 					usort($arr, function($a, $b){return strnatcmp($a['SecondName'], $b['SecondName']);});
 					echo '<select size="1" name="Student" onchange="onChange(this)">';
-					if($_POST['Student'] AND $_POST['Student']!='false'){
-						echo '<option selected>Очистити</option>';
+					if($_POST['Student'] AND $_POST['Student']!=''){
+						echo '<option selected value="">Очистити</option>';
 					}else{
 						echo '<option value="false"selected disabled>Оберіть</option>';
 					}
@@ -99,8 +105,8 @@
 					$arr = getUserByList('teacher');
 					usort($arr, function($a, $b){return strnatcmp($a['SecondName'], $b['SecondName']);});
 					echo '<select size="1" name="Teacher" onchange="onChange(this)">';
-					if($_POST['Teacher'] AND $_POST['Teacher']!='false'){
-						echo '<option selected>Очистити</option>';
+					if($_POST['Teacher'] AND $_POST['Teacher']!=''){
+						echo '<option selected value="">Очистити</option>';
 					}else{
 						echo '<option value="false"selected disabled>Оберіть</option>';
 					}
@@ -125,10 +131,10 @@
 				$arrOfParams = [];
 
 				if($_POST['Date']){$arrOfParams['Date'] = $_POST['Date'];}
-				if($_POST['Subject'] AND $_POST['Subject']!='false'){$arrOfParams['Subject'] = $_POST['Subject'];}
+				if($_POST['Subject'] AND $_POST['Subject']!=''){$arrOfParams['Subject'] = $_POST['Subject'];}
 				if($_POST['Class']){$arrOfParams['Class'] = $_POST['Class'];}
-				if($_POST['Student'] AND $_POST['Student']!='false'){$arrOfParams['Student'] = $_POST['Student'];}
-				if($_POST['Teacher'] AND $_POST['Teacher']!='false'){$arrOfParams['Teacher'] = $_POST['Teacher'];}
+				if($_POST['Student'] AND $_POST['Student']!=''){$arrOfParams['Student'] = $_POST['Student'];}
+				if($_POST['Teacher'] AND $_POST['Teacher']!=''){$arrOfParams['Teacher'] = $_POST['Teacher'];}
 				if($_POST['Mark']){$arrOfParams['Mark'] = $_POST['Mark'];}
 				$arr = getMarksByParams($arrOfParams);
 				if(!$arr){$arr=[];}

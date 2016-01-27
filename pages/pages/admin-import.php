@@ -24,7 +24,11 @@ function pwdGen(){
 }
 if($_FILES['uploadfile'] AND !$_FILES['uploadfile']['error']){
 	$json = file_get_contents($_FILES['uploadfile']['tmp_name']);
-	$arr = json_decode($json, true);
+	$json = file_get_contents("import.json");
+	$json = str_replace(["\r", "\n", "	"], "", $json);
+	echo $json;
+	$arr = json_decode($json, 1);
+	print_r($arr);
 	$printHTML = '<head><meta charset="utf-8"></head><body onload="window.print()">';
 	echo '<div id="pwds">';
 	foreach($arr as $a){
@@ -49,13 +53,13 @@ if($_FILES['uploadfile'] AND !$_FILES['uploadfile']['error']){
 				"</p>";
 				$notempty = 1;
 			}else{
-				echo  "FAILED! ".$a['Login'].' '.$a['Name'].' '.$a['SecondName'].' '.$a['Class'].' '.$pwd."<br>";
+				echo  "1FAILED! ".$a['Login'].' '.$a['Name'].' '.$a['SecondName'].' '.$a['Class'].' '.$pwd."<br>";
 			}
 		}else{
-			echo  "FAILED! ".$a['Login'].' '.$a['Name'].' '.$a['SecondName'].' '.$a['Class'].' '.$pwd."<br>";
+			echo  "2FAILED! ".$a['Login'].' '.$a['Name'].' '.$a['SecondName'].' '.$a['Class'].' '.$pwd."<br>";
 		}
-		echo "</div>";
 	}
+	echo "</div>";
 	if($notempty){
 		echo '<p><a href="data:text/html;base64,'.base64_encode($printHTML).'" target="_blank">Роздрукувати</a></p>';
 		echo '<p><a href="javascript:download(\'imported.txt\', document.getElementById(\'pwds\').innerText)">Завантажити (txt)</a></p>';

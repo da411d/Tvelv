@@ -17,7 +17,7 @@ function isPasswordCorrect($login, $password){
 function registerUser($login, $password, $permission, $name, $secondname, $class){
 	$database = db_connect();
 
-	$salt=md5(mt_rand());
+	$salt = _crypt(md5(mt_rand()), md5(mt_rand()));
 
 	$dbineed='students';
 	switch ($permission) {
@@ -46,7 +46,9 @@ function registerUser($login, $password, $permission, $name, $secondname, $class
 				"Class" => $class
 			]);
 		}
-	if($udb AND $ddb){return true;}else{return false;}
+	if($udb AND $ddb){return true;}else{
+		echo '['.$udb.' '.$ddb.']';
+		return false;}
 }
 
 //Змінити пароль
@@ -56,7 +58,7 @@ function editUserPassword($login, $password, $new){
 	$test = db_get("users", ["Login","Password","Salt"], ["Login[=]" => $login]);
 
 	if($test[0][Password] == _crypt($password, $test[0][Salt])){
-		$salt=md5(mt_rand());
+		$salt = _crypt(md5(mt_rand()), md5(mt_rand()));
 		return $database->update("users", [
 			"Password" => _crypt($new, $salt),
 			"Salt" => $salt
@@ -98,7 +100,12 @@ function getUserByList($in='student'){
 	        $dbineed='parents';
 	        break;
 	}
-return db_get($dbineed, ["Login", "Name", "SecondName", "Class"]);
+	return db_get($dbineed, ["Login", "Name", "SecondName", "Class"]);
+}
+
+//Повертає учнів певного класу
+function getUsersByClass($param='0'){
+	return db_get("students", ["Login", "Name", "SecondName", "Class"], ["Class" => $param]);
 }
 
 //Перевіряє чи є користувач вчителем
@@ -140,7 +147,7 @@ function getUserClassmates($login){
 function addUserSecret($login, $secret){
 	$database = db_connect();
 
-	$salt=md5(mt_rand());
+	$salt = _crypt(md5(mt_rand()), md5(mt_rand()));
 
 	if(!getInfoAboutUser($login)){
 		return $database->insert("2steplogin", [
@@ -162,7 +169,7 @@ function getUserSecret($login){
 function editUserSecret($login, $secret){
 	$database = db_connect();
 
-	$salt=md5(mt_rand());
+	$salt = _crypt(md5(mt_rand()), md5(mt_rand()));
 
 	return $database->update("2steplogin", [
 		"Secret" => _crypt($secret, $salt),

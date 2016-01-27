@@ -4,8 +4,7 @@ if(!in_array(getLoginedUsername(), json_decode(ADMIN_ID))){
 	exit();
 }
 ?>
-
-<h1>Register</h1>
+<?$title="Реєстрація";?>
 <?
 //AND $_POST['password'] AND $_POST['permission']
 if($_POST['act']== "reg" AND $_POST['login'] ){
@@ -23,16 +22,45 @@ if($_POST['act']== "reg" AND $_POST['login'] ){
 ?>
 <form method="post">
 <input type="hidden" name="act" value="reg">
-<input type="text" name="login" placeholder="LOGIN"required><br>
-<input type="text" name="password" placeholder="PASSWORD"required><br>
-<label><input type="radio" name="permission" value="student"required>student</label>
-<label><input type="radio" name="permission" value="teacher"required>teacher</label>
-<label><input type="radio" name="permission" value="parent"required>parent</label><br>
-<br>
-<input type="text" name="name" placeholder="Name"required><br>
-<input type="text" name="second" placeholder="Second name"required><br>
-<input type="text" name="class" placeholder="Class"required><br>
-<br><br>
 
+<p>
+	<label>
+		<p>Логін:</p>
+		<p><input type="text" name="login" placeholder="LOGIN"required></p>
+	</label>
+</p>
+
+<p>
+	<label>
+		<p>Пароль:</p>
+		<p><input type="text" name="password" placeholder="PASSWORD"required></p>
+	</label>
+</p>
+
+<p>
+	<p>Тип акаутту</p>
+	<label><input type="radio" name="permission" value="student"required>Учень</label>
+	<label><input type="radio" name="permission" value="teacher"required>Вчитель</label>
+	<label><input type="radio" name="permission" value="parent"required>Батько</label>
+</p>
+
+<p>
+	<label>
+		<p>Ім'я</p>
+		<p><input type="text" name="name" placeholder="Name"required></p>
+	</label>
+</p>
+<p>
+	<label>
+		<p>Прізвище</p>
+		<p><input type="text" name="second" placeholder="Second name"required></p>
+	</label>
+</p>
+<p>
+	<label>
+		<p>Клас</p>
+		<p><input type="text" name="class" placeholder="Class"required></p>
+	</label>
+</p>
 <input type="submit">
 </form>
