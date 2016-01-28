@@ -1,14 +1,14 @@
 <?
 //Додає оцінку
-function addMark($subject, $class, $student, $teacher, $mark, $info){
+function addMark($subject, $student, $mark='', $info=''){
 	$database = db_connect();
-
-	if($subject AND $class AND $student AND $teacher AND ($mark OR $info)){
+	$teacher = isTeacher()?getLoginedUsername():false;
+	if($subject AND $student AND $teacher AND ($mark OR $info)){
 		return $database->insert("marks", [
 				"Date" => date("Y-m-d"),
 				"Time" => date("H:i"),
 				"Subject" => $subject,
-				"Class" => $class,
+				"Class" => getClassByUser($student),
 				"Student" => $student,
 				"Teacher" => $teacher,
 				"Mark" => $mark,
@@ -19,21 +19,26 @@ function addMark($subject, $class, $student, $teacher, $mark, $info){
 	}
 }
 
-//Змінити оцінку. Додає поле "останній раз змінено"
-function editMark($date ,$class, $student, $teacher, $mark, $info){
-	$database = db_connect();
 
-		return $database->update("marks", [
-			"Mark" => $mark,
-			"LastEdit" => date("H:i"),
-			"Info" => $info
-		], [
-			"Date[=]" => $date,
-			"Class[=]" => $class,
-			"Student[=]" => $student,
-			"Teacher[=]" => $teacher,
-		]);
-}
+
+
+/*
+Не потрібно поки що, потім додам.
+	//Змінити оцінку. Додає поле "останній раз змінено"
+	function editMark($date ,$class, $student, $teacher, $mark, $info){
+		$database = db_connect();
+	
+			return $database->update("marks", [
+				"Mark" => $mark,
+				"LastEdit" => date("H:i"),
+				"Info" => $info
+			], [
+				"Date[=]" => $date,
+				"Student[=]" => $student,
+				"Teacher[=]" => $teacher,
+			]);
+	}
+*/
 
 //Повертає список оцінок відфільтрований по параметрах
 function getMarksByParams($param = array()){

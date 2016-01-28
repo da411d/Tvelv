@@ -61,13 +61,10 @@ if(!getLoginedUsername()){
 
 <div class="mark_block addmark">
 <?php
-	if($_POST['subject'] AND $_POST['class'] AND $_POST['student'] AND $_POST['teacher'] AND $_POST['mark'] AND $_POST['teacher']==getLoginedUsername()){
-		echo addMark($_POST['subject'], $_POST['class'], $_POST['student'], $_POST['teacher'], $_POST['mark'], $_POST['info'])?"Complete":"Failed";
+	if($_POST['subject'] AND $_POST['class'] AND ($_POST['mark'] OR $_POST['info']) AND $_POST['teacher']==getLoginedUsername()){
+		echo addMark($_POST['subject'], $_POST['class'], $login, $_POST['mark'], $_POST['info'])?"Complete":"Failed";
 	}
 ?><form method="post" style="margin:0px;padding:0px;">
-	<input type="hidden" name="student" value="<?=$login;?>">
-	<input type="hidden" name="teacher" value="<?=getLoginedUsername();?>">
-
 
 	<span class="mark m9" id="mrk"><input  type="number" name="mark"size="2" max="13" min="1"onchange="document.getElementById('mrk').style.background=['#CB2237', '#DC3338', '#EA4438', '#F25437', '#E46538', '#D37738', '#C58837', '#B59936', '#A7AC38', '#97BA38', '#88CC37', '#7ADC37', '#7ADC37'][parseInt(this.value)-1]" value="12"></span>
 
