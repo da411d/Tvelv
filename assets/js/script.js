@@ -45,9 +45,7 @@ function popupCenter(url, title, w, h) {
     }
 }
 
-function onLoad(){
-	
-};
+function onLoad(){};
 
 function CClick(e, event) {
 	switch (event.which) {
@@ -70,25 +68,6 @@ function CClick(e, event) {
 	}
 	return false;
 };
-function share(e) {
-	switch (e.classList[0]) {
-		case 'vk':
-			popupCenter('https://vk.com/share.php?url=' + window.location, '', 600, 400);
-			break;
-		case 'fb':
-			popupCenter('https://www.facebook.com/sharer/sharer.php?u=' + window.location, '', 600, 400);
-			break;
-		case 'tw':
-			popupCenter('https://twitter.com/intent/tweet?url=' + window.location, '', 600, 400);
-			break;
-		case 'ok':
-			popupCenter('https://connect.ok.ru/dk?cmd=WidgetSharePreview&st.cmd=WidgetSharePreview&st.shareUrl=' + window.location, '', 600, 400);
-			break;
-		case 'gp':
-			popupCenter('https://plus.google.com/share?url=' + window.location, '', 600, 400);
-			break;
-	}
-}
 
 function download(filename, text) {
 	var element = document.createElement('a');
@@ -101,4 +80,27 @@ function download(filename, text) {
 	element.click();
 
 	document.body.removeChild(element);
+}
+
+function connect(t){
+	u = '/ajax.php?'+t;
+	if (u.match(/\?/)) {
+		u += '&z='+rand(1000000, 9999999);
+	} else {
+		u += '?z='+rand(1000000, 9999999);
+	}
+	html = ajax(u);
+	html = JSON.parse(html);
+	return html;
+}
+
+function ajax(t){
+	var xhr = new XMLHttpRequest();
+	xhr.open('GET', t, 0);
+	xhr.send();
+	if (xhr.status != 200) {
+		console.error( xhr.status + ': ' + xhr.statusText );
+	} else {
+		return( xhr.responseText );
+	}
 }

@@ -151,23 +151,29 @@ h2 {
 	margin: 16px;
 }
 .card.cw1{
-	width: calc(100% - 66px);
+	width: calc(100% - 70px);
 }
 .card.cw2{
-	width: calc(50% - 66px);
+	width: calc(50% - 70px);
 }
 .card.cw3{
-	width: calc(33% - 66px);
+	width: calc(33% - 70px);
+}
+.card.cw2_3{
+	width: calc(66% - 70px);
 }
 @media (max-width: _reticle_hugescreen_barier_) {
 	.card.cw1{
-		width: calc(100% - 66px);
+		width: calc(100% - 70px);
 	}
 	.card.cw2{
-		width: calc(50% - 66px);
+		width: calc(50% - 70px);
 	}
 	.card.cw3{
-		width: calc(50% - 66px);
+		width: calc(50% - 70px);
+	}
+	.card.cw2_3{
+		width: calc(100% - 70px);
 	}
 }
 .footer {

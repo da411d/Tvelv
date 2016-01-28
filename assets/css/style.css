@@ -66,17 +66,6 @@ body * {
 .main * {
 	border-radius: 0px;
 }
-
-.applicationCategory {
-	display: block;
-}
-
-.applicationCategory a {
-	display: inline-block;
-	margin: 0.35em;
-	margin-bottom: 0px;
-}
-
 a{
 	color: _theme_text_color_;
 	text-decoration: none;
@@ -84,25 +73,6 @@ a{
 .main p{
 	margin-top: 8px;
 	margin-bottom: 8px;
-}
-.html4strict {
-	color: blue;
-	overflow: auto;
-	-moz-user-select: all;
-	-webkit-user-select: all;
-	-ms-user-select: all;
-	user-select: all;
-	background: _theme_html4strict_background_;
-	font-family: monospace;
-	display: block;
-	border-radius: 0px;
-}
-
-.html4strict * {
-	-moz-user-select: all;
-	-webkit-user-select: all;
-	-ms-user-select: all;
-	user-select: all;
 }
 
 input,
@@ -159,7 +129,53 @@ menu a,
 .main img::after {
 	content: _error_img_load_text_;
 }
+.card {
+	display: inline-block;
+	background: _theme_main_light_color_;
+	padding: 16px;
+	border: 1px solid _theme_main_dark_color_;
+	border-bottom: 5px solid _theme_main_dark_color_;
+	height: auto;
+	cursor: pointer;
+}
+.card:hover {
+	background: _theme_main_dark_color_;
+}
+.card.nohover:hover {
+	background: _theme_main_light_color_;
+	cursor: default;
+}
+.card .link {
+	display: block;
+	font-size: 120%;
+	text-decoration: none!important;
+	font-weight: bold;
+	margin-bottom: 8px;
+}
+.card .img-placeholder {
+	overflow:hidden;
+	text-align:center;
+	width: 100%;
+	width: calc(100% + 32px);
+	margin: -16px;
+	margin-bottom: 8px;
+	max-height: 250px;
+	border-bottom: 5px solid _theme_last_bg_color_;
+}
+.card .img-placeholder img {
+	padding: 0px;
+	margin: 0px;
+	margin-bottom: -6px;
+	width: 100%;
+}
 .emoji{
+    width: 1em;
+    height: 1em;
+    border: none;
+    vertical-align: middle;
+    margin: 0px 1px!important;
+}
+.icon{
     width: 1em;
     height: 1em;
     border: none;

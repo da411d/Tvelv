@@ -9,6 +9,7 @@ ob_start("calback");
 
 
 include(dirname(__FILE__)."/script.js");
+include(dirname(__FILE__)."/useful.js");
 
 ?>
 
