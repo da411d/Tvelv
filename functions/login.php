@@ -144,3 +144,40 @@ function resetAttempts($login){
 	$database = db_connect();
 	return $database->update("users", ["Attempt" => 0], ["Login[=]" => $login]);
 }
+
+//Редагує секретні питання(Цю функцію я відключив але потім планую включити)
+function addUserSecret($login, $secret){
+	$database = db_connect();
+
+	$salt = _crypt(md5(mt_rand()), md5(mt_rand()));
+
+	if(!getInfoAboutUser($login)){
+		return $database->insert("2steplogin", [
+				"Login" => $login,
+				"Secret" => _crypt($secret, $salt),
+				"Salt" => $salt,
+				"temp" => $secret
+			]);
+	}
+}
+
+//Повертає список секретних питань і відпрвіді
+function getUserSecret($login){
+	$database = db_connect();
+	return db_get('2steplogin', ["Secret", "Salt", "temp"], ["Login[=]" => $login])[0];
+}
+
+//Додає секретні питання
+function editUserSecret($login, $secret){
+	$database = db_connect();
+
+	$salt = _crypt(md5(mt_rand()), md5(mt_rand()));
+
+	return $database->update("2steplogin", [
+		"Secret" => _crypt($secret, $salt),
+		"Salt" => $salt,
+		"temp" => $secret
+	], [
+		"Login[=]" => $login
+	]);
+}
