@@ -9,7 +9,6 @@ ob_start("callback");
 
 <body id="body" 
 	onbeforeunload="
-		document.getElementById('onscroll').checked='true';
 		document.getElementById('load').checked='true';
 	" 
 	onload="
