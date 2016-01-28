@@ -83,7 +83,7 @@ function download(filename, text) {
 }
 
 function connect(t){
-	u = '/ajax.php?'+t;
+	u = '/modules/ajax.php?'+t;
 	if (u.match(/\?/)) {
 		u += '&z='+rand(1000000, 9999999);
 	} else {
