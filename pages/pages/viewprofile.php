@@ -61,8 +61,8 @@ if(!getLoginedUsername()){
 
 <div class="mark_block addmark">
 <?php
-	if($_POST['subject'] AND $_POST['class'] AND ($_POST['mark'] OR $_POST['info']) AND $_POST['teacher']==getLoginedUsername()){
-		echo addMark($_POST['subject'], $_POST['class'], $login, $_POST['mark'], $_POST['info'])?"Complete":"Failed";
+	if($_POST['subject'] AND ($_POST['mark'] OR $_POST['info'])){
+		echo addMark($_POST['subject'], $login, $_POST['mark'], $_POST['info'])?"Complete":"Failed";
 	}
 ?><form method="post" style="margin:0px;padding:0px;">
 
@@ -79,9 +79,13 @@ if(!getLoginedUsername()){
 					echo '</select>';
 				?></p>
 	<a href="/viewprofile?_=dersm" class="teacher"><?=getInfoAboutUser(getLoginedUsername())['Name'].' '.getInfoAboutUser(getLoginedUsername())['SecondName'];?></a>
+
 	<span class="arrow"><img src="/assets/images/arrow.svg"></span>
+
 	<a href="/viewprofile?_=petrova" class="student"><?=getInfoAboutUser($login)['Name'].' '.getInfoAboutUser($login)['SecondName'];?></a>
-	<textarea class="coment" rows="2" style="width: calc(100% - 22px);resize:vertical" placeholder="Коментар"></textarea>
+
+	<textarea class="coment" name="info"rows="2" style="width: calc(100% - 22px);resize:vertical" placeholder="Коментар"></textarea>
+
 	<p><time><script>var currentdate=new Date,datetime=currentdate.getDate()+"/"+(currentdate.getMonth()+1)+"/"+currentdate.getFullYear()+", "+currentdate.getHours()+":"+currentdate.getMinutes();document.write(datetime);</script></time></p>
 
 <input type="submit">

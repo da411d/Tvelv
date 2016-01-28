@@ -1,4 +1,6 @@
 <?php
+ini_set('date.timezone', 'Europe/Kiev');
+
 define('SERVER_NAME' ,$_SERVER['SERVER_NAME']);
 define('DIRNAME', dirname(__FILE__).'/');
 define('SITEDIR', '');

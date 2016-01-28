@@ -8,7 +8,7 @@ function addMark($subject, $student, $mark='', $info=''){
 				"Date" => date("Y-m-d"),
 				"Time" => date("H:i"),
 				"Subject" => $subject,
-				"Class" => getClassByUser($student),
+				"Class" => getClassByUser($student)[0]["ClassName"],
 				"Student" => $student,
 				"Teacher" => $teacher,
 				"Mark" => $mark,
