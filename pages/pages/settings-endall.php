@@ -1,0 +1,4 @@
+<?
+leaveAllSessions(getLoginedUsername());
+?>
+Готово!

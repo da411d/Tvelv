@@ -1,4 +1,5 @@
 <?
 $title = 'Налаштування';
 ?>
-<br><a href="/chpwd">Змінити пароль</a>
+<br><a href="/settings/chpwd">Змінити пароль</a>
+<br><a href="/settings/endall">Завершити всі сессії</a>

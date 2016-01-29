@@ -1,6 +1,7 @@
 <? 
 if($_POST['login']==getLoginedUsername() AND $_POST['pass'] AND $_POST['new']){
 	if(editUserPassword($_POST['login'], $_POST['pass'], $_POST['new'])){
+		loginMe($_POST['login']);
 		$title = 'Пароль змінено!';
 		echo "Новий пароль: ".$_POST['new'];
 	}else{
