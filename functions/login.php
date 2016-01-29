@@ -66,7 +66,7 @@ function isPasswordCorrect($login, $password){
 	$in = toQwerty($in);
 
 	$test = db_get("users", ["Login","Password","Salt"], ["Login[=]" => $login]);
-	$out = _decrypt($test[0][Password], $test[0][Salt]);
+	$out = _decrypt($test[0][Password], $test[0]["Salt"]);
 	$out = toQwerty($out);
 
 	similar_text($in, $out, $percent);
