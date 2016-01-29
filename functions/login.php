@@ -17,7 +17,7 @@ function getLoginedUsername(){
 	if($code['a'] AND $code['c']==md5(getPasswordSalt($code['a']))){
 		return $code['a'];
 	}else{
-		return 0;
+		return false;
 	}
 }
 
@@ -28,24 +28,25 @@ function checkLogined(){
 	$code = _decrypt($cookie, $cookiename);
 	$code = json_decode($code, 1);
 	if($code['a'] AND $code['c']==md5(getPasswordSalt($code['a']))){
-		return 1;
+		return true;
 	}else{
-		return 0;
+		return false;
 	}
 }
 
 //Функція завершує сессію і виходить
-function Leave(){
+function logOut(){
 	$cookiename = modulate(md5($_SERVER['REMOTE_ADDR'].$_SERVER['HTTP_USER_AGENT']).md5(date("Ym")));
-	$arr=['b' => '0', 'c' => md5(date("Ymds"))];
-	$code = _crypt(json_encode($arr), $cookiename);
-	SetCookie($cookiename, $code, -1, '/');
+	SetCookie($cookiename, 'null', -1, '/');
 }
 
 //Завершує всі сессії крім текучої
 function leaveAllSessions($login){
-	reloadUserPassword($login);
-	loginMe($login);
+	$cookiename = modulate(md5($_SERVER['REMOTE_ADDR'].$_SERVER['HTTP_USER_AGENT']).md5(date("Ym")));
+	$arr = ['b' => '0', 'c' => md5(mt_rand())];
+	$code = _crypt(json_encode($arr), $cookiename);
+	SetCookie($cookiename, $code, time() + (7 * 24 * 60 * 60), '/');
+	return true;
 }
 
 //Повертає сіль пароля

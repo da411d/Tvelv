@@ -1,6 +1,6 @@
 <?$title= 'Ти не ввійшов!';
 
-if(getLoginedUsername()){
+if(checkLogined()){
 	header('Location: /profile');
 }
 $login = $_POST['b'];

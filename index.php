@@ -37,7 +37,10 @@ ob_start("callback");
 		if($param==''){
 			$param='index';
 		}
-
+		
+		if(!checkLogined() AND $param!='login'){
+			header('Location: /login');exit();
+		}
 		if(file_exists(strtolower(dirname(__FILE__).'/pages/pages/'.$param.'.php'))){
 			$url = strtolower(dirname(__FILE__).'/pages/pages/'.$param.'.php');
 

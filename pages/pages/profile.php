@@ -1,7 +1,7 @@
 <? 
 $login = getLoginedUsername();
 
-if(!getLoginedUsername()){
+if(!checkLogined()){
 	$title= 'Зачекайте...';
 	header('Location: /login');
 }else{
