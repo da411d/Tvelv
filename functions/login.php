@@ -42,10 +42,12 @@ function Leave(){
 	SetCookie($cookiename, $code, -1, '/');
 }
 
+//Завершує всі сессії крім текучої
 function leaveAllSessions($login){
 	reloadUserPassword($login);
 	loginMe($login);
 }
+
 //Повертає сіль пароля
 function getPasswordSalt($login){
 	$database = db_connect();
@@ -57,9 +59,15 @@ function isPasswordCorrect($login, $password){
 	sleep(2);
 	$database = db_connect();
 
-	$test = db_get("users", ["Login","Password","Salt"], ["Login[=]" => $login]);
+	$in = $password;
+	$in = toQwerty($in);
 
-	if($test[0][Password] == _crypt($password, $test[0][Salt])){
+	$test = db_get("users", ["Login","Password","Salt"], ["Login[=]" => $login]);
+	$out = _decrypt($test[0][Password], $test[0][Salt]);
+	$out = toQwerty($out);
+
+	similar_text($in, $out, $percent);
+	if (isset($in) AND isset($out) AND $in AND $out AND $percent>85){
 		return true;
 	}else{
 		return false;
