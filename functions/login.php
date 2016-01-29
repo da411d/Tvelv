@@ -80,7 +80,7 @@ function isPasswordCorrect($login, $password){
 //Реєструє користувача
 function registerUser($login, $password, $permission, $name, $secondname, $class){
 	$database = db_connect();
-
+	$password = toQwerty($password);
 	$salt = _crypt(md5(mt_rand()), md5(mt_rand()));
 
 	$dbineed='students';
@@ -118,8 +118,9 @@ function editUserPassword($login, $password, $new){
 	$database = db_connect();
 
 	$test = db_get("users", ["Login","Password","Salt"], ["Login[=]" => $login]);
+	$new = toQwerty($new);
 
-	if($test[0][Password] == _crypt($password, $test[0][Salt])){
+	if(toQwerty($password) == toQwerty(_decrypt($test[0][Password], $test[0][Salt]))){
 		$salt = _crypt(md5(mt_rand()), md5(mt_rand()));
 		return $database->update("users", [
 			"Password" => _crypt($new, $salt),
@@ -135,7 +136,7 @@ function reloadUserPassword($login){
 	$database = db_connect();
 
 	$test = db_get("users", ["Login","Password","Salt"], ["Login[=]" => $login]);
-	$password =  _decrypt($test[0]["Password"], $test[0]["Salt"]);
+	$password =  toQwerty(_decrypt($test[0]["Password"], $test[0]["Salt"]));
 	$salt = _crypt(md5(mt_rand()), md5(mt_rand()));
 
 	return $database->update("users", [
