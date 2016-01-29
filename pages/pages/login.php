@@ -3,8 +3,8 @@
 if(checkLogined()){
 	header('Location: /profile');
 }
-$login = $_POST['b'];
-$pwd = $_POST['c'];
+$login = $_POST[_crypt('login', 'LoginForm'.modulate(sha1($_SERVER['REMOTE_ADDR'].$_SERVER['HTTP_USER_AGENT']).sha1(date("Ymd"))))];
+$pwd = $_POST[_crypt('pass', 'LoginForm'.modulate(sha1($_SERVER['REMOTE_ADDR'].$_SERVER['HTTP_USER_AGENT']).sha1(date("Ymd"))))];
 if(getAttempts($login)<=7){
 	$CaptchaName = 'Rex';
 }else{
@@ -25,7 +25,7 @@ if(getAttempts($login)<=2){
 	}
 }
 
-if($login AND $pwd){
+if($login AND $pwd AND (!isset($POST['login']) AND !isset($POST['password'])) OR (!$POST['login'] AND !$POST['password'])){
 	if(isPasswordCorrect($login, $pwd) AND $allow){
 		resetAttempts($login);
 		loginMe($login);
@@ -38,21 +38,19 @@ if($login AND $pwd){
 	}else{
 		addAttemptsOne($login);
 		$main = "Неправильний пароль!<br>".$main;
-		$eval = "document.getElementById('pass').focus()";
 	}
 }
 ?>
 <form method="post">
 	<label>
 			<p>Логін:</p>
-			<p><input type="text" id="login" name="b" value=""></p>
+			<p><input type="text" name="<?=_crypt('login', 'LoginForm'.modulate(sha1($_SERVER['REMOTE_ADDR'].$_SERVER['HTTP_USER_AGENT']).sha1(date("Ymd"))));?>"><input type="hidden" name="login"></p>
 	</label>
 		
 	<label>	
 		<p>Пароль:</p>	
-		<p><input type="password" id="pass" name="c" onkeydown="if(event.keyCode == 13){eLoad('a=login&b='+document.getElementById('login').value+'&c='+document.getElementById('pass').value);}" ></p>
+		<p><input type="password" name="<?=_crypt('pass', 'LoginForm'.modulate(sha1($_SERVER['REMOTE_ADDR'].$_SERVER['HTTP_USER_AGENT']).sha1(date("Ymd"))));?>"><input type="hidden" name="password"></p>
 	</label>
-
 	<?
 		if(getAttempts($login)>2){
 			echo '<p>Ти ввійшов(-ла) невдало '.getAttempts($login).' разів. Тепер тобі треба ввести капчу.';
@@ -62,10 +60,8 @@ if($login AND $pwd){
 	?>
 	
 	<p><input type="submit"value="Ввійти!"></p>
+	<input type="hidden" name="ЩобСкучноНеБуло" value="<?=_crypt(sha1(getPasswordSalt($code['a'])).sha1(getPasswordSalt($code['a'])), '228626');?>">
 </form>
-<input type="hidden" id="login" name="a" value="<?=base64_encode(sha1('HELLO'.$_SERVER['REMOTE_ADDR'].getdate()).sha1($_SERVER['REMOTE_ADDR'].getdate()));?>">
 <script>
-document.getElementById('login').focus();
 document.getElementById('nav').innerHTML = '<a href="/login"> <img src="/assets/images/icons/login.svg" class="icon">Вхід</a>';
-<?=$eval;?>
 </script>
