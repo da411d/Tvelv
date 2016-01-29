@@ -34,19 +34,21 @@ function checkLogined(){
 	}
 }
 
-//Функція завершує сессію і виходить
+//Функція завершує сесію і виходить
 function logOut(){
 	$cookiename = modulate(md5($_SERVER['REMOTE_ADDR'].$_SERVER['HTTP_USER_AGENT']).md5(date("Ym")));
-	SetCookie($cookiename, 'null', -1, '/');
+
+	$arr = ['a' => mt_rand(), 'b' => '0', 'c' => md5(mt_rand())];
+	$code = _crypt(json_encode($arr), $cookiename);
+	SetCookie($cookiename, $code, time() + (7 * 24 * 60 * 60), '/');
+
+	return true;
 }
 
 //Завершує всі сессії крім текучої
 function leaveAllSessions($login){
-	$cookiename = modulate(md5($_SERVER['REMOTE_ADDR'].$_SERVER['HTTP_USER_AGENT']).md5(date("Ym")));
-	$arr = ['b' => '0', 'c' => md5(mt_rand())];
-	$code = _crypt(json_encode($arr), $cookiename);
-	SetCookie($cookiename, $code, time() + (7 * 24 * 60 * 60), '/');
-	return true;
+	reloadUserPassword($login);
+	loginMe($login);
 }
 
 //Повертає сіль пароля

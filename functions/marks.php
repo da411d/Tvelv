@@ -3,7 +3,8 @@
 function addMark($subject, $student, $mark='', $info=''){
 	$database = db_connect();
 	$teacher = isTeacher()?getLoginedUsername():false;
-	if($subject AND $student AND $teacher AND ($mark OR $info)){
+
+	if($subject AND $student AND $teacher AND ($mark OR $info) and in_array($subject, getSubjectPermission())){
 		return $database->insert("marks", [
 				"Date" => date("Y-m-d"),
 				"Time" => date("H:i"),
@@ -18,8 +19,6 @@ function addMark($subject, $student, $mark='', $info=''){
 		return false;
 	}
 }
-
-
 
 
 /*

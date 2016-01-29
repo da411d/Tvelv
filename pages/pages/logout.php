@@ -1,6 +1,9 @@
 <? 
 	logOut();
-	sleep(1);
+	usleep(500000);
 	logOut();
-	sleep(1);
+	usleep(500000);
+	logOut();
+	usleep(500000);
+	logOut();
 	header('Location: /login');

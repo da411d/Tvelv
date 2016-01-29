@@ -2,7 +2,8 @@
 include "../_functions.php";
 include "../_config.php";
 
-$in = $_GET['a'];
+$in = $_SERVER['QUERY_STRING'];
+$in = explode("&", $in)[0];
 $in = trim(rtrim($in, '/'), '/');
 
 if(strpos($in, '-')){
@@ -10,7 +11,6 @@ if(strpos($in, '-')){
 }else{
 	$params =  [$in];
 }
-
 switch ($params[0]) {
 	case 'getStudentsByClass':
 		if($params[1]){
@@ -18,5 +18,8 @@ switch ($params[0]) {
 			usort($arr, function($a, $b){return strnatcmp($a['SecondName'], $b['SecondName']);});
 			echo json_encode($arr);
 		}
+		break;
+	case 'checkLogined':
+		echo checkLogined()?1:0;
 		break;
 }

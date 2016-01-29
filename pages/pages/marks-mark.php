@@ -58,7 +58,7 @@ exit;
 ?>
 <script>
 function loadStudents(e){
-	students = connect("a=getStudentsByClass-"+e.value);
+	students = JSON.parse(connect("getStudentsByClass-"+e.value));
 	studentsHTML = '';
 	for(a in students){
 		studentsHTML += '<option value="'+students[a]['Login']+'">'+students[a]['Name']+' '+students[a]['SecondName']+'</option>'

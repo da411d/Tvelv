@@ -90,7 +90,6 @@ function connect(t){
 		u += '?z='+rand(1000000, 9999999);
 	}
 	html = ajax(u);
-	html = JSON.parse(html);
 	return html;
 }
 
@@ -104,3 +103,5 @@ function ajax(t){
 		return( xhr.responseText );
 	}
 }
+
+var I = setInterval(function(){if(connect('checkLogined')==0 && window.location.pathname!='/login'){window.location = '/login?_='+window.location.pathname}else if(connect('checkLogined')==1 && window.location.pathname=='/login'){window.location = $_GET('_')}}, 3000)

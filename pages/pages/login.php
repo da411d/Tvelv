@@ -30,7 +30,11 @@ if($login AND $pwd){
 		resetAttempts($login);
 		loginMe($login);
 		$title = 'Зачекайте...';
-		header('Location: /profile');
+		if($_GET['_']){
+			header('Location: /'.$_GET['_']);
+		}else{
+			header('Location: /profile');
+		}
 	}else{
 		addAttemptsOne($login);
 		$main = "Неправильний пароль!<br>".$main;
@@ -62,6 +66,6 @@ if($login AND $pwd){
 <input type="hidden" id="login" name="a" value="<?=base64_encode(sha1('HELLO'.$_SERVER['REMOTE_ADDR'].getdate()).sha1($_SERVER['REMOTE_ADDR'].getdate()));?>">
 <script>
 document.getElementById('login').focus();
-document.getElementById('nav').innerHTML = '<a href="#login"> <img src="/assets/images/icons/login.svg" class="icon">Вхід</a>';
+document.getElementById('nav').innerHTML = '<a href="/login"> <img src="/assets/images/icons/login.svg" class="icon">Вхід</a>';
 <?=$eval;?>
 </script>
