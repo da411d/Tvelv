@@ -24,7 +24,7 @@ if(!getLoginedUsername()){
 		$MyMarks = getMarksByParams(['Student[=]' => $login]);
 	}
 	if(count($MyMarks)>0){
-			if(isTeacher()){
+			if(isTeacher($login)){
 				echo '<h1>Інформація про вчителя:</h1>';	
 			}else{
 				echo '<h1>Інформація про учня:</h1>';
