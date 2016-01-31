@@ -3,8 +3,8 @@
 if(checkLogined()){
 	header('Location: /profile');
 }
-$login = $_POST[_crypt('login', 'LoginForm'.modulate(sha1($_SERVER['REMOTE_ADDR'].$_SERVER['HTTP_USER_AGENT']).sha1(date("Ymd"))))];
-$pwd = $_POST[_crypt('pass', 'LoginForm'.modulate(sha1($_SERVER['REMOTE_ADDR'].$_SERVER['HTTP_USER_AGENT']).sha1(date("Ymd"))))];
+$login = $_POST[_crypt('login', 'LoginForm'.sha1($_SERVER['REMOTE_ADDR'].$_SERVER['HTTP_USER_AGENT']).sha1(date("Ymd")))];
+$pwd = $_POST[_crypt('pass', 'LoginForm'.sha1($_SERVER['REMOTE_ADDR'].$_SERVER['HTTP_USER_AGENT']).sha1(date("Ymd")))];
 if(getAttempts($login)<=7){
 	$CaptchaName = 'Rex';
 }else{
@@ -44,12 +44,12 @@ if($login AND $pwd AND (!isset($POST['login']) AND !isset($POST['password'])) OR
 <form method="post">
 	<label>
 			<p>Логін:</p>
-			<p><input type="text" name="<?=_crypt('login', 'LoginForm'.modulate(sha1($_SERVER['REMOTE_ADDR'].$_SERVER['HTTP_USER_AGENT']).sha1(date("Ymd"))));?>"><input type="hidden" name="login"></p>
+			<p><input type="text" name="<?=_crypt('login', 'LoginForm'.sha1($_SERVER['REMOTE_ADDR'].$_SERVER['HTTP_USER_AGENT']).sha1(date("Ymd")));?>"><input type="hidden" name="login"></p>
 	</label>
 		
 	<label>	
 		<p>Пароль:</p>	
-		<p><input type="password" name="<?=_crypt('pass', 'LoginForm'.modulate(sha1($_SERVER['REMOTE_ADDR'].$_SERVER['HTTP_USER_AGENT']).sha1(date("Ymd"))));?>"><input type="hidden" name="password"></p>
+		<p><input type="password" name="<?=_crypt('pass', 'LoginForm'.sha1($_SERVER['REMOTE_ADDR'].$_SERVER['HTTP_USER_AGENT']).sha1(date("Ymd")));?>"><input type="hidden" name="password"></p>
 	</label>
 	<?
 		if(getAttempts($login)>2){

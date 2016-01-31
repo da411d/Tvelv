@@ -1,7 +1,7 @@
 <?
 //Функція логінить нас на тиждень
 function loginMe($login){
-	$cookiename = modulate(md5($_SERVER['REMOTE_ADDR'].$_SERVER['HTTP_USER_AGENT']).md5(date("Ym")));
+	$cookiename = _crypt(md5($_SERVER['REMOTE_ADDR'].$_SERVER['HTTP_USER_AGENT']).md5(date("Ym")), 'SECRET_PASS');
 	$arr = ['a' => $login, 'b' => '1', 'c' => sha1(getPasswordSalt($login))];
 	$code = _crypt(json_encode($arr), $cookiename);
 	SetCookie($cookiename, $code, time() + (7 * 24 * 60 * 60), '/');
@@ -10,7 +10,7 @@ function loginMe($login){
 
 //Футкція повертає логін поточного користувача
 function getLoginedUsername(){
-	$cookiename = modulate(md5($_SERVER['REMOTE_ADDR'].$_SERVER['HTTP_USER_AGENT']).md5(date("Ym")));
+	$cookiename = _crypt(md5($_SERVER['REMOTE_ADDR'].$_SERVER['HTTP_USER_AGENT']).md5(date("Ym")), 'SECRET_PASS');
 	$cookie = $_COOKIE[$cookiename];
 	$code = _decrypt($cookie, $cookiename);
 	$code = json_decode($code, 1);
@@ -23,7 +23,7 @@ function getLoginedUsername(){
 
 //Функція перевіряє, чи ще залогінений користувач
 function checkLogined(){
-	$cookiename = modulate(md5($_SERVER['REMOTE_ADDR'].$_SERVER['HTTP_USER_AGENT']).md5(date("Ym")));
+	$cookiename = _crypt(md5($_SERVER['REMOTE_ADDR'].$_SERVER['HTTP_USER_AGENT']).md5(date("Ym")), 'SECRET_PASS');
 	$cookie = $_COOKIE[$cookiename];
 	$code = _decrypt($cookie, $cookiename);
 	$code = json_decode($code, 1);
@@ -36,7 +36,7 @@ function checkLogined(){
 
 //Функція завершує сесію і виходить
 function logOut(){
-	$cookiename = modulate(md5($_SERVER['REMOTE_ADDR'].$_SERVER['HTTP_USER_AGENT']).md5(date("Ym")));
+	$cookiename = _crypt(md5($_SERVER['REMOTE_ADDR'].$_SERVER['HTTP_USER_AGENT']).md5(date("Ym")), 'SECRET_PASS');
 
 	$arr = ['a' => mt_rand(), 'b' => '0', 'c' => md5(mt_rand())];
 	$code = _crypt(json_encode($arr), $cookiename);

@@ -1,42 +1,21 @@
-<?php
-function modulate($in){
-	$in = base64_encode($in);
-	$in=trim($in,"=");
-	for ($i = 0; $i <= strlen($in); $i++) {
-		$out = $in[$i].$out;
-	}
-	return $out;
-}
-
-function demodulate($in){
-	$in=trim($in,"=");
-	for ($i = 0; $i <= strlen($in); $i++) {
-		$out = $in[$i].$out;
-	}
-	$out = base64_decode($out);
-	return $out;
-}
-
-function _crypt($unencoded,$key){
+<?
+function _crypt($unencoded, $key){
 	$string=base64_encode($unencoded);
-
 	$arr=array();
-	$x=0;
-	while ($x++< strlen($string)) {
-		$arr[$x-1] = md5(md5($key.$string[$x-1]).$key);
-		$newstr = $newstr.$arr[$x-1][1].$arr[$x-1][2].$arr[$x-1][3].$arr[$x-1][4].$arr[$x-1][5].$arr[$x-1][0];
+	for($i=0;$i<strlen($string);$i++){
+		$arr[$i] = sha1(sha1($key.$string[$i]).$key);
+		$newstr = $newstr.substr($arr[$i], 5, 6);
 	}
-	$newstr=modulate($newstr);
+	$newstr=base64_encode(hex2bin($newstr));
 	return $newstr;
 }
 
 function _decrypt($encoded, $key){
-	$encoded = demodulate($encoded);
-	$strofsym="qwertyuiopasdfghjklzxcvbnm1234567890QWERTYUIOPASDFGHJKLZXCVBNM=";
-	$x=0;
-	while ($x++<= strlen($strofsym)) {
-		$tmp = md5(md5($key.$strofsym[$x-1]).$key);
-		$encoded = str_replace($tmp[1].$tmp[2].$tmp[3].$tmp[4].$tmp[5].$tmp[0], $strofsym[$x-1], $encoded);
+	$encoded = bin2hex(base64_decode($encoded));
+	$strofsym="qwertyuiopasdfghjklzxcvbnm1234567890QWERTYUIOPASDFGHJKLZXCVBNM=+/";
+	for($i=0;$i<strlen($strofsym);$i++){
+		$tmp = sha1(sha1($key.$strofsym[$i]).$key);
+		$encoded = str_replace(substr($tmp, 5, 6), $strofsym[$i], $encoded);
 	}
 	return base64_decode($encoded) ;
 }

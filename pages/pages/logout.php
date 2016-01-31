@@ -1,5 +1,5 @@
 <? 
-if($_GET['Hi_What_are_you_looking_for']== _crypt(sha1(getPasswordSalt($code['a'])), 'Logout')){
+if($_GET['Hi_What_are_you_looking_for']== sha1(getPasswordSalt($code['a']))){
 	logOut();
 	usleep(50000);
 	logOut();
