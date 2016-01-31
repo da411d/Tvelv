@@ -17,7 +17,7 @@
 		include dirname(__FILE__)."/_head.php";
 		include dirname(__FILE__)."/_tags.php"; 
 		include dirname(__FILE__)."/_ga.php";
-		echo "<title>".$title." | Blast.ORQ</title>";
+		echo "<title>".$title." | Tvelv</title>";
 	?>
 </head>
 <body id="body" 
