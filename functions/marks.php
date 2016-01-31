@@ -12,8 +12,8 @@ function addMark($subject, $student, $mark='', $info=''){
 				"Class" => getClassByUser($student)[0]["ClassName"],
 				"Student" => $student,
 				"Teacher" => $teacher,
-				"Mark" => $mark,
-				"Info" => $info
+				"Mark" => intval($mark),
+				"Info" => antiXSS($info)
 			]);
 	}else{
 		return false;

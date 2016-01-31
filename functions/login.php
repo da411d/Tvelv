@@ -105,7 +105,7 @@ function registerUser($login, $password, $permission, $name, $secondname, $class
 		
 		$ddb = $database->insert($dbineed, [
 				"Login" => $login,
-				"Name" => $name,
+				"Name" => antiXSS($name),
 				"SecondName" => $secondname,
 				"Class" => $class
 			]);
@@ -166,6 +166,7 @@ function resetAttempts($login){
 }
 
 //Редагує секретні питання(Цю функцію я відключив але потім планую включити)
+/*
 function addUserSecret($login, $secret){
 	$database = db_connect();
 
@@ -201,3 +202,4 @@ function editUserSecret($login, $secret){
 		"Login[=]" => $login
 	]);
 }
+*/
