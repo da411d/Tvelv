@@ -5,12 +5,6 @@
 	}else{
 		echo '<!DOCTYPE html>';
 	}
-
-	if(IS_DEV){
-		echo '<html lang="ua">';
-	}else{
-		echo '<html manifest="http://'.SERVER_NAME.'/default.appcache" lang="ua">';
-	}
 ?>
 <head>
 	<?php
