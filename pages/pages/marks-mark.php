@@ -16,7 +16,7 @@ if(isTeacher()){
 			<p style="font-weight: 400;">
 			<?
 				$arr = getSubjectPermission();
-				usort($arr, function($a, $b){return strnatcmp($a['SubjectCaption'], $b['SubjectCaption']);});
+				//usort($arr, function($a, $b){return strnatcmp($a['SubjectCaption'], $b['SubjectCaption']);});
 				echo '<select size="1" name="subject">';
 				foreach($arr as $a){
 					if($a['SubjectName']==$_POST['Subject']){$selected='selected';}else{$selected='';}
