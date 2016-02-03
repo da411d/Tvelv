@@ -59,7 +59,7 @@ function getPasswordSalt($login){
 
 //Перевіряє правильність паролю
 function isPasswordCorrect($login, $password){
-	sleep(2);
+	sleep(1);
 	$database = db_connect();
 
 	$in = $password;
@@ -81,7 +81,7 @@ function isPasswordCorrect($login, $password){
 function registerUser($login, $password, $permission, $name, $secondname, $class){
 	$database = db_connect();
 	$password = toQwerty($password);
-	$salt = _crypt(md5(mt_rand()), md5(mt_rand()));
+	$salt = _crypt(sha1(mt_rand()), sha1(mt_rand()));
 
 	$dbineed='students';
 	switch ($permission) {
@@ -121,7 +121,7 @@ function editUserPassword($login, $password, $new){
 	$new = toQwerty($new);
 
 	if(toQwerty($password) == toQwerty(_decrypt($test[0][Password], $test[0][Salt]))){
-		$salt = _crypt(md5(mt_rand()), md5(mt_rand()));
+		$salt = _crypt(sha1(mt_rand()), sha1(mt_rand()));
 		return $database->update("users", [
 			"Password" => _crypt($new, $salt),
 			"Salt" => $salt
@@ -137,7 +137,7 @@ function reloadUserPassword($login){
 
 	$test = db_get("users", ["Login","Password","Salt"], ["Login[=]" => $login]);
 	$password =  toQwerty(_decrypt($test[0]["Password"], $test[0]["Salt"]));
-	$salt = _crypt(md5(mt_rand()), md5(mt_rand()));
+	$salt = _crypt(sha1(mt_rand()), sha1(mt_rand()));
 
 	return $database->update("users", [
 		"Password" => _crypt($password, $salt),
