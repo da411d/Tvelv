@@ -149,17 +149,17 @@ h2 {
 .card {
 	margin: 16px;
 }
-.card.cw1{
+.cw1{
 	width: calc(100% - 70px);
 }
-.card.cw2{
+.cw2{
 	width: calc(50% - 70px);
 }
-.card.cw3{
+.cw3{
 	width: calc(33% - 70px);
 }
-.card.cw2_3{
-	width: calc(66% - 70px);
+.cw2_3{
+	width: calc(66% - 70px)!important;
 }
 @media (max-width: _reticle_hugescreen_barier_) {
 	.card.cw1{

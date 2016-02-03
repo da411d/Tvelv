@@ -3,7 +3,7 @@
 <?
 if(isTeacher()){
 ?>
-	<div class="mark_block addmark">
+	<div class="mark_block addmark cw2_3">
 		<?php
 			if($_POST['subject'] AND $_POST['student'] AND ($_POST['mark'] OR $_POST['info'])){
 				$status = addMark($_POST['subject'], $_POST['student'], $_POST['mark'], $_POST['info']);
@@ -61,7 +61,7 @@ function loadStudents(e){
 	students = JSON.parse(connect("getStudentsByClass-"+e.value));
 	studentsHTML = '';
 	for(a in students){
-		studentsHTML += '<option value="'+students[a]['Login']+'">'+students[a]['Name']+' '+students[a]['SecondName']+'</option>'
+		studentsHTML += '<option value="'+students[a]['Login']+'">'+students[a]['SecondName']+' '+students[a]['Name']+'</option>'
 	}
 	document.getElementsByName('student')[0].innerHTML = studentsHTML;
 }

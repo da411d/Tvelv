@@ -15,10 +15,11 @@ echo '<h1>Привіт, '.getInfoAboutUser($login)['Name'].' '.getInfoAboutUser(
 if(getUserClassmates($login) AND !isTeacher()){
 	$myClassmates = getUserClassmates($login);
 	
-	usort($myClassmates , function($a, $b){return strnatcmp($a['Name'], $b['Name']);});
+	
+	usort($myClassmates , function($a, $b){return strnatcmp($a['SecondName'], $b['SecondName']);});
 	echo '<h1>Мої однокласники</h1>';
 	foreach($myClassmates as $c){
-		echo '<a href="viewprofile?_='.$c['Login'].'" class="li">'.$c['Name'].' '.$c['SecondName'].'</a>';
+		echo '<a href="viewprofile?_='.$c['Login'].'" class="li">'.$c['SecondName'].' '.$c['Name'].'</a>';
 	}
 	echo $classmatesHTML;
 }
