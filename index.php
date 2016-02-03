@@ -1,5 +1,6 @@
 <?php
 include "_functions.php";
+include "_classes.php";
 include "_config.php";
 ob_start("callback");
 ?>
