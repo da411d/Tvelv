@@ -1,21 +1,19 @@
 <? 
-$currentSession = new Session();
-$currentUser = new User($currentSession->login);
+$login = getLoginedUsername();
 
-
-if(!$currentSession->isLogined){
+if(!checkLogined()){
 	$title= 'Зачекайте...';
 	header('Location: /login');
 }else{
 	$title = 'Профіль';
 }
-echo '<h1>Привіт, '.$currentUser->info['Name'].' '.$currentUser->info['SecondName'].'!</h1>';
+echo '<h1>Привіт, '.getInfoAboutUser($login)['Name'].' '.getInfoAboutUser($login)['SecondName'].'!</h1>';
 ?>
 
 <div class="right_block">
 <?
-if($currentUser->classmates){
-	$myClassmates = $currentUser->classmates;
+if(getUserClassmates($login) AND !isTeacher()){
+	$myClassmates = getUserClassmates($login);
 	
 	
 	usort($myClassmates , function($a, $b){return strnatcmp($a['SecondName'], $b['SecondName']);});
@@ -27,11 +25,13 @@ if($currentUser->classmates){
 }
 
 
-$marks = new Marks();
-if($currentUser->isTeacher){
-	$MyMarks = $marks->getByParams(['Teacher[=]' => $login]);
+
+
+if(isTeacher()){
+	$MyMarks = getMarksByParams(['Teacher[=]' => $login]);
+	
 }else{
-	$MyMarks = $marks->getByParams(['Student[=]' => $login]);
+	$MyMarks = getMarksByParams(['Student[=]' => $login]);
 }
 
 if(count($MyMarks)>0){
@@ -65,6 +65,6 @@ if(count($MyMarks)>0){
 }
 echo '</div>';
 
-$login = $currentUser->login;
+$login = getLoginedUsername();
 include "getMarkslist.php";
 echo $MarksBlock;
