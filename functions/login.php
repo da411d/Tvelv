@@ -63,11 +63,11 @@ function isPasswordCorrect($login, $password){
 	$database = db_connect();
 
 	$in = $password;
-	$in = toQwerty($in);
+	//$in = toQwerty($in);
 
 	$test = db_get("users", ["Login","Password","Salt"], ["Login[=]" => $login]);
 	$out = _decrypt($test[0][Password], $test[0]["Salt"]);
-	$out = toQwerty($out);
+	//$out = toQwerty($out);
 
 	similar_text($in, $out, $percent);
 	if (isset($in) AND isset($out) AND $in AND $out AND $percent>85){

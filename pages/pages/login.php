@@ -3,8 +3,9 @@
 if(checkLogined()){
 	header('Location: /profile');
 }
-$login = $_POST[_crypt('login', 'LoginForm'.sha1($_SERVER['REMOTE_ADDR'].$_SERVER['HTTP_USER_AGENT']).sha1(date("Ymd")))];
-$pwd = $_POST[_crypt('pass', 'LoginForm'.sha1($_SERVER['REMOTE_ADDR'].$_SERVER['HTTP_USER_AGENT']).sha1(date("Ymd")))];
+
+$login = $_POST[_crypt('login', $_POST['secretcode'])];
+$pwd = $_POST[_crypt('pass', $_POST['secretcode'])];
 if(getAttempts($login)<=7){
 	$CaptchaName = 'Rex';
 }else{
@@ -37,19 +38,23 @@ if($login AND $pwd AND (!isset($POST['login']) AND !isset($POST['password'])) OR
 		}
 	}else{
 		addAttemptsOne($login);
-		$main = "Неправильний пароль!<br>".$main;
+		echo "<p>Неправильний пароль!</p>";
 	}
 }
 ?>
 <form method="post">
+<input type="hidden" name="secretcode" value="<?
+$keyval = _crypt(sha1('KeyForEncrypyion'.rand()), 'LoginForm'.sha1($_SERVER['REMOTE_ADDR'].$_SERVER['HTTP_USER_AGENT']));
+echo $keyval;
+?>">
 	<label>
 			<p>Логін:</p>
-			<p><input type="text" name="<?=_crypt('login', 'LoginForm'.sha1($_SERVER['REMOTE_ADDR'].$_SERVER['HTTP_USER_AGENT']).sha1(date("Ymd")));?>"><input type="hidden" name="login"></p>
+			<p><input type="text" name="<?=_crypt('login', $keyval);?>"><input type="hidden" name="login"></p>
 	</label>
 		
 	<label>	
 		<p>Пароль:</p>	
-		<p><input type="password" name="<?=_crypt('pass', 'LoginForm'.sha1($_SERVER['REMOTE_ADDR'].$_SERVER['HTTP_USER_AGENT']).sha1(date("Ymd")));?>"><input type="hidden" name="password"></p>
+		<p><input type="password" name="<?=_crypt('pass', $keyval);?>"><input type="hidden" name="password"></p>
 	</label>
 	<?
 		if(getAttempts($login)>2){

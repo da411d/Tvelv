@@ -7,10 +7,13 @@ function _crypt($unencoded, $key){
 		$newstr = $newstr.substr($arr[$i], 5, 6);
 	}
 	$newstr=base64_encode(hex2bin($newstr));
+	$newstr=str_replace('+', '-', $newstr);
+	$newstr=str_replace('/', '_', $newstr);
 	return $newstr;
 }
-
 function _decrypt($encoded, $key){
+	$encoded=str_replace('-', '+', $encoded);
+	$encoded=str_replace('_', '/', $encoded);
 	$encoded = bin2hex(base64_decode($encoded));
 	$strofsym="qwertyuiopasdfghjklzxcvbnm1234567890QWERTYUIOPASDFGHJKLZXCVBNM=+/";
 	for($i=0;$i<strlen($strofsym);$i++){
