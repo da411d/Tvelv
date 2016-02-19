@@ -1,5 +1,7 @@
 <?$title="Лістинг";?>
 <style>
+	body{font-size:16px;}
+	.main{width:90%;padding:0px;}
 	table{width: 100%;border-collapse:collapse;border-color:#9E9E9E;background:#3F9DFF;font-size:83%;}
 	table, table tr, table td, table th{border: 2px solid #9E9E9E;}
 	table tr, table td, table th{max-width:20%;}
@@ -10,9 +12,7 @@
 	
 	tr:nth-child(2n) {
 		background-color: #74B8FF;
-	}
-	tr:hover{
-		background-color: #047DFC;
+		border-color: #047DFC;
 	}
 	input, textarea, select{
 		padding:4px;

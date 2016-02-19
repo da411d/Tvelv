@@ -41,11 +41,7 @@ function preprocessor($text){
 	return $style;
 }
 
-if(!isset($_GET['a'])){
-	include(dirname(__FILE__)."/_settings.php");
-}else{
-	include(dirname(__FILE__)."/_".base64_decode($_GET['a']).".php");
-}
+include(dirname(__FILE__)."/_settings.php");
 
 include(dirname(__FILE__)."/style.css");
 

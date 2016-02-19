@@ -3,7 +3,7 @@
 <?
 if(isTeacher()){
 ?>
-	<div class="mark_block addmark cw2_3">
+	<div class="mark_block addmark cw1">
 		<?php
 			if($_POST['subject'] AND $_POST['student'] AND ($_POST['mark'] OR $_POST['info'])){
 				$status = addMark($_POST['subject'], $_POST['student'], $_POST['mark'], $_POST['info']);

@@ -29,15 +29,14 @@
 		}
 	"
 >
-<input type="checkbox" id="aside_dis">
-<input type="checkbox" id="load" checked="true">
+<input type="checkbox" id="load">
 <input type="checkbox" id="onscroll" checked="true">
+<div class="bg_wrapper"></div>
 	<?php 
 		include dirname(__FILE__)."/_header.php";
 	?>
 	<div class="main">
 	<?php
-		echo '<h1>'.$title.'</h1>';
 		echo $innerHTML;
 	?>
 		<noscript><meta http-equiv="refresh" content="0; url=http://<?=SERVER_NAME;?>/badbrowser"></noscript>
