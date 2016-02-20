@@ -130,6 +130,9 @@
 	max-height: 100%;
 	overflow-y: auto;
 }
+.right_block h1{
+	font-size: 115%;
+}
 
 .right_block a.li:hover:before{
 	padding-right: 6px;

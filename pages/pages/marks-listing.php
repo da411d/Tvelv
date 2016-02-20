@@ -2,8 +2,8 @@
 <style>
 	body{font-size:16px;}
 	.main{width:90%;padding:0px;}
-	table{width: 100%;border-collapse:collapse;border-color:#9E9E9E;background:#3F9DFF;font-size:83%;}
-	table, table tr, table td, table th{border: 2px solid #9E9E9E;}
+	table{width: 100%;border-collapse:collapse;background:#3F9DFF;font-size:83%;}
+	table, table tr, table td, table th{border: 2px solid;}
 	table tr, table td, table th{max-width:20%;}
 	@media (max-width: 480px){
 		table *{display:none;}
@@ -39,7 +39,7 @@
 <table>
 	<tr>
 		<td colspan="7">
-			<a href="?#"><img src="/assets/images/icons/filter-remove.svg">Очистити всі фільтри</a>
+			<a href="?#" class="btn" style="width:auto;padding:8px;background:#004184"><img src="/assets/images/icons/filter-remove.svg" class="icon">Очистити всі фільтри</a>
 		</td>
 	</tr>
 	<form method="get" id="params">

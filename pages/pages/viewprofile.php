@@ -8,13 +8,13 @@ if(!getLoginedUsername()){
 	$title = 'Профіль';
 	echo '<h1>'.getInfoAboutUser($login)['Name'].' '.getInfoAboutUser($login)['SecondName'];
 	if(getUserPermission($login)=='teacher'){
-		echo '<sup style="background:#ff7777;padding:4px;font-size:50%;">Вчитель</sup>';
+		echo '<sup style="background:#ff7777;padding:4px;font-size:50%;color:#ffffff;">Вчитель</sup>';
 	}elseif(getUserPermission($login)=='student'){
-		echo '<sup style="background:#7777ff;padding:4px;font-size:50%;">Учень</sup>';
+		echo '<sup style="background:#7777ff;padding:4px;font-size:50%;color:#ffffff;">Учень</sup>';
 	}elseif(getUserPermission($login)=='parent'){
-		echo '<sup style="background:#77ff77;padding:4px;font-size:50%;">Батько/мама</sup>';
+		echo '<sup style="background:#77ff77;padding:4px;font-size:50%;color:#ffffff;">Батько/мама</sup>';
 	}else{
-		echo '<sup style="background:#ff7777;padding:4px;font-size:50%;">'.getUserPermission().'</sup>';
+		echo '<sup style="background:#ff7777;padding:4px;font-size:50%;color:#ffffff;">'.getUserPermission().'</sup>';
 	}
 	echo '</h1>';
 	echo '<div class="right_block">';
