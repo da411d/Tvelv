@@ -1,8 +1,8 @@
 <?
 //Функція логінить нас на тиждень
 function loginMe($login){
-	$cookiename = _crypt(md5($_SERVER['REMOTE_ADDR'].$_SERVER['HTTP_USER_AGENT']).md5(date("Ym")), 'SECRET_PASS');
-	$arr = ['a' => $login, 'b' => '1', 'c' => sha1(getPasswordSalt($login))];
+	$cookiename = substr(_crypt(md5($_SERVER['REMOTE_ADDR'].$_SERVER['HTTP_USER_AGENT']).md5(date("Ym")), 'SECRET_PASS'), 0, 64);
+	$arr = ['a' => $login, 'c' => substr(sha1(getPasswordSalt($login)),0,8)];
 	$code = _crypt(json_encode($arr), $cookiename);
 	SetCookie($cookiename, $code, time() + (7 * 24 * 60 * 60), '/');
 	return true;
@@ -10,11 +10,11 @@ function loginMe($login){
 
 //Футкція повертає логін поточного користувача
 function getLoginedUsername(){
-	$cookiename = _crypt(md5($_SERVER['REMOTE_ADDR'].$_SERVER['HTTP_USER_AGENT']).md5(date("Ym")), 'SECRET_PASS');
+	$cookiename = substr(_crypt(md5($_SERVER['REMOTE_ADDR'].$_SERVER['HTTP_USER_AGENT']).md5(date("Ym")), 'SECRET_PASS'), 0, 64);
 	$cookie = $_COOKIE[$cookiename];
 	$code = _decrypt($cookie, $cookiename);
 	$code = json_decode($code, 1);
-	if($code['a'] AND $code['c']==sha1(getPasswordSalt($code['a']))){
+	if($code['a'] AND $code['c']==substr(sha1(getPasswordSalt($code['a'])),0,8)){
 		return $code['a'];
 	}else{
 		return false;
@@ -23,11 +23,11 @@ function getLoginedUsername(){
 
 //Функція перевіряє, чи ще залогінений користувач
 function checkLogined(){
-	$cookiename = _crypt(md5($_SERVER['REMOTE_ADDR'].$_SERVER['HTTP_USER_AGENT']).md5(date("Ym")), 'SECRET_PASS');
+	$cookiename = substr(_crypt(md5($_SERVER['REMOTE_ADDR'].$_SERVER['HTTP_USER_AGENT']).md5(date("Ym")), 'SECRET_PASS'), 0, 64);
 	$cookie = $_COOKIE[$cookiename];
 	$code = _decrypt($cookie, $cookiename);
 	$code = json_decode($code, 1);
-	if($code['a'] AND $code['c']==sha1(getPasswordSalt($code['a']))){
+	if($code['a'] AND $code['c']==substr(sha1(getPasswordSalt($code['a'])),0,8)){
 		return true;
 	}else{
 		return false;
@@ -36,9 +36,9 @@ function checkLogined(){
 
 //Функція завершує сесію і виходить
 function logOut(){
-	$cookiename = _crypt(md5($_SERVER['REMOTE_ADDR'].$_SERVER['HTTP_USER_AGENT']).md5(date("Ym")), 'SECRET_PASS');
+	$cookiename = substr(_crypt(md5($_SERVER['REMOTE_ADDR'].$_SERVER['HTTP_USER_AGENT']).md5(date("Ym")), 'SECRET_PASS'), 0, 64);
 
-	$arr = ['a' => mt_rand(), 'b' => '0', 'c' => md5(mt_rand())];
+	$arr = ['a' => false, 'c' => md5(mt_rand())];
 	$code = _crypt(json_encode($arr), $cookiename);
 	SetCookie($cookiename, $code, time() + (7 * 24 * 60 * 60), '/');
 
