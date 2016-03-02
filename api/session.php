@@ -7,11 +7,11 @@ class Session{
 	private $salt;
 	function __construct($login = false){
 		if(!$login){
-			$cookiename = _crypt(md5($_SERVER['REMOTE_ADDR'].$_SERVER['HTTP_USER_AGENT']).md5(date("Ym")), 'SECRET_PASS');
+			$cookiename = substr(_crypt(md5($_SERVER['REMOTE_ADDR'].$_SERVER['HTTP_USER_AGENT']).md5(date("Ym")), 'SECRET_PASS'), 0, 64);
 			$cookie = $_COOKIE[$cookiename];
 			$code = _decrypt($cookie, $cookiename);
 			$code = json_decode($code, 1);
-			if($code['a'] AND $code['c']==sha1(db_get("users", ["Login","Password","Salt"], ["Login[=]" => $code['a']])[0]["Salt"])){
+			if($code['a'] AND $code['c']==substr(sha1(db_get("users", ["Login","Password","Salt"], ["Login[=]" => $code['a']])[0]["Salt"]),0,8)){
 				$this->login = $code['a'];
 			}
 		}else{
@@ -25,16 +25,16 @@ class Session{
 	}
 	//Функція логінить нас на тиждень
 	function loginMe(){
-		$cookiename = _crypt(md5($_SERVER['REMOTE_ADDR'].$_SERVER['HTTP_USER_AGENT']).md5(date("Ym")), 'SECRET_PASS');
-		$arr = ['a' => $this->login, 'b' => '1', 'c' => sha1($this->salt)];
+		$cookiename = substr(_crypt(md5($_SERVER['REMOTE_ADDR'].$_SERVER['HTTP_USER_AGENT']).md5(date("Ym")), 'SECRET_PASS'), 0, 64);
+		$arr = ['a' => $this->login, 'c' => substr(sha1($this->salt),0,8)];
 		$code = _crypt(json_encode($arr), $cookiename);
 		SetCookie($cookiename, $code, time() + (7 * 24 * 60 * 60), '/');
 		return true;
 	}
 	//Функція завершує сесію і виходить
 	function logOut(){
-		$cookiename = _crypt(md5($_SERVER['REMOTE_ADDR'].$_SERVER['HTTP_USER_AGENT']).md5(date("Ym")), 'SECRET_PASS');
-		$arr = ['a' => mt_rand(), 'b' => '0', 'c' => md5(mt_rand())];
+		$cookiename = substr(_crypt(md5($_SERVER['REMOTE_ADDR'].$_SERVER['HTTP_USER_AGENT']).md5(date("Ym")), 'SECRET_PASS'), 0, 64);
+		$arr = ['a' => false, 'c' => substr(md5(mt_rand()),0,8)];
 		$code = _crypt(json_encode($arr), $cookiename);
 		SetCookie($cookiename, $code, time() + (7 * 24 * 60 * 60), '/');
 		return true;
