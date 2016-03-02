@@ -24,7 +24,6 @@ function pwdGen(){
 }
 if($_FILES['uploadfile'] AND !$_FILES['uploadfile']['error']){
 	$json = file_get_contents($_FILES['uploadfile']['tmp_name']);
-	$json = file_get_contents("import.json");
 	$json = str_replace(["\r", "\n", "	"], "", $json);
 	$arr = json_decode($json, 1);
 	$printHTML = '<head><meta charset="utf-8"></head><body onload="window.print()">';
@@ -36,7 +35,7 @@ if($_FILES['uploadfile'] AND !$_FILES['uploadfile']['error']){
 				echo 
 				"<p>".
 				"<b>Ім'я: </b>".$a['Name'].' '.$a['SecondName']."<br>".
-				"<b>Група: </b> Л-".$a['Class']."<br>".
+				"<b>Група: </b> ".getClassName($a['Class'])."<br>".
 				"<b>Тип: </b> ".$a['Permission']."<br>".
 				"<b>Логін: </b>".$a['Login']."<br>".
 				"<b>Пароль: </b>".$pwd."<br>".
@@ -44,7 +43,7 @@ if($_FILES['uploadfile'] AND !$_FILES['uploadfile']['error']){
 
 				$printHTML .= "<p>".
 				"<b>Ім'я: </b>".$a['Name'].' '.$a['SecondName']."<br>".
-				"<b>Група: </b> Л-".$a['Class']."<br>".
+				"<b>Група: </b> ".getClassName($a['Class'])."<br>".
 				"<b>Тип: </b> ".$a['Permission']."<br>".
 				"<b>Логін: </b>".$a['Login']."<br>".
 				"<b>Пароль: </b>".$pwd."<br>".
@@ -59,8 +58,8 @@ if($_FILES['uploadfile'] AND !$_FILES['uploadfile']['error']){
 	}
 	echo "</div>";
 	if($notempty){
-		echo '<p><a href="data:text/html;base64,'.base64_encode($printHTML).'" target="_blank">Роздрукувати</a></p>';
-		echo '<p><a href="javascript:download(\'imported.txt\', document.getElementById(\'pwds\').innerText)">Завантажити (txt)</a></p>';
+		echo '<p><a href="data:text/html;base64,'.base64_encode($printHTML).'" target="_blank" class="btn">Роздрукувати</a></p>';
+		echo '<p><a href="javascript:download(\'imported.txt\', document.getElementById(\'pwds\').innerText)" class="btn">Завантажити (txt)</a></p>';
 	}
 }else{
 	?>

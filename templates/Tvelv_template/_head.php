@@ -1,6 +1,6 @@
 <link rel="stylesheet" type="text/css" href="http://<?=SERVER_NAME;?>/<?=SITEDIR;?>assets/css/style.css" async="async" />
 <style>.<?=$h;?>top{padding-bottom:11px!important;border-bottom:5px solid #fafafa!important;}</style>
-<base href="http://<?=SERVER_NAME;?><?= rtrim($_SERVER['REQUEST_URI'], '/');?>">
+<base href="http://<?=SERVER_NAME;?>/">
 <link rel="canonical" hreflang="uk" href="<?=SERVER_NAME;?><?= rtrim(rtrim($_SERVER['REQUEST_URI'], '?p=1'), '/');?>/">
 <meta http-equiv="cache-control" content="max-age=0" />
 <meta http-equiv="cache-control" content="no-cache" />

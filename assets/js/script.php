@@ -5,7 +5,7 @@ include "../../_functions.php";
 function calback($content){
 	return minify_js($content);
 }
-//ob_start("calback");
+ob_start("calback");
 
 
 include(dirname(__FILE__)."/script.js");
@@ -14,5 +14,6 @@ include(dirname(__FILE__)."/useful.js");
 
 ?>
 
-<?php// ob_end_flush();
+<?php
+ob_end_flush();
 ?>

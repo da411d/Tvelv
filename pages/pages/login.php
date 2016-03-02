@@ -4,8 +4,9 @@ if(checkLogined()){
 	header('Location: /profile');
 }
 
-$login = $_POST[_crypt('login', $_POST['secretcode'])];
-$pwd = $_POST[_crypt('pass', $_POST['secretcode'])];
+$login = isset($_POST[_crypt('login', $_POST['secretcode'])])?$_POST[_crypt('login', $_POST['secretcode'])]:false;
+$pwd = isset($_POST[_crypt('pass', $_POST['secretcode'])])?$_POST[_crypt('pass', $_POST['secretcode'])]:false;
+
 if(getAttempts($login)<=7){
 	$CaptchaName = 'Rex';
 }else{
@@ -26,7 +27,7 @@ if(getAttempts($login)<=2){
 	}
 }
 
-if($login AND $pwd AND (!isset($POST['login']) AND !isset($POST['password'])) OR (!$POST['login'] AND !$POST['password'])){
+if($login AND $pwd AND (!$POST['login'] AND !$POST['password'])){
 	if(isPasswordCorrect($login, $pwd) AND $allow){
 		resetAttempts($login);
 		loginMe($login);
@@ -36,7 +37,7 @@ if($login AND $pwd AND (!isset($POST['login']) AND !isset($POST['password'])) OR
 		}else{
 			header('Location: /profile');
 		}
-	}else{
+	}elseif($allow){
 		addAttemptsOne($login);
 		echo "<p>Неправильний пароль!</p>";
 	}

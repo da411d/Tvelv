@@ -2,6 +2,7 @@
 include "_functions.php";
 include "_config.php";
 ob_start("callback");
+error_reporting(0);
 ?>
 
 <?php
