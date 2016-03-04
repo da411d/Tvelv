@@ -1,26 +1,37 @@
 <?
-function _crypt($unencoded, $key){
-	$string=base64_encode($unencoded);
-	$arr=array();
-	$newstr = '';
-	for($i=0;$i<strlen($string);$i++){
-		$arr[$i] = sha1(sha1($key.$string[$i]).$key);
-		$newstr = $newstr.substr($arr[$i], 5, 6);
+function _crypt($str, $key){
+	$encoded = bin2hex($str);
+	$encoded = str_split($encoded, 2);
+	$returnment = '';
+	foreach($encoded as $a){
+		$returnment .= bin2hex(pack('H*', $a)^pack('H*', substr(md5($key),0,2)));
 	}
-	$newstr=base64_encode(hex2bin($newstr));
-	$newstr=str_replace('+', '-', $newstr);
-	$newstr=str_replace('/', '_', $newstr);
-	return $newstr;
+	$returnment = hex2bin($returnment);
+	$returnment = base64_encode($returnment);
+	$returnment = str_replace('+', '-', $returnment);
+	$returnment = str_replace('/', '_', $returnment);
+	return $returnment;
 }
-
-function _decrypt($encoded, $key){
-	$encoded=str_replace('-', '+', $encoded);
-	$encoded=str_replace('_', '/', $encoded);
-	$encoded = bin2hex(base64_decode($encoded));
-	$strofsym="qwertyuiopasdfghjklzxcvbnm1234567890QWERTYUIOPASDFGHJKLZXCVBNM=+/";
-	for($i=0;$i<strlen($strofsym);$i++){
-		$tmp = sha1(sha1($key.$strofsym[$i]).$key);
-		$encoded = str_replace(substr($tmp, 5, 6), $strofsym[$i], $encoded);
+function _decrypt($str, $key){
+	$str = str_replace('-', '+', $str);
+	$str = str_replace('_', '/', $str);
+	$str = base64_decode($str);
+	$str = bin2hex($str);
+	$returnment = '';
+	foreach(str_split($str, 2) as $a){
+		$returnment .= (
+			pack('H*', 
+				pack('H*', 
+					bin2hex($a)
+				)
+			)
+			^
+			pack('H*', 
+				pack('H*', 
+					bin2hex(substr(md5($key),0,2))
+				)
+			)
+		);
 	}
-	return base64_decode($encoded) ;
+	return $returnment;
 }

@@ -137,7 +137,7 @@ function reloadUserPassword($login){
 
 	$test = db_get("users", ["Login","Password","Salt"], ["Login[=]" => $login]);
 	$password =  toQwerty(_decrypt($test[0]["Password"], $test[0]["Salt"]));
-	$salt = _crypt(sha1(mt_rand()), sha1(mt_rand()));
+	$salt = _crypt(md5(mt_rand()).md5(mt_rand()).md5(mt_rand()).md5(mt_rand()), sha1(mt_rand()));
 
 	return $database->update("users", [
 		"Password" => _crypt($password, $salt),
