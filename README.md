@@ -8,4 +8,4 @@ PHP 5.4+
 
 ## Автор
 
- * [Давид Манжула](http://blastorq.url.ph/about)
+ * [Давид Манжула](http://blastorq.pp.ua/about)
