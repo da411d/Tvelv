@@ -1,9 +1,9 @@
 <?
 $login = $_GET['_'];
 if(!getLoginedUsername()){
-	header('Location: /login');
+	//header('Location: /login');
 }elseif($login==getLoginedUsername()){
-	header('Location: /profile');
+	//header('Location: /profile');
 }else{
 	$title = 'Профіль';
 	echo '<h1>'.getInfoAboutUser($login)['Name'].' '.getInfoAboutUser($login)['SecondName'];
@@ -76,11 +76,11 @@ if(isTeacher() AND !isTeacher($login)){
 				echo '</select>';
 			?>
 			</p>
-			<a href="/viewprofile?_=<?=getLoginedUsername();?>" class="teacher"><?=getInfoAboutUser(getLoginedUsername())['Name'].' '.getInfoAboutUser(getLoginedUsername())['SecondName'];?></a>
+			<a href="/#viewprofile?_=<?=getLoginedUsername();?>" class="teacher"><?=getInfoAboutUser(getLoginedUsername())['Name'].' '.getInfoAboutUser(getLoginedUsername())['SecondName'];?></a>
 
 			<span class="arrow"><img src="/assets/images/arrow.svg"></span>
 
-			<a href="/viewprofile?_=petrova" class="<?=$login;?>"><?=getInfoAboutUser($login)['Name'].' '.getInfoAboutUser($login)['SecondName'];?></a>
+			<a href="/#viewprofile?_=petrova" class="<?=$login;?>"><?=getInfoAboutUser($login)['Name'].' '.getInfoAboutUser($login)['SecondName'];?></a>
 
 			<textarea class="coment" name="info"rows="2" style="width: calc(100% - 22px);resize:vertical" placeholder="Коментар"></textarea>
 

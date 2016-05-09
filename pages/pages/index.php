@@ -1,2 +1,2 @@
 <?
-header('Location: /profile');
+$eval = "window.location.hash='profile';";

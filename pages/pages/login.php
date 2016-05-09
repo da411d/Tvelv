@@ -1,7 +1,7 @@
 <?$title= 'Ти не ввійшов!';
 
 if(checkLogined()){
-	header('Location: /profile');
+	$eval = "window.location.hash='profile';";
 }
 
 $login = isset($_POST[_crypt('login', $_POST['secretcode'])])?$_POST[_crypt('login', $_POST['secretcode'])]:false;
@@ -33,9 +33,9 @@ if($login AND $pwd AND (!$POST['login'] AND !$POST['password'])){
 		loginMe($login);
 		$title = 'Зачекайте...';
 		if($_GET['_']){
-			header('Location: /'.$_GET['_']);
+			$eval = "window.location.hash='".$_GET['_']."';";
 		}else{
-			header('Location: /profile');
+			$eval = "window.location.hash='profile';";
 		}
 	}elseif($allow){
 		addAttemptsOne($login);

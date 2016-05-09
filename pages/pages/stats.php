@@ -1,12 +1,7 @@
 <?$title="Статистика";?>
 <style>.main div{margin-top:16px;margin-bottom:16px;height:45vh;}</style>
-<script type="text/javascript" src="https://www.google.com/jsapi"></script>
 <script type="text/javascript">
-google.load('visualization', '1', {
-packages: ['corechart', 'bar']
-});
-
-google.setOnLoadCallback(drawStats);
+<?ob_start();?>
 
 function drawStats(){
 	<?php
@@ -105,6 +100,10 @@ function drawBasic(id, arr, titl) {
     document.getElementById(id));
     chart.draw(data, options);
 }
+<?
+$eval = ob_get_contents();
+ob_end_clean();
+?>
     </script>
 <div id="stats1"></div>
 <div id="stats2"></div>

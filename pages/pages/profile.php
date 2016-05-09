@@ -3,7 +3,7 @@ $login = getLoginedUsername();
 
 if(!checkLogined()){
 	$title= 'Зачекайте...';
-	header('Location: /login');
+	$eval = "window.location.hash = 'login';";
 }else{
 	$title = 'Профіль';
 }

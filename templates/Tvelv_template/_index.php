@@ -9,12 +9,10 @@
 <head>
 	<?php
 		include dirname(__FILE__)."/_head.php";
-		include dirname(__FILE__)."/_tags.php"; 
-		include dirname(__FILE__)."/_ga.php";
 		echo "<title>".$title." | Tvelv</title>";
 	?>
 </head>
-<body id="body" 
+<body id="body" onload="onLoad()" onhashchange="onHashChange()"
 	onbeforeunload="
 		document.getElementById('onscroll').checked='true';
 		document.getElementById('load').checked='true';
@@ -35,10 +33,7 @@
 	<?php 
 		include dirname(__FILE__)."/_header.php";
 	?>
-	<div class="main">
-	<?php
-		echo $innerHTML;
-	?>
+	<div class="main" id="main">
 		<noscript><meta http-equiv="refresh" content="0; url=http://<?=SERVER_NAME;?>/badbrowser"></noscript>
 		<script>setTimeout(function(){if(document.getElementById('load')){document.getElementById('load').checked=''}},250);</script>
 	</div>
@@ -47,7 +42,4 @@
 			include dirname(__FILE__)."/_footer.php";
 		 ?>
 	</div>
-	<?php 
-		include dirname(__FILE__)."/_share.php";
-	 ?>
 </body>

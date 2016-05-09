@@ -1,7 +1,7 @@
 <?
 if(!in_array(getLoginedUsername(), json_decode(ADMIN_ID))){
-	header('Location: /403');
-	exit();
+	//header('Location: /403');
+	//exit();
 }
 $title = "Імпорт";
 function pwdGen(){
@@ -22,8 +22,10 @@ function pwdGen(){
 	$word .= rand(0,9).rand(0,9);
 	return $word;
 }
-if($_FILES['uploadfile'] AND !$_FILES['uploadfile']['error']){
-	$json = file_get_contents($_FILES['uploadfile']['tmp_name']);
+
+if(false AND isset($_POST['import']) AND strlen($_POST['import'])>25){
+	echo $_POST['import'];
+	$json = $_POST['uploadfile'];
 	$json = str_replace(["\r", "\n", "	"], "", $json);
 	$arr = json_decode($json, 1);
 	$printHTML = '<head><meta charset="utf-8"></head><body onload="window.print()">';
@@ -50,10 +52,10 @@ if($_FILES['uploadfile'] AND !$_FILES['uploadfile']['error']){
 				"</p>";
 				$notempty = 1;
 			}else{
-				echo  "1FAILED! ".$a['Login'].' '.$a['Name'].' '.$a['SecondName'].' '.$a['Class'].' '.$pwd."<br>";
+				echo  "FAILED! ".$a['Login'].' '.$a['Name'].' '.$a['SecondName'].' '.$a['Class'].' '.$pwd."<br>";
 			}
 		}else{
-			echo  "2FAILED! ".$a['Login'].' '.$a['Name'].' '.$a['SecondName'].' '.$a['Class'].' '.$pwd."<br>";
+			echo  "FAILED! ".$a['Login'].' '.$a['Name'].' '.$a['SecondName'].' '.$a['Class'].' '.$pwd."<br>";
 		}
 	}
 	echo "</div>";
@@ -61,13 +63,16 @@ if($_FILES['uploadfile'] AND !$_FILES['uploadfile']['error']){
 		echo '<p><a href="data:text/html;base64,'.base64_encode($printHTML).'" target="_blank" class="btn">Роздрукувати</a></p>';
 		echo '<p><a href="javascript:download(\'imported.txt\', document.getElementById(\'pwds\').innerText)" class="btn">Завантажити (txt)</a></p>';
 	}
-}else{
+}else{if (false){
 	?>
 	<p>Тут можна імпортувати акаунти в форматі JSON.</p>
 	<p>Детальніше в документації.</p>
-	<form method="post" enctype="multipart/form-data">
-		<p><input type="file" name="uploadfile" style="height:100px;background: #047DFC;"></p>
+	<form method="post">
+		<p><input type="file" name="uploadfile" style="height:100px;background: #047DFC;" onchange="reader = new FileReader();var elem = this;reader.onload = function(e){document.getElementById('import').value=e.target.result;};reader.readAsText(elem.files[0]);"></p>
+		<p><textarea id="import" name="import"rows="10"readonly></textarea></p>
 		<p><input type="submit"></p>
 	</form>
 <?;
-}
+}}
+?>
+Ця футкція тимчасово вимкнена

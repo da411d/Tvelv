@@ -25,7 +25,7 @@ if(isTeacher()){
 				echo '</select>';
 			?>
 			</p>
-			<a href="/viewprofile?_=<?=getLoginedUsername();?>" class="teacher"><?=getInfoAboutUser(getLoginedUsername())['Name'].' '.getInfoAboutUser(getLoginedUsername())['SecondName'];?></a>
+			<a href="/#viewprofile?_=<?=getLoginedUsername();?>" class="teacher"><?=getInfoAboutUser(getLoginedUsername())['Name'].' '.getInfoAboutUser(getLoginedUsername())['SecondName'];?></a>
 
 			<span class="arrow"><img src="/assets/images/arrow.svg"></span>
 
@@ -52,17 +52,5 @@ if(isTeacher()){
 
 <?
 }else{
-header("Location: /403");
-exit;
+	$eval = "window.location.hash='403';";
 }
-?>
-<script>
-function loadStudents(e){
-	students = JSON.parse(connect("getStudentsByClass-"+e.value));
-	studentsHTML = '';
-	for(a in students){
-		studentsHTML += '<option value="'+students[a]['Login']+'">'+students[a]['SecondName']+' '+students[a]['Name']+'</option>'
-	}
-	document.getElementsByName('student')[0].innerHTML = studentsHTML;
-}
-</script>

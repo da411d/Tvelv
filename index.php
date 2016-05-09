@@ -18,35 +18,13 @@ if(isset($_GET["param"])){
 $param = trim($param, '/');
 $param = rtrim($param, '/');
 $param = str_replace(array('/', '.'), '-', $param);
-if($param==''){
-	$param='index';
+
+if(strlen($param)>0){
+	if($param==''){
+		$param='index';
+	}
+	header("Location: /#".$_SERVER['QUERY_STRING']);
 }
-
-if(file_exists(strtolower(dirname(__FILE__).'/pages/pages/'.$param.'.php'))){
-	$url = strtolower(dirname(__FILE__).'/pages/pages/'.$param.'.php');
-
-}elseif(file_exists(strtolower(dirname(__FILE__).'/pages/special/'.$param.'.php'))){
-	$url = strtolower(dirname(__FILE__).'/pages/special/'.$param.'.php');
-
-}elseif(file_exists(strtolower(dirname(__FILE__).'/pages/301/'.$param.'.php'))){
-	$url = strtolower(dirname(__FILE__).'/pages/301/'.$param.'.php');
-	include($url);
-	http_response_code(301);
-	header('Location: http://blastorq.pp.ua/'.$newurl);
-
-}elseif(file_exists(strtolower(dirname(__FILE__).'/pages/error/'.$param.'.php'))){
-	$url = strtolower(dirname(__FILE__).'/pages/error/'.$param.'.php');
-	http_response_code($param);
-
-}else{
-	$url = strtolower(dirname(__FILE__).'/pages/error/404.php');
-	http_response_code(404);
-
-}
-
-ob_start(function($content){$GLOBALS['innerHTML'] = $content;});
-	include($url);
-ob_end_flush();
 
 include dirname(__FILE__)."/templates/".TEMPLATE."/_index.php";
 ?>

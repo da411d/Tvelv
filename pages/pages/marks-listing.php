@@ -173,8 +173,8 @@
 					echo "<tr><td>".$time[2].'/'.$time[1].'/'.$time[0].", ".rtrim($a['Time'], ':00').
 					"<td>".getSubjectName($a['Subject']).
 					"<td>".getClassName($a['Class']).
-					"<td><a href=\"viewprofile?_=".$a['Student']."\">".getInfoAboutUser($a['Student'])['Name'].' '.getInfoAboutUser($a['Student'])['SecondName']."</a>".
-					"<td><a href=\"viewprofile?_=".$a['Teacher']."\">".getInfoAboutUser($a['Teacher'])['Name'].' '.getInfoAboutUser($a['Teacher'])['SecondName']."</a>".
+					"<td><a href=\"/#viewprofile?_=".$a['Student']."\">".getInfoAboutUser($a['Student'])['Name'].' '.getInfoAboutUser($a['Student'])['SecondName']."</a>".
+					"<td><a href=\"/#viewprofile?_=".$a['Teacher']."\">".getInfoAboutUser($a['Teacher'])['Name'].' '.getInfoAboutUser($a['Teacher'])['SecondName']."</a>".
 					"<td>".$a['Mark'].
 					"<td style=\"max-width:12em\">".str_replace("\r\n", "<br>", $a['Info']);
 				}

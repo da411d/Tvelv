@@ -82,26 +82,42 @@ function download(filename, text) {
 	document.body.removeChild(element);
 }
 
-function connect(t){
-	u = '/modules/ajax.php?'+t;
-	if (u.match(/\?/)) {
-		u += '&z='+rand(1000000, 9999999);
-	} else {
-		u += '?z='+rand(1000000, 9999999);
-	}
-	html = ajax(u);
-	return html;
-}
 
-function ajax(t){
-	var xhr = new XMLHttpRequest();
-	xhr.open('GET', t, 0);
-	xhr.send();
-	if (xhr.status != 200) {
-		console.error( xhr.status + ': ' + xhr.statusText );
-	} else {
-		return( xhr.responseText );
-	}
-}
 
-var I = setInterval(function(){if(connect('checkLogined')==0 && window.location.pathname!='/login'){window.location = '/login?_='+window.location.pathname}else if(connect('checkLogined')==1 && window.location.pathname=='/login'){window.location = $_GET('_')}}, 5000)
+    function setOrPush(target, val) {
+	var result = val;
+	if (target) {
+		result = [target];
+		result.push(val);
+	}
+	return result;
+}
+function getFormResults(formElement) {
+	var formElements = formElement.elements;
+	console.log(formElements);
+	var formParams = new FormData();
+	var i = 0;
+	var elem = null;
+	for (i = 0; i < formElements.length; i += 1) {
+		var elem = formElements[i];
+		switch (elem.type) {
+			case 'submit':
+				break;
+			case 'radio':
+				if (elem.checked) {
+					formParams.append(elem.name, elem.value);
+				}
+				break;
+			case 'checkbox':
+				if (elem.checked) {
+					formParams.append(elem.name, setOrPush(formParams[elem.name], elem.value));
+				}
+				break;
+			default:
+				formParams.append(elem.name, elem.value);
+				console.log(elem.name, elem.value);
+		}
+	}
+	console.log(formParams);
+	return formParams;
+}
