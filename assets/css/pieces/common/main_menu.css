@@ -1,0 +1,25 @@
+.main menu{
+	display:block;
+	padding:0px;
+}
+.main menu a,
+.main .btn{
+	text-decoration: none!important;
+	color: #ffffff!important;
+	background: #047DFC;
+	height: auto;
+	position: relative;
+	overflow: hidden;
+	border-width: 0;
+	outline: none;
+	border-radius: 2px;
+	box-shadow: 0 1px 4px rgba(0, 0, 0, .6);
+	transition: background-color .3s;
+}
+.main menu a:hover,
+.main menu a:active,
+.main .btn:hover,
+.main .btn:active{
+	background: #004184!important;
+	box-shadow: 0 1px 6px rgba(0, 0, 0, .7);
+}

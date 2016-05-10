@@ -1,0 +1,38 @@
+::selection {
+    background-color: #004184;
+    color:  #ffffff;
+}
+.fl_l{float:left;}
+.fl_r{float:right;}
+
+body {
+	background: #f0f0f0;
+	font-family: _theme_font_family_;
+	font-weight: _theme_font_weight_;
+	letter-spacing: 1px;
+	font-size: 24px;
+	color: #004184;
+	cursor: default;
+	margin: 0px;
+	overflow-x: hidden;
+}
+
+body * {
+	-webkit-transition-duration: 0.4s;
+	-o-transition-duration: 0.4s;
+	-moz-transition-duration: 0.4s;
+	transition-duration: 0.4s;
+
+	font-family: _theme_font_family_;
+	font-weight: _theme_font_weight_;
+	font-size: _theme_font_size_;
+	outline: none;
+}
+
+.icon{
+    width: 1em;
+    height: 1em;
+    border: none;
+    vertical-align: middle;
+    margin: 0px 1px!important;
+}

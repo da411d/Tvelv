@@ -1,0 +1,11 @@
+#load:checked ~body {
+	overflow: hidden!important;
+}
+
+#load:checked ~.main {
+	margin-top: 10vh;
+}
+
+#load:checked ~.share-wrapper{
+	left: -48px!important;
+}

@@ -1,0 +1,53 @@
+.main {
+	overflow: hidden;
+	height: auto;
+}
+
+.main a {
+	text-decoration: underline;
+	cursor: pointer;
+	color: #ffffff;
+}
+
+.main p{
+	margin-top: 16px;
+	margin-bottom: 16px;
+}
+
+.main table {
+	max-width: 100%;
+	border-collapse: collapse;
+	border-color: transparent;
+	background: #047DFC;
+	color: #ffffff;
+}
+
+.main table,
+.main table tr,
+.main table td,
+.main table th {
+	padding: 4px;
+	border:1px #047DFC;
+}
+
+.right_block{
+	display: block;
+	background: #047DFC;
+	color:#ffffff;
+	box-shadow: 2px 2px 8px rgba(0, 0, 0, 0.6);
+	height: auto;
+	border-radius:4px;
+	margin-bottom:24px;
+}
+.right_block h1{
+	font-size:115%;
+	margin-top: 0px;
+}
+.right_block a.li{
+	font-size:105%;
+	display:block;
+	width:auto;
+}
+.right_block a.li:before{
+	content: '► ';
+}

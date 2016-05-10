@@ -1,6 +1,5 @@
 <?php
 header('content-type: text/css');
-include "../../_functions.php";
 
 function calback($content){
 	$content = preprocessor($content);
@@ -40,20 +39,35 @@ function preprocessor($text){
 	}
 	return $style;
 }
+$feature = (isset($_GET['f']) AND $_GET['f'])?'/features/'.$_GET['f']:false;
 
-include(dirname(__FILE__)."/_settings.php");
+if($feature){
+	include(dirname(__FILE__)."/_settings.php");
 
-include(dirname(__FILE__)."/style.css");
+	include(dirname(__FILE__).$feature."/style.css");
 
-echo "@media (max-width: _reticle_mobilecomp_barrier_){";
-	include(dirname(__FILE__)."/style-mob.css");
-echo "}";
+	echo "@media (max-width: _reticle_mobilecomp_barrier_){";
+		include(dirname(__FILE__).$feature."/style-mob.css");
+	echo "}";
 
-echo "@media (min-width: _reticle_mobilecomp_barrier_){";
-	include(dirname(__FILE__)."/style-pc.css");
-echo "}";
+	echo "@media (min-width: _reticle_mobilecomp_barrier_){";
+		include(dirname(__FILE__).$feature."/style-pc.css");
+	echo "}";
+}else{
+	include(dirname(__FILE__)."/_settings.php");
 
-include(dirname(__FILE__)."/style-easters.php");
+	include(dirname(__FILE__)."/pieces/patch.css");
+	include(dirname(__FILE__)."/pieces/common/index.php");
+
+	echo "@media (max-width: _reticle_mobilecomp_barrier_){";
+		include(dirname(__FILE__)."/pieces/m/index.php");
+	echo "}";
+
+	echo "@media (min-width: _reticle_mobilecomp_barrier_){";
+		include(dirname(__FILE__)."/pieces/pc/index.php");
+	echo "}";
+
+}
 
 ob_end_flush();
 

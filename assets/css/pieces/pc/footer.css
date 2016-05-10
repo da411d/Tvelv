@@ -1,0 +1,8 @@
+.footer {
+	padding: 0 64px;
+	width: 90%;
+	width: calc(90% - 128px);
+	margin-left: 5%;
+	margin-bottom: 16px;
+	border-radius: 4px;
+}

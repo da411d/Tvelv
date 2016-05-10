@@ -1,0 +1,23 @@
+.bg_wrapper, .bg_wrapper:after{
+	height:100%!important;
+}
+.header {
+	margin-bottom:32px;
+	background:transparent;
+}
+.header .h1 {
+	width:100%;
+	font-size:64px;
+}
+.header nav a {
+	cursor: pointer;
+	color: #ffffff;
+	text-decoration: none;
+	padding: 8px;
+	margin: 4px;
+	border: 1px solid transparent;
+	text-align: center;
+	display:block;
+	margin-left: 24px;
+	margin-right: 24px;
+}

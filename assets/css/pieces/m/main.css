@@ -1,0 +1,62 @@
+.main {
+	width: calc(100% - 32px);
+	padding: 16px;
+	padding-bottom: 32px;
+	display: block;
+
+	background:#ffffff;
+	box-shadow: 0 0 16px rgba(0, 0, 0, 0.7);
+}
+
+.main table {
+	font-size: 83%;
+}
+
+@media (max-width: _reticle_tinyscreen_barier_) {
+	.main table * {
+		display: none;
+		font-size:0px;
+	}
+	.main table::before {
+		content: 'Таблиця не доступна на таких маленьких екранах.';
+		display: block;	
+		font-size:16px!important;
+		padding: 8px;
+	}
+}
+
+.main menu a,
+.main .btn{
+	width: calc(100% - 16px)!important;
+	margin-top: 8px;
+	padding: 8px;
+	display: block;
+}
+
+.main h1 {
+	font-size: 120%;
+	padding: 8px;
+	margin: 0px;
+}
+
+.main h2 {
+	font-size: 115%;
+	padding: 8px;
+	margin: 0px;
+	padding-top: 16px;
+}
+
+.main .card {
+	width: calc(100% - 32px);
+	margin-top: 16px;
+}
+
+.right_block{
+	width: calc(100% - 32px);
+	padding: 16px;
+}
+.mark_block {
+	width: calc(100% - 32px);
+	padding: 16px;
+	margin-bottom: 16px;
+}

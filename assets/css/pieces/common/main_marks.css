@@ -1,0 +1,79 @@
+.mark_block{
+	display: block;
+	background: #047DFC;
+	color:#ffffff;
+	box-shadow: 2px 2px 8px rgba(0, 0, 0, 0.6);
+	padding: 16px;
+	height: auto;
+	border-radius:4px;
+}
+.mark_block:hover{
+	box-shadow: 2px 2px 24px rgba(0, 0, 0, 0.8);
+}
+.addmark{
+	display: block;
+	background: #047DFC;
+	color:#ffffff;
+	box-shadow: 2px 2px 8px rgba(0, 0, 0, 0.6);
+	padding: 16px;
+	height: auto;
+	border-radius:4px;
+}
+.coment{
+	display:block;
+	margin: 8px 0px;
+	padding: 0px 8px;
+	border-left: 5px solid _theme_main_dark_color_;
+}
+.arrow{
+	padding: 8px;
+}
+.mark{
+	float:right;
+	font-size:130%;
+	padding:8px;
+	margin:-16px;
+	background: #CB2237;
+}
+
+.mark_block time{display:block;}
+.mark_block .mark:not(.addmark){border-top-right-radius: 4px;}
+.m1{
+	background: #CB2237;
+}
+.m2{
+	background: #DC3338;
+}
+.m3{
+	background: #EA4438;
+}
+.m4{
+	background: #F25437;
+}
+.m5{
+	background: #E46538;
+}
+.m6{
+	background: #D37738;
+}
+.m7{
+	background: #C58837;
+}
+.m8{
+	background: #B59936;
+}
+.m9{
+	background: #A7AC38;
+}
+.m10{
+	background: #97BA38;
+}
+.m11{
+	background: #88CC37;
+}
+.m12{
+	background: #7ADC37;
+}
+.m13{
+	background: #7ADC37;
+}

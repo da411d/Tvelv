@@ -1,0 +1,46 @@
+.bg_wrapper{
+	z-index: -100;
+	width: 100%;
+	position: fixed;
+	top: 0px;
+	left: 0px;
+	background: url("_bg_image_");
+	background-position: 50% 50%;
+	background-size: cover;
+	background-repeat: no-repeat;
+	min-height: 256px;
+}
+#load,
+#onscroll {
+	position: fixed;
+	opacity: 0.001;
+	top: -46.5px;
+	visibility: hidden;
+}
+
+.header {
+	display: block;
+	width: 100%;
+	text-align:center;
+}
+.header .h1 {
+	content: "Blast.ORQ";
+	display: block;
+	z-index:2;
+	color:#ffffff;
+}
+.header nav {
+	display: block;
+	padding-top:8px;
+}
+
+.header nav a {
+	cursor: pointer;
+	color: #ffffff;
+	text-decoration: none;
+	display: inline-block;
+	padding: 16px;
+	margin: 4px;
+	border: 1px solid transparent;
+	text-align: center;
+}

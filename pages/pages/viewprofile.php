@@ -1,9 +1,9 @@
 <?
 $login = $_GET['_'];
 if(!getLoginedUsername()){
-	//header('Location: /login');
+	$eval = "window.location.hash='login';";
 }elseif($login==getLoginedUsername()){
-	//header('Location: /profile');
+	$eval = "window.location.hash='profile';";
 }else{
 	$title = 'Профіль';
 	echo '<h1>'.getInfoAboutUser($login)['Name'].' '.getInfoAboutUser($login)['SecondName'];
@@ -92,5 +92,5 @@ if(isTeacher() AND !isTeacher($login)){
 
 <?
 }
-include "getMarkslist.php";
+include "profile-getMarkslist.php";
 echo $MarksBlock;

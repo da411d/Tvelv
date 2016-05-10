@@ -1,0 +1,12 @@
+.header #meta {
+	display: block;
+	color: #ffffff;
+	font-style: italic;
+	font-size: 18px;
+	margin: 24px;
+	padding: 16px;
+	width: calc(100% - 80px);
+	text-align: left;
+	border-radius: 2px;
+	background: rgba(0,0,0,0.6);
+}

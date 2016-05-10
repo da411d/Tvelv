@@ -1,0 +1,43 @@
+.main input,
+.main textarea,
+.main select{
+	padding: 8px;
+	font-size: 120%;
+	background: #ffffff;
+	color: #004184;
+	width: calc(100% - 16px);
+	text-decoration: none!important;
+	display: block;
+	position: relative;
+	border: none;
+	border-radius: 2px;
+	box-shadow: 0 1px 4px rgba(0,0,0,.6);
+}
+.main select{
+	width: initial;
+	display:initial;
+}
+.main input:hover, .main input:focus,
+.main textarea:hover, .main textarea:focus  {
+	box-shadow: 0 2px 8px rgba(0,0,0,.6);
+}
+.main input[type=submit],.main input[type=button],.main button{
+	text-decoration: none!important;
+	color: #004184!important;
+	background: #f0f0f0;
+	height: auto;
+	display: block;
+	border: 1px solid #ffffff;
+	position: relative;
+	overflow: hidden;
+	border-width: 0;
+	outline: none;
+	border-radius: 2px;
+	box-shadow: 0 1px 4px rgba(0, 0, 0, .6);
+	transition: background-color .3s;
+	cursor:pointer;
+}
+.main input[type=submit]:hover,.main  input[type=button]:hover, .main button:hover,
+.main input[type=submit]:active, .main input[type=button]:active, .main button:active {
+	box-shadow: 0 1px 6px rgba(0, 0, 0, .7);
+}

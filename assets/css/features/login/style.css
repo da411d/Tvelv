@@ -1,0 +1,48 @@
+.header.big{
+	margin-bottom:100vh!important;
+}
+.header.big .scrolldown{
+	display:block;
+	border-left: 2px solid #ffffff;
+	border-bottom: 2px solid #ffffff;
+	height: 50px;
+	width: 50px;
+	position: absolute;
+	bottom: 25px;
+	left: 50%;
+	left: calc(50% - 25px);
+	
+	-webkit-transform: rotate(-45deg);
+	-mox-transform: rotate(-45deg);
+	-o-transform: rotate(-45deg);
+	transform: rotate(-45deg);
+
+	animation-duration: 2s;
+	animation-name: pulse;
+	animation-iteration-count: infinite;
+	animation-direction: alternate;
+
+	-o-animation-duration: 2s;
+	-o-animation-name: pulse;
+	-o-animation-iteration-count: infinite;
+	-o-animation-direction: alternate;
+
+	-moz-animation-duration: 2s;
+	-moz-animation-name: pulse;
+	-moz-animation-iteration-count: infinite;
+	-moz-animation-direction: alternate;
+
+	-webkit-animation-duration: 2s;
+	-webkit-animation-name: pulse;
+	-webkit-animation-iteration-count: infinite;
+	-webkit-animation-direction: alternate;
+}
+
+@keyframes pulse{
+	from {
+		margin-bottom: 25px;
+	}
+	to {
+		margin-bottom: 0px;
+	}
+}

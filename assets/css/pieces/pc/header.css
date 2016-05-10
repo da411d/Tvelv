@@ -1,0 +1,21 @@
+.bg_wrapper{
+	height:60%!important;
+}
+.header {
+	margin-bottom: 4vh;
+}
+
+.header .h1 {
+	font-size: 16vh;
+	padding-top:4vh;
+}
+.header nav a {
+	font-size:24px;
+}
+
+.header nav a:hover,
+.header nav a:focus,
+.header nav a:active {
+	border: 1px solid #ffffff;
+	background: rgba(0,0,0,0.3);
+}

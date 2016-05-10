@@ -1,0 +1,14 @@
+.footer {
+	height: auto;
+	background: rgba(4,125,252,0.6);
+	color: #ffffff;
+	background: #004184;
+	box-shadow: 0 0 16px rgba(0, 0, 0, 0.7);
+}
+.footer a {
+	display: inline-block;
+	margin: 16px;
+	margin-bottom: 0px;
+	color: #ffffff;
+	text-decoration: none;
+}

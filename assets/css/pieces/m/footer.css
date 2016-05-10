@@ -1,0 +1,7 @@
+.footer {
+	z-index: 099;
+	padding: 8px;
+	margin: 0px;
+	margin-bottom: 48px;
+	width: calc(100% - 16px);
+}

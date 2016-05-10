@@ -19,7 +19,7 @@ if(getUserClassmates($login) AND !isTeacher()){
 	usort($myClassmates , function($a, $b){return strnatcmp($a['SecondName'], $b['SecondName']);});
 	echo '<h1>Мої однокласники</h1>';
 	foreach($myClassmates as $c){
-		echo '<a href="viewprofile?_='.$c['Login'].'" class="li">'.$c['SecondName'].' '.$c['Name'].'</a>';
+		echo '<a href="/#viewprofile?_='.$c['Login'].'" class="li">'.$c['SecondName'].' '.$c['Name'].'</a>';
 	}
 	echo $classmatesHTML;
 }
@@ -66,5 +66,5 @@ if(count($MyMarks)>0){
 echo '</div>';
 
 $login = getLoginedUsername();
-include "getMarkslist.php";
+include "profile-getMarkslist.php";
 echo $MarksBlock;

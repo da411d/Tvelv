@@ -1,0 +1,48 @@
+body{
+	overflow:hidden;
+}
+.bg_wrapper.big{
+	height:100vh!important;
+}
+.header.big{
+	height:100vh!important;
+}
+.header.big .tohomepage{
+	display:block;
+	position: fixed;
+	bottom: 64px;
+	left: 0px;
+	width:100%;
+	color: #ffffff;
+}
+.header.big .tohomepage a{
+	padding:16px;	
+	animation-duration: 2s;
+	animation-name: pulse;
+	animation-iteration-count: infinite;
+	animation-direction: alternate;
+
+	-o-animation-duration: 2s;
+	-o-animation-name: pulse;
+	-o-animation-iteration-count: infinite;
+	-o-animation-direction: alternate;
+
+	-moz-animation-duration: 2s;
+	-moz-animation-name: pulse;
+	-moz-animation-iteration-count: infinite;
+	-moz-animation-direction: alternate;
+
+	-webkit-animation-duration: 2s;
+	-webkit-animation-name: pulse;
+	-webkit-animation-iteration-count: infinite;
+	-webkit-animation-direction: alternate;
+}
+
+@keyframes pulse{
+	from {
+		border: 1px solid white;
+	}
+	to {
+		border: 1px solid transparent;
+	}
+}
