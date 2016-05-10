@@ -94,7 +94,6 @@ function download(filename, text) {
 }
 function getFormResults(formElement) {
 	var formElements = formElement.elements;
-	console.log(formElements);
 	var formParams = new FormData();
 	var i = 0;
 	var elem = null;
@@ -115,9 +114,7 @@ function getFormResults(formElement) {
 				break;
 			default:
 				formParams.append(elem.name, elem.value);
-				console.log(elem.name, elem.value);
 		}
 	}
-	console.log(formParams);
 	return formParams;
 }

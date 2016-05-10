@@ -103,7 +103,6 @@ function ajaxPost(t, data){
 
 function submitForm(event){
 	var params = getFormResults(event.target);
-	return false;
 	t = parser(window.location, 'hash').replace('?','&');
 	t = t.substring(1, t.length);
 	t = 'connector.php?a='+t;
