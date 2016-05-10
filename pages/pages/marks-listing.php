@@ -35,7 +35,6 @@
 	}
 </script>
 
-
 <table>
 	<tr>
 		<td colspan="7">

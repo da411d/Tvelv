@@ -37,6 +37,11 @@ ob_start();
 	$main = ob_get_contents();
 ob_end_clean();
 
+if(!checkLogined() AND $param!='login'){
+	$title= 'Зачекайте...';
+	$eval = "window.location.hash = 'login';";
+	$main = '';
+}
 
 $eval = isset($eval)&&strlen($eval)>1?$eval:"";
 $response = isset($response)&&strlen($response)>1?$response:"";
