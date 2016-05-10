@@ -1,2 +1,2 @@
 <a href="http://<?=SERVER_NAME;?>">©Tvelv</a><br>
-<a href="/profile">Профіль</a>|<a href="/marks">Оцінки</a>|<a href="/settings">Налаштування</a>|<a href="/logout">Вихід</a>
+<a href="/#profile">Профіль</a>|<a href="/#marks">Оцінки</a>|<a href="/#settings">Налаштування</a>|<a href="/#logout?Hi_What_are_you_looking_for=<?=sha1(getPasswordSalt($code['a']));?>&rnd<?=rand(10000000,99999999);?>">Вихід</a>
