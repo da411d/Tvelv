@@ -33,9 +33,9 @@ if($login AND $pwd AND (!$POST['login'] AND !$POST['password'])){
 		$token = loginMe($login);
 		$title = 'Зачекайте...';
 		if($_GET['_']){
-			$eval = "window.location.hash='".$_GET['_']."'; localStorage.setItem('token', '".$token."'); console.log('token', '".$token."')";
+			$eval = "window.location.hash='".$_GET['_']."'; localStorage.setItem('token', '".$token."');";
 		}else{
-			$eval = "window.location.hash='profile'; localStorage.setItem('token', '".$token."'); console.log('token', '".$token."')";
+			$eval = "window.location.hash='profile'; localStorage.setItem('token', '".$token."');";
 		}
 	}elseif($allow){
 		addAttemptsOne($login);

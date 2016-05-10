@@ -3,7 +3,7 @@
 function loginMe($login){
 	$cookiename = substr(_crypt(md5($_SERVER['REMOTE_ADDR'].$_SERVER['HTTP_USER_AGENT']).md5(date("Ym")), 'SECRET_PASS'), 0, 64);
 	$arr = ['a' => $login, 'c' => substr(sha1(getPasswordSalt($login)),0,8)];
-	//$code = _crypt(json_encode($arr), $cookiename);
+	$code = _crypt(json_encode($arr), $cookiename);
 	//SetCookie($cookiename, $code, time() + (7 * 24 * 60 * 60), '/');
 	return $code;
 }
