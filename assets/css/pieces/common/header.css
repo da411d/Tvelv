@@ -18,6 +18,32 @@
 	visibility: hidden;
 }
 
+#loader {
+	top:0px;
+	width:200vw;
+	position:fixed;
+	border-bottom:4px dotted white;
+	-webkit-animation-name: load;
+	animation-name: load;
+	-webkit-animation-duration: .25s;
+	animation-duration: .25s;
+	-webkit-animation-iteration-count: infinite;
+	animation-iteration-count: infinite;
+	-webkit-animation-timing-function: linear;
+	animation-timing-function: linear;
+}
+#loader.hidden{
+	opacity:0;
+}
+@-webkit-keyframes load {
+	from{
+		left:-8px;
+	}
+	to{
+		left:0px;
+	}
+}
+
 .header {
 	display: block;
 	width: 100%;

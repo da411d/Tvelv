@@ -1,3 +1,4 @@
+<div id="loader"></div>
 <div class="header">
 	<span class="h1" id="title">Tvelv</span>
 	<nav id="nav">

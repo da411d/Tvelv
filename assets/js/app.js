@@ -4,6 +4,10 @@ function commonLoad(){
 	
 }
 
+loader = {
+	start: function(){document.getElementById('loader').className='';},
+	end: function(){setTimeout(function(){document.getElementById('loader').className='hidden';}, 500);}
+};
 function onLoad(){
 	if(!window.location.hash){
 		window.location.hash='#profile';
@@ -16,6 +20,7 @@ function onHashChange(){
 }
 
 function Load(){
+	loader.start();
 	t = window.location.hash.replace('?','&');
 	t = t.substring(1, t.length);
 	connect('a='+t, defaultLoader);
@@ -53,6 +58,7 @@ function connect(t, f, p){
 }
 
 function submitForm(event){
+	loader.start();
 	var params = getFormResults(event.target);
 	connect('a='+t, defaultLoader, params);
 }
@@ -68,6 +74,7 @@ function loadData(data){
 	if(data['eval']){
 		eval(data['eval']);
 	}
+	loader.end();
 }
 
 var I = setInterval(function(){
