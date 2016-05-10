@@ -31,16 +31,19 @@ if(file_exists(strtolower(dirname(__FILE__).'/pages/pages/'.$param.'.php'))){
 	//http_response_code(404);
 }
 
-ob_start(function($content){$GLOBALS['innerHTML'] = $content;});
+ob_start();
 	include($url);
-ob_end_flush();
+	$main = ob_get_contents();
+ob_end_clean();
 
 
 $eval = isset($eval)&&strlen($eval)>1?$eval:"";
+$response = isset($response)&&strlen($response)>1?$response:"";
 $request = array(
-	'header'    => $title,		//Header
-	'main'        => $innerHTML,		//innerHTML
-	'eval'         => $eval			//eVal
+	'header'     => $title,			//Header
+	'main'        => $main,			//innerHTML
+	'eval'         => $eval	,			//eval
+	'response' => $response		//response
 );
 
 $return = json_encode($request);
