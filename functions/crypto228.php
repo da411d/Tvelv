@@ -1,15 +1,19 @@
 <?php
 
-function _crypt($str, $key){
+function _crypt($str='', $key=''){
+	$secret = md5("Tiffany");
 	$encoded = bin2hex($str);
 	$encoded = str_split($encoded, 2);
-
-	$binkey = md5($key);
+	$newkey = md5($key);
+	for($i=0;$i<1000;$i++){
+		$newkey = $newkey.substr(md5($newkey.$i), 6, 1);
+	}
+	$key = $newkey;
+	$binkey = '';
 	for($i=0;$i<(count($encoded)/16)+1;$i++){
-		$binkey .= md5($key.$binkey);
+		$binkey .= md5($key.$binkey.$secret.md5($i));
 	}
 	$binkey = str_split($binkey, 2);
-
 	$returnment = '';
 	for ($i=0;$i<count($encoded);$i++){
 		$a = $encoded[$i];
@@ -25,35 +29,30 @@ function _crypt($str, $key){
 	$returnment = str_replace('/', '_', $returnment);
 	return $returnment;
 }
-
-function _decrypt($str, $key){
+function _decrypt($str='', $key=''){
+	$secret = md5("Tiffany");
 	$str = str_replace('-', '+', $str);
 	$str = str_replace('_', '/', $str);
 	$str = base64_decode($str);
 	$str = bin2hex($str);
 	$str = str_split($str, 2);
-
-	$binkey = md5($key);
+	$newkey = md5($key);
+	for($i=0;$i<1000;$i++){
+		$newkey = $newkey.substr(md5($newkey.$i), 6, 1);
+	}
+	$key = $newkey;
+	$binkey = '';
 	for($i=0;$i<(count($str)/16)+1;$i++){
-		$binkey .= md5($key.$binkey);
+		$binkey .= md5($key.$binkey.$secret.md5($i));
 	}
 	$binkey = str_split($binkey, 2);
-
 	$returnment = '';
 	for ($i=0;$i<count($str);$i++){
 		$a = $str[$i];
 		$returnment .= (
-			pack('H*', 
-				pack('H*', 
-					bin2hex($a)
-				)
-			)
+			pack('H*', $a)
 			^
-			pack('H*', 
-				pack('H*', 
-					bin2hex($binkey[$i])
-				)
-			)
+			pack('H*', $binkey[$i])
 		);
 	}
 	return $returnment;

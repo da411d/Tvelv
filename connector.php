@@ -8,6 +8,7 @@ if(isset($_GET["a"])){
 }else{
 	$param = '';
 }
+define('TOKEN', $_GET['y']);
 
 $param = trim($param, '/');
 $param = rtrim($param, '/');

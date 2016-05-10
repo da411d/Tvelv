@@ -40,21 +40,21 @@ function defaultLoader(e){
 
 function connect(t, f, p){
 	t = 'connector.php?'+t;
+	key = encodeURIComponent(localStorage.getItem("token")) || null;
 	if (t.match(/\?/)) {
-		t += '&z='+rand(1000000, 9999999);
+		t += '&y='+key+'&z='+rand(1000000, 9999999);
 	} else {
-		t += '?z='+rand(1000000, 9999999);
+		t += '?y='+key+'&z='+rand(1000000, 9999999);
 	}
 	var xhr = new XMLHttpRequest();
-	xhr.open(p?'POST':'GET', t, 1);
+	xhr.open('POST', t, 1);
 	xhr.send(p?p:null);
-	console.log(p?'POST':'GET', t, p?p:null);
 	xhr.onreadystatechange = f;
 }
 
 function submitForm(event){
 	var params = getFormResults(event.target);
-	connect(t, defaultLoader, params);
+	connect('a='+t, defaultLoader, params);
 }
 
 function loadData(data){

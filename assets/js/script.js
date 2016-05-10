@@ -113,7 +113,7 @@ function getFormResults(formElement) {
 				}
 				break;
 			default:
-				formParams.append(elem.name, setOrPush(formParams[elem.name], elem.value));
+				formParams.append(elem.name, elem.value);
 		}
 	}
 	return formParams;

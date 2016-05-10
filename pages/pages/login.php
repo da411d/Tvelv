@@ -1,7 +1,7 @@
 <?$title= 'Ти не ввійшов!';
 
 if(checkLogined()){
-	$eval = "window.location.hash='profile';";
+	$eval = "window.location.hash='profile;";
 }
 
 $login = isset($_POST[_crypt('login', $_POST['secretcode'])])?$_POST[_crypt('login', $_POST['secretcode'])]:false;
@@ -30,14 +30,12 @@ if(getAttempts($login)<=2){
 if($login AND $pwd AND (!$POST['login'] AND !$POST['password'])){
 	if(isPasswordCorrect($login, $pwd) AND $allow){
 		resetAttempts($login);
-		loginMe($login);
-		loginMe($login);
-		loginMe($login);
+		$token = loginMe($login);
 		$title = 'Зачекайте...';
 		if($_GET['_']){
-			$eval = "window.location.hash='".$_GET['_']."';";
+			$eval = "window.location.hash='".$_GET['_']."'; localStorage.setItem('token', '".$token."'); console.log('token', '".$token."')";
 		}else{
-			$eval = "window.location.hash='profile';";
+			$eval = "window.location.hash='profile'; localStorage.setItem('token', '".$token."'); console.log('token', '".$token."')";
 		}
 	}elseif($allow){
 		addAttemptsOne($login);

@@ -3,16 +3,16 @@
 function loginMe($login){
 	$cookiename = substr(_crypt(md5($_SERVER['REMOTE_ADDR'].$_SERVER['HTTP_USER_AGENT']).md5(date("Ym")), 'SECRET_PASS'), 0, 64);
 	$arr = ['a' => $login, 'c' => substr(sha1(getPasswordSalt($login)),0,8)];
-	$code = _crypt(json_encode($arr), $cookiename);
-	SetCookie($cookiename, $code, time() + (7 * 24 * 60 * 60), '/');
-	return true;
+	//$code = _crypt(json_encode($arr), $cookiename);
+	//SetCookie($cookiename, $code, time() + (7 * 24 * 60 * 60), '/');
+	return $code;
 }
 
 //Футкція повертає логін поточного користувача
 function getLoginedUsername(){
 	$cookiename = substr(_crypt(md5($_SERVER['REMOTE_ADDR'].$_SERVER['HTTP_USER_AGENT']).md5(date("Ym")), 'SECRET_PASS'), 0, 64);
-	$cookie = $_COOKIE[$cookiename];
-	$code = _decrypt($cookie, $cookiename);
+	//$cookie = $_COOKIE[$cookiename];
+	$code = _decrypt(TOKEN, $cookiename);
 	$code = json_decode($code, 1);
 	if($code['a'] AND $code['c']==substr(sha1(getPasswordSalt($code['a'])),0,8)){
 		return $code['a'];
@@ -24,8 +24,8 @@ function getLoginedUsername(){
 //Функція перевіряє, чи ще залогінений користувач
 function checkLogined(){
 	$cookiename = substr(_crypt(md5($_SERVER['REMOTE_ADDR'].$_SERVER['HTTP_USER_AGENT']).md5(date("Ym")), 'SECRET_PASS'), 0, 64);
-	$cookie = $_COOKIE[$cookiename];
-	$code = _decrypt($cookie, $cookiename);
+	//$cookie = $_COOKIE[$cookiename];
+	$code = _decrypt(TOKEN, $cookiename);
 	$code = json_decode($code, 1);
 	if($code['a'] AND $code['c']==substr(sha1(getPasswordSalt($code['a'])),0,8)){
 		return true;
@@ -40,9 +40,9 @@ function logOut(){
 
 	$arr = ['a' => false, 'c' => md5(mt_rand())];
 	$code = _crypt(json_encode($arr), $cookiename);
-	SetCookie($cookiename, $code, time() + (7 * 24 * 60 * 60), '/');
+	//SetCookie($cookiename, $code, time() + (7 * 24 * 60 * 60), '/');
 
-	return true;
+	return $code;
 }
 
 //Завершує всі сессії крім текучої
@@ -81,7 +81,7 @@ function isPasswordCorrect($login, $password){
 function registerUser($login, $password, $permission, $name, $secondname, $class){
 	$database = db_connect();
 	$password = toQwerty($password);
-	$salt = _crypt(sha1(mt_rand()), sha1(mt_rand()));
+	$salt = str_replace(array("/", "=", "+"), "", base64_encode(hex2bin(   sha1(rand()).sha1(rand()).sha1(rand()).sha1(rand()).sha1(rand()).sha1(rand())   )));
 
 	$dbineed='students';
 	switch ($permission) {
@@ -121,7 +121,7 @@ function editUserPassword($login, $password, $new){
 	$new = toQwerty($new);
 
 	if(toQwerty($password) == toQwerty(_decrypt($test[0][Password], $test[0][Salt]))){
-		$salt = _crypt(sha1(mt_rand()), sha1(mt_rand()));
+		$salt = str_replace(array("/", "=", "+"), "", base64_encode(hex2bin(   sha1(rand()).sha1(rand()).sha1(rand()).sha1(rand()).sha1(rand()).sha1(rand())   )));
 		return $database->update("users", [
 			"Password" => _crypt($new, $salt),
 			"Salt" => $salt
@@ -137,7 +137,7 @@ function reloadUserPassword($login){
 
 	$test = db_get("users", ["Login","Password","Salt"], ["Login[=]" => $login]);
 	$password =  toQwerty(_decrypt($test[0]["Password"], $test[0]["Salt"]));
-	$salt = _crypt(md5(mt_rand()).md5(mt_rand()).md5(mt_rand()).md5(mt_rand()), sha1(mt_rand()));
+	$salt = str_replace(array("/", "=", "+"), "", base64_encode(hex2bin(   sha1(rand()).sha1(rand()).sha1(rand()).sha1(rand()).sha1(rand()).sha1(rand())   )));
 
 	return $database->update("users", [
 		"Password" => _crypt($password, $salt),
