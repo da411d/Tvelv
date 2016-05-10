@@ -31,6 +31,8 @@ if($login AND $pwd AND (!$POST['login'] AND !$POST['password'])){
 	if(isPasswordCorrect($login, $pwd) AND $allow){
 		resetAttempts($login);
 		loginMe($login);
+		loginMe($login);
+		loginMe($login);
 		$title = 'Зачекайте...';
 		if($_GET['_']){
 			$eval = "window.location.hash='".$_GET['_']."';";

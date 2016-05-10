@@ -16,125 +16,83 @@ function onHashChange(){
 }
 
 function Load(){
-	t = parser(window.location, 'hash').replace('?','&');
+	t = window.location.hash.replace('?','&');
 	t = t.substring(1, t.length);
-	req = connect('a='+t);
-	if(req['header']){
-		document.getElementById('title').innerHTML = req['header'];
-		document.title = req['header'];
-	}
-	if(req['main']){
-		document.getElementById('main').innerHTML = req['main'];
-	}
-	if(req['eval']){
-		eval(req['eval']);
-	}
+	connect('a='+t, defaultLoader);
 }
-
-function eLoad(t){
-	req = connect(t);
-	if(req['header']){
-		document.getElementById('header').innerHTML = req['header'];
-		document.title = req['header'];
-	}
-	if(req['main']){
-		document.getElementById('main').innerHTML = req['main'];
-	}
-	if(req['eval']){
-		eval(req['eval']);
-	}
-}
-
-function connect(t){
-	u = 'connector.php?'+t;
-	if (u.match(/\?/)) {
-		u += '&z='+rand(1000000, 9999999);
-	} else {
-		u += '?z='+rand(1000000, 9999999);
-	}
-	html = ajax(u);
-	html = trim(explode('dG2Sp6rW', html)[0], explode('dG2Sp6rW', html)[1]);
-	html = html.replace('vI24mDj3', '=');
-	html = html.replace('vI24mDj3', '=');
-
-	html = YmFzZTY0.decode(html);
-	html = explode('=====', html)[1];
-	html = JSON.parse(html);
-	return html;
-}
-
-function parser(loc, param){
-	var parser = document.createElement('a');
-	parser.href = loc;
-	/*
-	parser.protocol; // => "http:"
-	parser.hostname; // => "example.com123"
-	parser.port;     // => "3000"
-	parser.pathname; // => "/pathname/"
-	parser.search;   // => "?search=test"
-	parser.hash;     // => "#hash"
-	parser.host;     // => "example.com:3000"
-	*/
-	return parser[param];
-}
-
-function ajax(t){
-	var xhr = new XMLHttpRequest();
-	xhr.open('GET', t, 0);
-	xhr.send();
+function defaultLoader(e){
+	xhr = e.target;
+	if (xhr.readyState != 4) return;
 	if (xhr.status != 200) {
-		console.error( xhr.status + ': ' + xhr.statusText );
+		console.log(xhr.status + ': ' + xhr.statusText);
 	} else {
-		return( xhr.responseText );
+		html = xhr.responseText;
+		html = trim(explode('dG2Sp6rW', html)[0], explode('dG2Sp6rW', html)[1]);
+		html = html.replace('vI24mDj3', '=');
+		html = html.replace('vI24mDj3', '=');
+
+		html = YmFzZTY0.decode(html);
+		html = explode('=====', html)[1];
+		html = JSON.parse(html);
+		loadData(html);
 	}
 }
 
-
-function ajaxPost(t, data){
-	var xhr = new XMLHttpRequest();
-	xhr.open('POST', t, 0);
-	xhr.send(data);
-	if (xhr.status != 200) {
-		console.error( xhr.status + ': ' + xhr.statusText );
+function connect(t, f, p){
+	t = 'connector.php?'+t;
+	if (t.match(/\?/)) {
+		t += '&z='+rand(1000000, 9999999);
 	} else {
-		return xhr.responseText;
+		t += '?z='+rand(1000000, 9999999);
 	}
+	var xhr = new XMLHttpRequest();
+	xhr.open(p?'POST':'GET', t, 1);
+	xhr.send(p?p:null);
+	console.log(p?'POST':'GET', t, p?p:null);
+	xhr.onreadystatechange = f;
 }
 
 function submitForm(event){
 	var params = getFormResults(event.target);
-	t = parser(window.location, 'hash').replace('?','&');
-	t = t.substring(1, t.length);
-	t = 'connector.php?a='+t;
-	if (t.match(/\?/)) {
-		t += '&z='+rand(1000000, 9999999);
-	}else{
-		t += '?z='+rand(1000000, 9999999);
-	}
-	ajaxPost(t, params);
+	connect(t, defaultLoader, params);
+}
 
-	html = trim(explode('dG2Sp6rW', html)[0], explode('dG2Sp6rW', html)[1]);
-	html = html.replace('vI24mDj3', '=');
-	html = html.replace('vI24mDj3', '=');
-
-	html = YmFzZTY0.decode(html);
-	html = explode('=====', html)[1];
-	html = JSON.parse(html);
-	return html;
-	req = connect('a='+t);
-	if(req['header']){
-		document.getElementById('title').innerHTML = req['header'];
-		document.title = req['header'];
+function loadData(data){
+	if(data['header']){
+		document.getElementById('title').innerHTML = data['header'];
+		document.title = data['header'];
 	}
-	if(req['main']){
-		document.getElementById('main').innerHTML = req['main'];
+	if(data['main']){
+		document.getElementById('main').innerHTML = data['main'];
 	}
-	if(req['eval']){
-		eval(req['eval']);
+	if(data['eval']){
+		eval(data['eval']);
 	}
 }
 
-var I = setInterval(function(){cl=connect('a=ajax&in=checkLogined').main;if(window.location.hash.indexOf('#login')!=0 && cl==0){window.location.hash = '#login?_='+window.location.pathname}else if(cl==1 && window.location.hash.indexOf('#login')==0){window.location.hash = $_GET('_')}}, 5000);
+var I = setInterval(function(){
+	connect('a=ajax&in=checkLogined', function(e){
+		xhr = e.target;
+		if (xhr.readyState != 4) return;
+		if (xhr.status != 200) {
+			console.log(xhr.status + ': ' + xhr.statusText);
+		} else {
+			cl = xhr.responseText;
+			cl = trim(explode('dG2Sp6rW', cl)[0], explode('dG2Sp6rW', cl)[1]);
+			cl = cl.replace('vI24mDj3', '=');
+			cl = cl.replace('vI24mDj3', '=');
+
+			cl = YmFzZTY0.decode(cl);
+			cl = explode('=====', cl)[1];
+			cl = JSON.parse(cl);
+			if(window.location.hash.indexOf('#login')!=0 && cl==0){
+				window.location.hash = '#login?_='+window.location.pathname;
+			}else if(cl==1 && window.location.hash.indexOf('#login')==0){
+				window.location.hash = $_GET('_');
+			}
+		}
+	});
+}, 5000);
 
 (function() {
 	document.addEventListener('submit', function(event) {
