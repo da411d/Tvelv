@@ -1,5 +1,5 @@
 <?$title= 'Ти не ввійшов!';
-
+$eval = 'document.getElementById(\'nav\').innerHTML = \'<a href="#login"> <img src="/assets/images/icons/login.svg" class="icon">Вхід</a>\';';
 if(checkLogined()){
 	$eval = "window.location.hash='profile;";
 }
@@ -33,9 +33,9 @@ if($login AND $pwd AND (!$POST['login'] AND !$POST['password'])){
 		$token = loginMe($login);
 		$title = 'Зачекайте...';
 		if($_GET['_']){
-			$eval = "window.location.hash='".$_GET['_']."'; localStorage.setItem('token', '".$token."');";
+			$eval = "window.location.hash='".$_GET['_']."'; localStorage.setItem('token', '".$token."');window.location.reload();";
 		}else{
-			$eval = "window.location.hash='profile'; localStorage.setItem('token', '".$token."');";
+			$eval = "window.location.hash='profile'; localStorage.setItem('token', '".$token."');window.location.reload();";
 		}
 	}elseif($allow){
 		addAttemptsOne($login);
@@ -60,14 +60,11 @@ echo $keyval;
 	<?
 		if(getAttempts($login)>2){
 			echo '<p>Ти ввійшов(-ла) невдало '.getAttempts($login).' разів. Тепер тобі треба ввести капчу.';
-			echo '<script src="http://'.SERVER_NAME.'/'.SITEDIR.'modules/'.$CaptchaName.'Captcha/api.js"></script>';
-			echo '<div id="'.$CaptchaName.'Captcha"><script type="text/javascript">'.$CaptchaName.'Captcha(\''.$CaptchaName.'Captcha\')</script></div></p>';
+			echo '<div id="'.$CaptchaName.'Captcha"></div></p>';
+			$eval .= $CaptchaName.'Captcha(\''.$CaptchaName.'Captcha\')';
 		}
 	?>
 	
 	<p><input type="submit"value="Ввійти!"></p>
 	<input type="hidden" name="ЩобСкучноНеБуло" value="<?=_crypt(sha1(getPasswordSalt($code['a'])).sha1(getPasswordSalt($code['a'])), '228626');?>">
 </form>
-<script>
-document.getElementById('nav').innerHTML = '<a href="/login"> <img src="/assets/images/icons/login.svg" class="icon">Вхід</a>';
-</script>
