@@ -9,7 +9,7 @@
 <head>
 	<?php
 		include dirname(__FILE__)."/_head.php";
-		echo "<title>".$title." | Tvelv</title>";
+		echo "<title>Зачекайте...</title>";
 	?>
 </head>
 <body id="body" onload="onLoad()" onhashchange="onHashChange()"

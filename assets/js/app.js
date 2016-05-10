@@ -111,10 +111,26 @@ var I = setInterval(function(){
 })();
 
 function loadStudents(e){
-	students = JSON.parse(connect("a=ajax&in=getStudentsByClass-"+e.value).main);
-	studentsHTML = '';
-	for(a in students){
-		studentsHTML += '<option value="'+students[a]['Login']+'">'+students[a]['SecondName']+' '+students[a]['Name']+'</option>'
+	connect("a=ajax&in=getStudentsByClass-"+e.value, function(e){
+	xhr = e.target;
+	if (xhr.readyState != 4) return;
+	if (xhr.status != 200) {
+		console.log(xhr.status + ': ' + xhr.statusText);
+	} else {
+		html = xhr.responseText;
+		html = trim(explode('dG2Sp6rW', html)[0], explode('dG2Sp6rW', html)[1]);
+		html = html.replace('vI24mDj3', '=');
+		html = html.replace('vI24mDj3', '=');
+
+		html = YmFzZTY0.decode(html);
+		html = explode('=====', html)[1];
+		students = JSON.parse(JSON.parse(html).main);
+		loadData(html);
+		studentsHTML = '';
+		for(a in students){
+			studentsHTML += '<option value="'+students[a]['Login']+'">'+students[a]['SecondName']+' '+students[a]['Name']+'</option>'
+		}
+		document.getElementsByName('student')[0].innerHTML = studentsHTML;
 	}
-	document.getElementsByName('student')[0].innerHTML = studentsHTML;
+});
 }
