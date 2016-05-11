@@ -84,7 +84,7 @@ function download(filename, text) {
 
 
 
-    function setOrPush(target, val) {
+function setOrPush(target, val) {
 	var result = val;
 	if (target) {
 		result = [target];

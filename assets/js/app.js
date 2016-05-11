@@ -91,9 +91,9 @@ var I = setInterval(function(){
 
 			cl = YmFzZTY0.decode(cl);
 			cl = explode('=====', cl)[1];
-			cl = JSON.parse(cl);
+			cl = JSON.parse(cl).main;
 			if(window.location.hash.indexOf('#login')!=0 && cl==0){
-				window.location.hash = '#login?_='+window.location.pathname;
+				window.location.hash = '#login?_='+window.location.hash;
 			}else if(cl==1 && window.location.hash.indexOf('#login')==0){
 				window.location.hash = $_GET('_');
 			}

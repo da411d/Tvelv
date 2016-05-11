@@ -48,7 +48,7 @@ function logOut(){
 //Завершує всі сессії крім текучої
 function leaveAllSessions($login){
 	reloadUserPassword($login);
-	loginMe($login);
+	return loginMe($login);
 }
 
 //Повертає сіль пароля
