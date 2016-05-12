@@ -1,6 +1,6 @@
 <?$title="Журнал";?>
 <?$eval = "
-	var elements = document.getElementsByClassName('ms-wpContentDivSpace');
+	var elements = document.getElementsByClassName('doublescrollbar');
 	for (var i = 0; i < elements.length; i++) {
 		DoubleScroll(elements[i]);
 	}";
@@ -34,7 +34,7 @@ function mj_getdate($d){
 }
 ?>
 <a onclick="window.location.hash = (window.location.hash+'?').substring(0, (window.location.hash+'?').indexOf('?'))" class="btn" style="width:auto;padding:8px;background:#004184"><img src="/assets/images/icons/keyboard-backspace.svg" class="icon">Назад</a>
-<div class="ms-wpContentDivSpace">
+<div class="doublescrollbar">
 <table border=1>
 	<tr>
 		<td>№</td>

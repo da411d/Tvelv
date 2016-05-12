@@ -128,7 +128,7 @@ function DoubleScroll(element) {
 	scrollbar.firstChild.style.width = element.scrollWidth + 'px';
 	scrollbar.firstChild.style.height = '1px';
 	scrollbar.firstChild.appendChild(document.createTextNode('\xA0'));
-	scrollbar.className = 'myscroll';
+	scrollbar.className = 'doublescrollbarhelper';
 
 	scrollbar.onscroll = function() {
 		element.scrollLeft = scrollbar.scrollLeft;
@@ -144,4 +144,12 @@ function DoubleScroll(element) {
 		scrollbar.firstChild.style.width = element.scrollWidth + 'px';
 	};
 	element.parentNode.insertBefore(scrollbar, element);
+}
+
+function onChange(e){
+	document.getElementById('params').submit();
+}
+function clearMe(e){
+	document.getElementsByName(e.id)[0].value = "";
+	onChange(document.getElementsByName(e.id)[0]);
 }

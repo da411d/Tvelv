@@ -1,23 +1,14 @@
 <?$title="Лістинг";?>
 <?$eval = "
-	var elements = document.getElementsByClassName('ms-wpContentDivSpace');
+	var elements = document.getElementsByClassName('doublescrollbar');
 	for (var i = 0; i < elements.length; i++) {
 		DoubleScroll(elements[i]);
 	}";
 ?>
 <link rel="stylesheet" type="text/css" href="http://tvelv/assets/css/style.css?f=viewmarks" async="async">
-<script>
-	function onChange(e){
-		document.getElementById('params').submit();
-	}
-	function clearMe(e){
-		document.getElementsByName(e.id)[0].value = "";
-		onChange(document.getElementsByName(e.id)[0]);
-	}
-</script>
 
-			<a href="?#" class="btn" style="width:auto;padding:8px;background:#004184"><img src="/assets/images/icons/filter-remove.svg" class="icon">Очистити всі фільтри</a>
-<div class="ms-wpContentDivSpace">
+<a href="?#" class="btn" style="width:auto;padding:8px;background:#004184"><img src="/assets/images/icons/filter-remove.svg" class="icon">Очистити всі фільтри</a>
+<div class="doublescrollbar">
 <table>
 	<form method="get" id="params">
 		<tr>
