@@ -20,7 +20,7 @@ $cnt = isTeacher()?3:2;
 </div>
 <div class="card cw<?=$cnt;?>" onmousedown="CClick(this, event)">
 	<div class="img-placeholder">
-		<img src="/assets/images/12.png">
+		<img src="/assets/images/journal.jpg">
 	</div>
 	<a class="link" href="/#marks/journal">Журнал</a>
 	Тут оцінки як в журналі
