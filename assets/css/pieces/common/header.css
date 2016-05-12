@@ -10,13 +10,6 @@
 	background-repeat: no-repeat;
 	min-height: 256px;
 }
-#load,
-#onscroll {
-	position: fixed;
-	opacity: 0.001;
-	top: -46.5px;
-	visibility: hidden;
-}
 
 #loader {
 	top:0px;

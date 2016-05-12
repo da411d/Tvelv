@@ -12,29 +12,12 @@
 		echo "<title>Зачекайте...</title>";
 	?>
 </head>
-<body id="body" onload="Load()" onhashchange="Load()"
-	onbeforeunload="
-		document.getElementById('onscroll').checked='true';
-		document.getElementById('load').checked='true';
-	"  
-	onscroll="
-		if(document.getElementById('onscroll')){
-			if(getScrollTop()<48){
-				document.getElementById('onscroll').checked='true'
-			}else{
-				document.getElementById('onscroll').checked=false
-			}
-		}
-	"
->
-<input type="checkbox" id="load">
-<input type="checkbox" id="onscroll" checked="true">
+<body id="body" onload="Load()" onhashchange="Load()">
 <div class="bg_wrapper"></div>
 	<?php 
 		include dirname(__FILE__)."/_header.php";
 	?>
 	<div class="main" id="main" style="opacity:0">
 		<noscript><meta http-equiv="refresh" content="0; url=http://<?=SERVER_NAME;?>/badbrowser"></noscript>
-		<script>setTimeout(function(){if(document.getElementById('load')){document.getElementById('load').checked=''}},250);</script>
 	</div>
 </body>

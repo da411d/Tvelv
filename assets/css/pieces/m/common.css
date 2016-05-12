@@ -1,7 +1,2 @@
 .main img.fl_l{float:none;}
 .main img.fl_r{float:none;}
-
-#onscroll:checked ~.share-wrapper{
-	margin-top: -48px!important;
-	position:static!important;
-}

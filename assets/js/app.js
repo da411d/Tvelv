@@ -94,12 +94,13 @@ loader = {
 					}
 					var sct = setInterval(function(){if(!getScrollTop())clearInterval(sct);setScrollTop(getScrollTop()-5)}, 1);
 		})()
+		document.getElementsByClassName('header')[0].style.marginTop = "50px";
 		document.getElementById('loader').className='';
 	},
 	end: function(){
 		document.getElementById('main').style.opacity = 1;
 		document.body.style.overflow = '';
-		document.getElementsByClassName('bg_wrapper')[0].style.height = "";
+		document.getElementsByClassName('header')[0].style.marginTop = "";
 		setTimeout(function(){
 			document.getElementById('loader').className='hidden';
 		}, 500);}
