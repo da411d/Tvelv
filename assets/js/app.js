@@ -1,25 +1,8 @@
-function commonLoad(){
+function Load(){
 	document.title = 'Завантаження';
-	Load();
-	
-}
-
-loader = {
-	start: function(){document.getElementById('loader').className='';},
-	end: function(){setTimeout(function(){document.getElementById('loader').className='hidden';}, 500);}
-};
-function onLoad(){
 	if(!window.location.hash){
 		window.location.hash='#profile';
 	}
-	commonLoad();
-}
-
-function onHashChange(){
-	commonLoad();
-}
-
-function Load(){
 	loader.start();
 	t = window.location.hash.replace('?','&');
 	t = t.substring(1, t.length);
@@ -100,6 +83,27 @@ var I = setInterval(function(){
 		}
 	});
 }, 5000);
+
+loader = {
+	start: function(){
+		document.getElementById('main').style.opacity = 0;
+		document.body.style.overflow = 'hidden';
+				(function(){
+					if(getScrollTop()>300){
+						setScrollTop(300);
+					}
+					var sct = setInterval(function(){if(!getScrollTop())clearInterval(sct);setScrollTop(getScrollTop()-5)}, 1);
+		})()
+		document.getElementById('loader').className='';
+	},
+	end: function(){
+		document.getElementById('main').style.opacity = 1;
+		document.body.style.overflow = '';
+		document.getElementsByClassName('bg_wrapper')[0].style.height = "";
+		setTimeout(function(){
+			document.getElementById('loader').className='hidden';
+		}, 500);}
+};
 
 (function() {
 	document.addEventListener('submit', function(event) {

@@ -15,25 +15,7 @@ foreach($all_marks as $a){
 		$dates[] = $a["Date"];
 	}
 }
-
-/*foreach ($dates as $d){
-	echo "-----$d-----";
-	foreach($students as $s){
-		print_r(
-			db_get(
-				"marks", 
-				["Date", "Time", "LastEdit", "Subject",  "Student", "Teacher", "Mark", "Info"], 
-				["AND" => 
-					["Date[=]"=>$d, "Student[=]"=>$s["Login"]]
-				]
-			)
-		);
-	}
-		echo "\r\n\r\n\r\n\r\n\r\n";
-}
-*/
 ?>
-
 
 <table border=1>
 	<tr>
@@ -58,7 +40,16 @@ foreach($all_marks as $a){
 						["Date[=]"=>$d, "Student[=]"=>$s["Login"]]
 					]
 				);
-			echo $m[0]["Mark"];
+			if(count($m)==1){
+				echo $m[0]["Mark"];
+			}else{
+				$ms = '';
+				foreach($m as $mm){
+					$ms .= $mm["Mark"].", ";
+				}
+				$ms = rtrim($ms, ", ");
+				echo $ms;
+			}
 			echo "</td>";
 		}
 		echo "</tr>";

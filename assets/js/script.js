@@ -118,3 +118,27 @@ function getFormResults(formElement) {
 	}
 	return formParams;
 }
+
+function DoubleScroll(element) {
+	var scrollbar = document.createElement('div');
+	scrollbar.appendChild(document.createElement('div'));
+	scrollbar.style.overflow = 'auto';
+	scrollbar.style.overflowY = 'hidden';
+	scrollbar.style.width = '100%';
+	scrollbar.firstChild.style.width = element.scrollWidth + 'px';
+	scrollbar.firstChild.style.paddingTop = '1px';
+	scrollbar.firstChild.style.height = '1px';
+	scrollbar.firstChild.appendChild(document.createTextNode('\xA0'));
+	scrollbar.className = 'myscroll';
+
+	scrollbar.onscroll = function() {
+		element.scrollLeft = scrollbar.scrollLeft;
+	};
+
+	element.onscroll = function() {
+		scrollbar.scrollLeft = element.scrollLeft;
+	};
+
+	if (element.clientWidth < element.scrollWidth)
+		element.parentNode.insertBefore(scrollbar, element);
+}
