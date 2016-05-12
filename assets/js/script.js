@@ -179,6 +179,12 @@ function DoubleScroll(element) {
 		scrollbar.firstChild.style.width = element.scrollWidth + 'px';
 		scrollbar2.firstChild.style.width = element.scrollWidth + 'px';
 	}, 2000);
+	setTimeout(function(){
+		element.scrollLeft = scrollbar.scrollLeft;
+		element.scrollLeft = scrollbar2.scrollLeft;
+		scrollbar.firstChild.style.width = element.scrollWidth + 'px';
+		scrollbar2.firstChild.style.width = element.scrollWidth + 'px';
+	}, 500);
 
 	element.parentNode.insertBefore(scrollbar, element);
 	element.parentNode.insertBefore(scrollbar2, element);

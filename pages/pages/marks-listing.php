@@ -7,20 +7,20 @@
 ?>
 <link rel="stylesheet" type="text/css" href="http://tvelv/assets/css/style.css?f=viewmarks" async="async">
 
-<a href="?#" class="btn" style="width:auto;padding:8px;background:#004184"><img src="/assets/images/icons/filter-remove.svg" class="icon">Очистити всі фільтри</a>
+<a onclick="window.location.hash = (window.location.hash+'?').substring(0, (window.location.hash+'?').indexOf('?'))" class="btn" style="width:auto;padding:8px;background:#004184"><img src="/assets/images/icons/filter-remove.svg" class="icon">Очистити всі фільтри</a>
 <div class="doublescrollbar">
 <table>
-	<form method="get" id="params">
+	<form method="get" name="params" id="params">
 		<tr>
 			<th>Дата
-				<a onclick="clearMe(this)" id="date"><img src="/assets/images/icons/close-circle.svg" class="icon" alt="Очистити фільтр"></a>
+				<a onclick="document.getElementsByName(this.id)[0].value='';" id="date"><img src="/assets/images/icons/close-circle.svg" class="icon" alt="Очистити фільтр"></a>
 				<br>
-				<input type="date" name="date"onblur="onChange(this)" value="<?if($_GET['date'])echo $_GET['date'];else echo"Дата";?>" required>
+				<input type="date" name="date" onchange="document.forms['params'].submit()" value="<?if($_GET['date'])echo $_GET['date'];else echo"Дата";?>" required>
 			</th>
 			<th>Предмет
-				<a onclick="clearMe(this)" id="subject"><img src="/assets/images/icons/close-circle.svg" class="icon" alt="Очистити фільтр"></a>
+				<a onclick="document.getElementsByName(this.id)[0].value='';" id="subject"><img src="/assets/images/icons/close-circle.svg" class="icon" alt="Очистити фільтр"></a>
 				<br>
-				<select size="1" name="subject" onchange="onChange(this)">
+				<select size="1" name="subject" onchange="document.forms['params'].submit()">
 				<?
 					$arr = getAllSubjects();
 					usort($arr, function($a, $b){return strnatcmp($a['SubjectCaption'], $b['SubjectCaption']);});
@@ -38,9 +38,9 @@
 				</select>
 			</th>
 			<th>Група
-				<a onclick="clearMe(this)" id="class"><img src="/assets/images/icons/close-circle.svg" class="icon" alt="Очистити фільтр"></a>
+				<a onclick="document.getElementsByName(this.id)[0].value='';" id="class"><img src="/assets/images/icons/close-circle.svg" class="icon" alt="Очистити фільтр"></a>
 				<br>
-				<select size="1" name="class" onchange="onChange(this)" value="<?=$_GET['class'];?>">
+				<select size="1" name="class" onchange="document.forms['params'].submit()" value="<?=$_GET['class'];?>">
 					<?php
 					$arr = getAllClasses();
 					if($_GET['class'] AND $_GET['class']!=''){
@@ -56,9 +56,9 @@
 				</select>
 			</th>
 			<th>Ліцеїст
-				<a onclick="clearMe(this)" id="student"><img src="/assets/images/icons/close-circle.svg" class="icon" alt="Очистити фільтр"></a>
+				<a onclick="document.getElementsByName(this.id)[0].value='';" id="student"><img src="/assets/images/icons/close-circle.svg" class="icon" alt="Очистити фільтр"></a>
 				<br>
-				<select size="1" name="student" onchange="onChange(this)">
+				<select size="1" name="student" onchange="document.forms['params'].submit()">
 				<?
 					if($_GET['class']){
 						$arr = getUsersByClass($_GET['class']);
@@ -81,9 +81,9 @@
 			</th>
 
 			<th>Вчитель
-				<a onclick="clearMe(this)" id="teacher"><img src="/assets/images/icons/close-circle.svg" class="icon" alt="Очистити фільтр"></a>
+				<a onclick="document.getElementsByName(this.id)[0].value='';" id="teacher"><img src="/assets/images/icons/close-circle.svg" class="icon" alt="Очистити фільтр"></a>
 				<br>
-				<select size="1" name="teacher" onchange="onChange(this)">
+				<select size="1" name="teacher" onchange="document.forms['params'].submit()">
 				<?
 					$arr = getUserByList('teacher');
 					usort($arr, function($a, $b){return strnatcmp($a['SecondName'], $b['SecondName']);});
@@ -102,9 +102,9 @@
 			</th>
 
 			<th>Оцінка
-				<a onclick="clearMe(this)" id="mark"><img src="/assets/images/icons/close-circle.svg" class="icon" alt="Очистити фільтр"></a>
+				<a onclick="document.getElementsByName(this.id)[0].value='';" id="mark"><img src="/assets/images/icons/close-circle.svg" class="icon" alt="Очистити фільтр"></a>
 				<br>
-				<input  type="number" name="mark" size="2" max="13" min="1"onchange="this.style.background=['#CB2237', '#DC3338', '#EA4438', '#F25437', '#E46538', '#D37738', '#C58837', '#B59936', '#A7AC38', '#97BA38', '#88CC37', '#7ADC37', '#7ADC37'][parseInt(this.value)-1]" onblur="onChange(this)" style="color:#fafafa;background:<?
+				<input  type="number" name="mark" size="2" max="13" min="1"onchange="this.style.background=['#CB2237', '#DC3338', '#EA4438', '#F25437', '#E46538', '#D37738', '#C58837', '#B59936', '#A7AC38', '#97BA38', '#88CC37', '#7ADC37', '#7ADC37'][parseInt(this.value)-1];document.forms['params'].submit()" style="color:#fafafa;background:<?
 				if($_GET['mark']){
 					$arr = ['#CB2237', '#DC3338', '#EA4438', '#F25437', '#E46538', '#D37738', '#C58837', '#B59936', '#A7AC38', '#97BA38', '#88CC37', '#7ADC37', '#7ADC37'];
 					echo $arr[$_GET['mark']];}else{echo "#7ADC37";}
