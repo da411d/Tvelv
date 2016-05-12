@@ -46,24 +46,23 @@ if($feature){
 
 	include(dirname(__FILE__).$feature."/style.css");
 
-	echo "@media (max-width: _reticle_mobilecomp_barrier_){";
+	echo "@media(max-width: _reticle_mobilecomp_barrier_){";
 		include(dirname(__FILE__).$feature."/style-mob.css");
 	echo "}";
 
-	echo "@media (min-width: _reticle_mobilecomp_barrier_){";
+	echo "@media(min-width: _reticle_mobilecomp_barrier_){";
 		include(dirname(__FILE__).$feature."/style-pc.css");
 	echo "}";
 }else{
 	include(dirname(__FILE__)."/_settings.php");
 
-	include(dirname(__FILE__)."/pieces/patch.css");
 	include(dirname(__FILE__)."/pieces/common/index.php");
 
-	echo "@media (max-width: _reticle_mobilecomp_barrier_){";
+	echo "@media(max-width: _reticle_mobilecomp_barrier_){";
 		include(dirname(__FILE__)."/pieces/m/index.php");
 	echo "}";
 
-	echo "@media (min-width: _reticle_mobilecomp_barrier_){";
+	echo "@media(min-width: _reticle_mobilecomp_barrier_){";
 		include(dirname(__FILE__)."/pieces/pc/index.php");
 	echo "}";
 

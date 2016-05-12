@@ -27,7 +27,6 @@ body * {
 	font-weight: _theme_font_weight_;
 	font-size: _theme_font_size_;
 	outline: none;
-	white-space: nowrap;
 }
 
 .icon{

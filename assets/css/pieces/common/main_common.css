@@ -20,15 +20,36 @@
 	border-color: transparent;
 	background: #047DFC;
 	color: #ffffff;
+	white-space: nowrap;
 }
-
-.main table,
+table *{
+	white-space: nowrap;
+}
 .main table tr,
 .main table td,
 .main table th {
 	padding: 4px;
-	border:1px #047DFC;
 }
+tr{
+	background-color: #047DFC;
+}
+tr td{
+	border:1px solid #74B8FF;
+}
+
+tr:nth-child(2n){
+	background-color: #74B8FF;
+}
+tr:nth-child(2n) td{
+	border:1px solid #047DFC;
+}
+@media all and (max-width:1400px) {
+	.ms-wpContentDivSpace {
+		width: 100%;
+		overflow-x: auto;
+	}
+}
+
 
 .right_block{
 	display: block;

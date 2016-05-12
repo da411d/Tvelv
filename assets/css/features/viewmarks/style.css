@@ -1,0 +1,16 @@
+input, textarea, select{
+	padding:4px;
+	border:0px solid transparent;
+	background:#fafafa;
+	border-radius:0px;
+}
+
+label{
+	font-size:120%;
+	width:80%;
+}
+input, textarea,select {
+	font-size: 80%!important;
+}
+
+table tr, table th{max-width:20%;}

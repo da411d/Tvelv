@@ -12,18 +12,6 @@
 	font-size: 83%;
 }
 
-@media (max-width: _reticle_tinyscreen_barier_) {
-	.main table * {
-		display: none;
-		font-size:0px;
-	}
-	.main table::before {
-		content: 'Таблиця не доступна на таких маленьких екранах.';
-		display: block;	
-		font-size:16px!important;
-		padding: 8px;
-	}
-}
 
 .main menu a,
 .main .btn{
