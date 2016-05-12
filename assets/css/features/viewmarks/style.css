@@ -4,7 +4,9 @@ input, textarea, select{
 	background:#fafafa;
 	border-radius:0px;
 }
-
+.main{
+	background:#047DFC;
+}
 label{
 	font-size:120%;
 	width:80%;
