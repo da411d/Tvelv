@@ -11,11 +11,11 @@
 			</select>
 			<select size="1" id="subject">
 			<?
-				$arr = getSubjectPermission();
+				$arr = getAllSubjects();
 				echo '';
 				foreach($arr as $a){
 					$selected = $subject&&$a['SubjectName']==$subject?"selected":"";
-					echo '<option value="'.$a.'" '.$selected.'>'.getSubjectName($a).'</option>';
+					echo '<option value="'.$a['SubjectName'].'" '.$selected.'>'.$a['SubjectCaption'].'</option>';
 				}
 				echo '</select>';
 			?>

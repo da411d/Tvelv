@@ -16,13 +16,9 @@
 	}
 </script>
 
+			<a href="?#" class="btn" style="width:auto;padding:8px;background:#004184"><img src="/assets/images/icons/filter-remove.svg" class="icon">Очистити всі фільтри</a>
 <div class="ms-wpContentDivSpace">
 <table>
-	<tr>
-		<td colspan="7">
-			<a href="?#" class="btn" style="width:auto;padding:8px;background:#004184"><img src="/assets/images/icons/filter-remove.svg" class="icon">Очистити всі фільтри</a>
-		</td>
-	</tr>
 	<form method="get" id="params">
 		<tr>
 			<th>Дата
