@@ -46,7 +46,13 @@ tr:nth-child(2n) td{
 	width: 100%;
 	overflow-x: auto;
 }
-
+.doublescrollbarhelper.fixed{
+	position:fixed;
+	top:0px;
+	left:0px;
+	width:100%;
+	z-index:1000;
+}
 
 .right_block{
 	display: block;

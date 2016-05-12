@@ -1,14 +1,19 @@
 .main {
 	padding: 64px;
 	width: 90%;
-	width: calc(90% - 128px);
-	margin-left:5%;
+	width: calc(100% - 256px);
+	margin-left:64px;
 	margin-bottom: 16px;
 	display: block;
 
 	background:#ffffff;
 	border-radius:4px;
 	box-shadow: 0 0 16px rgba(0, 0, 0, 0.7);
+}
+
+.doublescrollbarhelper.fixed{
+	left:64px;
+	width:100%;
 }
 
 .main table {
