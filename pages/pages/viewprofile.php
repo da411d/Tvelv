@@ -92,5 +92,5 @@ if(isTeacher() AND !isTeacher($login)){
 
 <?
 }
-include "profile-getMarkslist.php";
+include "profile_getMarkslist.php";
 echo $MarksBlock;
