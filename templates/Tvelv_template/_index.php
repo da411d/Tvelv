@@ -33,7 +33,7 @@
 	<?php 
 		include dirname(__FILE__)."/_header.php";
 	?>
-	<div class="main" id="main">
+	<div class="main" id="main" style="opacity:0">
 		<noscript><meta http-equiv="refresh" content="0; url=http://<?=SERVER_NAME;?>/badbrowser"></noscript>
 		<script>setTimeout(function(){if(document.getElementById('load')){document.getElementById('load').checked=''}},250);</script>
 	</div>
