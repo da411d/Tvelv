@@ -1,30 +1,11 @@
 <?$title="Лістинг";?>
-<style>
-	body{font-size:16px;}
-	.main{width:90%;padding:0px;}
-	table{width: 100%;border-collapse:collapse;background:#3F9DFF;font-size:83%;}
-	table, table tr, table td, table th{border: 2px solid;}
-	table tr, table td, table th{max-width:20%;}
-	@media (max-width: 480px){
-		table *{display:none;}
-		table::before{content:'Таблиця не доступна на таких маленьких екранах.';display:block;padding:8px;}
-	}
-	
-	tr:nth-child(2n) {
-		background-color: #74B8FF;
-		border-color: #047DFC;
-	}
-	input, textarea, select{
-		padding:4px;
-		border:0px solid transparent;
-		background:#fafafa;
-		border-radius:0px;
-	}
-	label{font-size:120%;width:80%;}
-	input, textarea,select {
-		font-size: 80%!important;
-	}
-</style>
+<?$eval = "
+	var elements = document.getElementsByClassName('ms-wpContentDivSpace');
+	for (var i = 0; i < elements.length; i++) {
+		DoubleScroll(elements[i]);
+	}";
+?>
+<link rel="stylesheet" type="text/css" href="http://tvelv/assets/css/style.css?f=viewmarks" async="async">
 <script>
 	function onChange(e){
 		document.getElementById('params').submit();
@@ -35,6 +16,7 @@
 	}
 </script>
 
+<div class="ms-wpContentDivSpace">
 <table>
 	<tr>
 		<td colspan="7">
@@ -181,3 +163,4 @@
 		</th>
 	</tr>
 </table>
+</div>
