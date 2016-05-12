@@ -126,19 +126,22 @@ function DoubleScroll(element) {
 	scrollbar.style.overflowY = 'hidden';
 	scrollbar.style.width = '100%';
 	scrollbar.firstChild.style.width = element.scrollWidth + 'px';
-	scrollbar.firstChild.style.paddingTop = '1px';
 	scrollbar.firstChild.style.height = '1px';
 	scrollbar.firstChild.appendChild(document.createTextNode('\xA0'));
 	scrollbar.className = 'myscroll';
 
 	scrollbar.onscroll = function() {
 		element.scrollLeft = scrollbar.scrollLeft;
+		scrollbar.firstChild.style.width = element.scrollWidth + 'px';
 	};
+	scrinterval = setInterval(function(){
+		element.scrollLeft = scrollbar.scrollLeft;
+		scrollbar.firstChild.style.width = element.scrollWidth + 'px';
+	}, 2000);
 
 	element.onscroll = function() {
 		scrollbar.scrollLeft = element.scrollLeft;
+		scrollbar.firstChild.style.width = element.scrollWidth + 'px';
 	};
-
-	if (element.clientWidth < element.scrollWidth)
-		element.parentNode.insertBefore(scrollbar, element);
+	element.parentNode.insertBefore(scrollbar, element);
 }
