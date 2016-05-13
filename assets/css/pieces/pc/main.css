@@ -13,7 +13,8 @@
 
 .doublescrollbarhelper.fixed{
 	left:64px;
-	width:100%;
+	width:90%;
+	width: calc(100% - 128px);
 }
 
 .main table {

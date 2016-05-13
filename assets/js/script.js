@@ -131,39 +131,40 @@ function DoubleScroll(element) {
 	scrollbar.className = 'doublescrollbarhelper';
 	scrollbar.id = 'doublescrollbarhelper';
 
-
 	var scrollbar2 = document.createElement('div');
 	scrollbar2.appendChild(document.createElement('div'));
 	scrollbar2.style.overflow = 'auto';
 	scrollbar2.style.overflowY = 'hidden';
-	scrollbar2.style.width = '100%';
 	scrollbar2.firstChild.style.width = element.scrollWidth + 'px';
 	scrollbar2.firstChild.style.height = '0px';
 	scrollbar2.firstChild.appendChild(document.createTextNode('\xA0'));
 	scrollbar2.className = 'doublescrollbarhelper fixed';
 	scrollbar2.style.display = 'none';
-	scrollbar2.className = 'doublescrollbarhelper scrollbarfx';
+	scrollbar2.className = 'doublescrollbarhelper scrollbarfx fixed';
 	scrollbar2.id = 'scrollbarfx';
 
 	scroll = function() {
-		if(document.getElementById('doublescrollbarhelper').getBoundingClientRect().top < 1){
-			document.getElementById('scrollbarfx').classList.add('fixed');
-			document.getElementById('scrollbarfx').style.display = "";
-			document.getElementById('scrollbarfx').style.width = document.getElementById('doublescrollbarhelper').getBoundingClientRect().width+"px";
-		}else{
-			document.getElementById('scrollbarfx').classList.remove('fixed');
-			document.getElementById('scrollbarfx').style.display = "none";
+		if (scrollbar.getBoundingClientRect().top < 1 && element.getBoundingClientRect().bottom > 18) {
+			scrollbar2.style.display = "";
+		} else {
+			scrollbar2.style.display = "none";
 		}
+		scrollbar.scrollLeft = element.scrollLeft;
+		scrollbar2.scrollLeft = element.scrollLeft;
+		scrollbar.firstChild.style.width = element.scrollWidth + 'px';
+		scrollbar2.firstChild.style.width = element.scrollWidth + 'px';
 	}
 	document.addEventListener("scroll", scroll);
 
 	scrollbar.onscroll = function() {
 		element.scrollLeft = scrollbar.scrollLeft;
+		scrollbar2.scrollLeft = element.scrollLeft;
 		scrollbar.firstChild.style.width = element.scrollWidth + 'px';
 		scrollbar2.firstChild.style.width = element.scrollWidth + 'px';
 	};
 	scrollbar2.onscroll = function() {
 		element.scrollLeft = scrollbar2.scrollLeft;
+		scrollbar.scrollLeft = element.scrollLeft;
 		scrollbar.firstChild.style.width = element.scrollWidth + 'px';
 		scrollbar2.firstChild.style.width = element.scrollWidth + 'px';
 	};
@@ -173,13 +174,7 @@ function DoubleScroll(element) {
 		scrollbar.firstChild.style.width = element.scrollWidth + 'px';
 		scrollbar2.firstChild.style.width = element.scrollWidth + 'px';
 	};
-	scrinterval = setInterval(function(){
-		element.scrollLeft = scrollbar.scrollLeft;
-		element.scrollLeft = scrollbar2.scrollLeft;
-		scrollbar.firstChild.style.width = element.scrollWidth + 'px';
-		scrollbar2.firstChild.style.width = element.scrollWidth + 'px';
-	}, 2000);
-	clearscrollbar = function(){
+	clearscrollbar = function() {
 		element.scrollLeft = scrollbar.scrollLeft;
 		element.scrollLeft = scrollbar2.scrollLeft;
 		scrollbar.firstChild.style.width = element.scrollWidth + 'px';
