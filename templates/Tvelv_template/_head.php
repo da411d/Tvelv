@@ -10,8 +10,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1, user-scalable=no"><meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="HandheldFriendly" content="True">
 <script type="text/javascript" src="http://<?=SERVER_NAME;?>/<?=SITEDIR;?>assets/js/script.js"></script>
-<script type="text/javascript" src="http://<?=SERVER_NAME;?>/<?=SITEDIR;?>modules/StrangeCaptcha/api.js"></script>
-<script type="text/javascript" src="http://<?=SERVER_NAME;?>/<?=SITEDIR;?>modules/RexCaptcha/api.js"></script>
+<script type="text/javascript" src="http://<?=SERVER_NAME;?>/<?=SITEDIR;?>modules/VictoriaCaptcha/api.js"></script>
 <script>
 function ImportFont(e){style=document.createElement("style"),style.innerHTML='@import "'+e+'";',document.head.appendChild(style)}
 ImportFont('http://<?=SERVER_NAME;?>/<?=SITEDIR;?>assets/fonts/lato.css');

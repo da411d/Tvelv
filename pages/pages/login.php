@@ -7,12 +7,7 @@ if(checkLogined()){
 $login = isset($_POST[_crypt('login', $_POST['secretcode'])])?$_POST[_crypt('login', $_POST['secretcode'])]:false;
 $pwd = isset($_POST[_crypt('pass', $_POST['secretcode'])])?$_POST[_crypt('pass', $_POST['secretcode'])]:false;
 
-if(getAttempts($login)<=7){
-	$CaptchaName = 'Rex';
-}else{
-	$CaptchaName = 'Strange';
-}
-$captcha_url = "http://".SERVER_NAME.'/'.SITEDIR."modules/".$CaptchaName."Captcha/tester.php?ip=".$_SERVER['REMOTE_ADDR']."&r=".$_POST[$CaptchaName."CaptchaRequest"];
+$captcha_url = "http://".SERVER_NAME.'/'.SITEDIR."modules/VictoriaCaptcha/tester.php?ip=".$_SERVER['REMOTE_ADDR']."&r=".$_POST["VictoriaCaptchaRequest"];
 function checkCaptcha($captcha_url){
 	if(file_get_contents($captcha_url)=="true"){return true;}return false;
 }
@@ -60,8 +55,8 @@ echo $keyval;
 	<?
 		if(getAttempts($login)>2){
 			echo '<p>Ти ввійшов(-ла) невдало '.getAttempts($login).' разів. Тепер тобі треба ввести капчу.';
-			echo '<div id="'.$CaptchaName.'Captcha"></div></p>';
-			$eval .= $CaptchaName.'Captcha(\''.$CaptchaName.'Captcha\')';
+			echo '<div id="VictoriaCaptcha"></div></p>';
+			$eval .= 'VictoriaCaptcha(\'VictoriaCaptcha\')';
 		}
 	?>
 	
