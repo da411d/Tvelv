@@ -87,6 +87,8 @@ var I = setInterval(function(){
 loader = {
 	start: function(){
 		document.getElementById('main').style.opacity = 0;
+		document.getElementById('main').style.marginTop = "50vh";
+		document.getElementById('header').style.height = "50vh";
 		document.body.style.overflow = 'hidden';
 				(function(){
 					if(getScrollTop()>300){
@@ -99,6 +101,8 @@ loader = {
 	},
 	end: function(){
 		document.getElementById('main').style.opacity = 1;
+		document.getElementById('main').style.marginTop = "";
+		document.getElementById('header').style.height = "";
 		document.body.style.overflow = '';
 		document.getElementsByClassName('header')[0].style.marginTop = "";
 		setTimeout(function(){

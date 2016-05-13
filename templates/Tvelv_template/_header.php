@@ -1,5 +1,5 @@
 <div id="loader"></div>
-<div class="header">
+<div class="header" id="header">
 	<span class="h1" id="title">Tvelv</span>
 	<nav id="nav">
 		<a href="/#profile" class="profiletop"><img src="/assets/images/icons/account.svg" class="icon">Профіль</a>
