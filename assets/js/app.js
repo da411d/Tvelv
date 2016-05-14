@@ -13,17 +13,16 @@ function defaultLoader(e){
 	if (xhr.readyState != 4) return;
 	if (xhr.status != 200) {
 		console.log(xhr.status + ': ' + xhr.statusText);
-	} else {
-		html = xhr.responseText;
-		html = trim(explode('dG2Sp6rW', html)[0], explode('dG2Sp6rW', html)[1]);
-		html = html.replace('vI24mDj3', '=');
-		html = html.replace('vI24mDj3', '=');
-
-		html = YmFzZTY0.decode(html);
-		html = explode('=====', html)[1];
-		html = JSON.parse(html);
-		loadData(html);
 	}
+	html = xhr.responseText;
+	html = trim(explode('dG2Sp6rW', html)[0], explode('dG2Sp6rW', html)[1]);
+	html = html.replace('vI24mDj3', '=');
+	html = html.replace('vI24mDj3', '=');
+
+	html = YmFzZTY0.decode(html);
+	html = explode('=====', html)[1];
+	html = JSON.parse(html);
+	loadData(html);
 }
 
 function connect(t, f, p){
@@ -66,20 +65,19 @@ var I = setInterval(function(){
 		if (xhr.readyState != 4) return;
 		if (xhr.status != 200) {
 			console.log(xhr.status + ': ' + xhr.statusText);
-		} else {
-			cl = xhr.responseText;
-			cl = trim(explode('dG2Sp6rW', cl)[0], explode('dG2Sp6rW', cl)[1]);
-			cl = cl.replace('vI24mDj3', '=');
-			cl = cl.replace('vI24mDj3', '=');
+		}
+		cl = xhr.responseText;
+		cl = trim(explode('dG2Sp6rW', cl)[0], explode('dG2Sp6rW', cl)[1]);
+		cl = cl.replace('vI24mDj3', '=');
+		cl = cl.replace('vI24mDj3', '=');
 
-			cl = YmFzZTY0.decode(cl);
-			cl = explode('=====', cl)[1];
-			cl = JSON.parse(cl).main;
-			if(window.location.hash.indexOf('#login')!=0 && cl==0){
-				window.location.hash = '#login?_='+window.location.hash;
-			}else if(cl==1 && window.location.hash.indexOf('#login')==0){
-				window.location.hash = $_GET('_');
-			}
+		cl = YmFzZTY0.decode(cl);
+		cl = explode('=====', cl)[1];
+		cl = JSON.parse(cl).main;
+		if(window.location.hash.indexOf('#login')!=0 && cl==0){
+			window.location.hash = '#login?_='+window.location.hash;
+		}else if(cl==1 && window.location.hash.indexOf('#login')==0){
+			window.location.hash = $_GET('_');
 		}
 	});
 }, 5000);
@@ -121,16 +119,16 @@ loader = {
 
 function loadStudents(e){
 	connect("a=ajax&in=getStudentsByClass-"+e.value, function(e){
-	xhr = e.target;
-	if (xhr.readyState != 4) return;
-	if (xhr.status != 200) {
-		console.log(xhr.status + ': ' + xhr.statusText);
-	} else {
+		xhr = e.target;
+		if (xhr.readyState != 4) return;
+		if (xhr.status != 200) {
+			console.log(xhr.status + ': ' + xhr.statusText);
+		}
 		html = xhr.responseText;
 		html = trim(explode('dG2Sp6rW', html)[0], explode('dG2Sp6rW', html)[1]);
 		html = html.replace('vI24mDj3', '=');
 		html = html.replace('vI24mDj3', '=');
-
+	
 		html = YmFzZTY0.decode(html);
 		html = explode('=====', html)[1];
 		students = JSON.parse(JSON.parse(html).main);
@@ -140,6 +138,5 @@ function loadStudents(e){
 			studentsHTML += '<option value="'+students[a]['Login']+'">'+students[a]['SecondName']+' '+students[a]['Name']+'</option>'
 		}
 		document.getElementsByName('student')[0].innerHTML = studentsHTML;
-	}
-});
+	});
 }
