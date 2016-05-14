@@ -1,10 +1,14 @@
 <? 
 if(isTeacher($login)){
-	$arr = getMarksByParams(['Teacher[=]' => $login]);
+	$arr = getMarksByParams(["LIMIT" => 30, 'Teacher[=]' => $login]);
 }else{
-	$arr = getMarksByParams(['Student[=]' => $login]);
+	$arr = getMarksByParams(["LIMIT" => 30, 'Student[=]' => $login]);
 }
-
+if(count($arr)==30){
+	$aftertext = "Показано тільки останні 30 оцінок";
+}else{
+	$aftertext = false;
+}
 $svg = '<img src="/assets/images/arrow.svg">';
 
 $MarksBlock = '';
@@ -28,5 +32,9 @@ foreach($arr as $a){
 	$MarksBlock .= '<p><time>'.$time[2].'/'.$time[1].'/'.$time[0].", ".rtrim($a['Time'], ':00').'</time></p>';
 	$MarksBlock .= '</div>';
 }
-
+if($aftertext){
+	$MarksBlock .= '<div class="mark_block">';
+	$MarksBlock .= $aftertext;
+	$MarksBlock .= '</div>';
+}
 ?>
