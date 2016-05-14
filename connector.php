@@ -25,11 +25,11 @@ if(file_exists(strtolower(dirname(__FILE__).'/pages/pages/'.$param.'.php'))){
 
 }elseif(file_exists(strtolower(dirname(__FILE__).'/pages/error/'.$param.'.php'))){
 	$url = strtolower(dirname(__FILE__).'/pages/error/'.$param.'.php');
-	//http_response_code($param);
+	http_response_code($param);
 
 }else{
 	$url = strtolower(dirname(__FILE__).'/pages/error/404.php');
-	//http_response_code(404);
+	http_response_code(404);
 }
 
 
