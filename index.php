@@ -9,8 +9,8 @@ error_reporting(0);
 header("Cache-Control:public, max-age=86400");
 header('Content-Type: text/html; charset=utf-8');
 
-if(isset($_GET["param"])){
-	$param = $_GET["param"];
+if(isset($_GET["a"])){
+	$param = $_GET["a"];
 }else{
 	$param = '';
 }
@@ -23,7 +23,7 @@ if(strlen($param)>0){
 	if($param==''){
 		$param='index';
 	}
-	header("Location: /#".$_SERVER['QUERY_STRING']);
+	header("Location: /#".$param);
 }
 
 include dirname(__FILE__)."/templates/".TEMPLATE."/_index.php";

@@ -18,6 +18,5 @@
 		include dirname(__FILE__)."/_header.php";
 	?>
 	<div class="main" id="main" style="opacity:0">
-		<noscript><meta http-equiv="refresh" content="0; url=http://<?=SERVER_NAME;?>/badbrowser"></noscript>
 	</div>
 </body>
