@@ -20,8 +20,8 @@
 </script>
 
 <?php
-$students = db_get("students", ["Login", "Name", "SecondName"], ["Class"=>$class]);
-$all_marks = db_get("marks", ["Date", "Time", "LastEdit", "Subject",  "Student", "Teacher", "Mark", "Info"], ["AND" => ["Class" => $class, "Subject" => $subject]]);
+$students = db::get("students", ["Login", "Name", "SecondName"], ["Class"=>$class]);
+$all_marks = db::get("marks", ["Date", "Time", "LastEdit", "Subject",  "Student", "Teacher", "Mark", "Info"], ["AND" => ["Class" => $class, "Subject" => $subject]]);
 $dates = [];
 foreach($all_marks as $a){
 	if(!in_array($a["Date"], $dates)){
@@ -55,7 +55,7 @@ function mj_getdate($d){
 		echo "<td>".$s["SecondName"]." ".$s["Name"]."</td>";
 		foreach($dates as $d){
 			echo "<td>";
-			$m = db_get(
+			$m = db::get(
 					"marks", 
 					["Date", "Time", "LastEdit", "Subject",  "Student", "Teacher", "Mark", "Info"], 
 					["AND" => 

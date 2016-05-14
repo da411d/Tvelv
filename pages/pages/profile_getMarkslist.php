@@ -1,8 +1,8 @@
 <? 
-if(isTeacher($login)){
-	$arr = getMarksByParams(["LIMIT" => 30, 'Teacher[=]' => $login]);
+if(user::isTeacher($login)){
+	$arr = marks::getMarksByParams(["LIMIT" => 30, 'Teacher[=]' => $login]);
 }else{
-	$arr = getMarksByParams(["LIMIT" => 30, 'Student[=]' => $login]);
+	$arr = marks::getMarksByParams(["LIMIT" => 30, 'Student[=]' => $login]);
 }
 if(count($arr)==30){
 	$aftertext = "Показано тільки останні 30 оцінок";
@@ -20,11 +20,11 @@ usort($arr, function($a, $b){
 foreach($arr as $a){
 	$MarksBlock .= '<div class="mark_block">';
 	$MarksBlock .= '<span class="mark m'.$a['Mark'].'">'.$a['Mark'].'</span>';
-	$MarksBlock .= '<p style="font-weight: 400;">'.getSubjectName($a['Subject']).'</p>';
+	$MarksBlock .= '<p style="font-weight: 400;">'.marks::getSubjectName($a['Subject']).'</p>';
 	$MarksBlock .= '<a href="/#viewprofile?_='.$a['Teacher'].'" class="teacher">';
-	$MarksBlock .= getInfoAboutUser($a['Teacher'])['Name'].' '.getInfoAboutUser($a['Teacher'])['SecondName'].'</a>';
+	$MarksBlock .= user::getInfoAboutUser($a['Teacher'])['Name'].' '.user::getInfoAboutUser($a['Teacher'])['SecondName'].'</a>';
 	$MarksBlock .= '<span class="arrow">'.$svg.'</span><a href="/#viewprofile?_='.$a['Student'].'" class="student">';
-	$MarksBlock .= getInfoAboutUser($a['Student'])['Name'].' '.getInfoAboutUser($a['Student'])['SecondName'].'</a>';
+	$MarksBlock .= user::getInfoAboutUser($a['Student'])['Name'].' '.user::getInfoAboutUser($a['Student'])['SecondName'].'</a>';
 	if($a['Info']){
 		$MarksBlock .= '<p class="coment">'.$a['Info'].'</p>';
 	}

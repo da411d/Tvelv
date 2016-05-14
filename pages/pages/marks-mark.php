@@ -1,12 +1,12 @@
 <?$title="Поставити оцінку";?>
 
 <?
-if(isTeacher()){
+if(user::isTeacher()){
 ?>
 	<div class="mark_block addmark cw1">
 		<?php
 			if($_POST['subject'] AND $_POST['student'] AND ($_POST['mark'] OR $_POST['info'])){
-				$status = addMark($_POST['subject'], $_POST['student'], $_POST['mark'], $_POST['info']);
+				$status = marks::addMark($_POST['subject'], $_POST['student'], $_POST['mark'], $_POST['info']);
 				echo '<span style="background:'.($status?"#7ADC37":"#CB2237").';">'.($status?"Complete":"Failed").'</span>';
 			}
 		?>
@@ -15,23 +15,23 @@ if(isTeacher()){
 
 			<p style="font-weight: 400;">
 			<?
-				$arr = getSubjectPermission();
+				$arr = marks::getSubjectPermission();
 				//usort($arr, function($a, $b){return strnatcmp($a['SubjectCaption'], $b['SubjectCaption']);});
 				echo '<select size="1" name="subject">';
 				foreach($arr as $a){
 					if($a['SubjectName']==$_POST['Subject']){$selected='selected';}else{$selected='';}
-					echo '<option value="'.$a.'" '.$selected.'>'.getSubjectName($a).'</option>';
+					echo '<option value="'.$a.'" '.$selected.'>'.marks::getSubjectName($a).'</option>';
 				}
 				echo '</select>';
 			?>
 			</p>
-			<a href="/#viewprofile?_=<?=getLoginedUsername();?>" class="teacher"><?=getInfoAboutUser(getLoginedUsername())['Name'].' '.getInfoAboutUser(getLoginedUsername())['SecondName'];?></a>
+			<a href="/#viewprofile?_=<?=login::getLoginedUsername();?>" class="teacher"><?=user::getInfoAboutUser(login::getLoginedUsername())['Name'].' '.user::getInfoAboutUser(login::getLoginedUsername())['SecondName'];?></a>
 
 			<span class="arrow"><img src="/assets/images/arrow.svg"></span>
 
 			<select size="1" name="class" onchange="loadStudents(this)">
 				<?php
-					$arr = getAllClasses();
+					$arr = classes::getAllClasses();
 					foreach($arr as $a){
 						echo '<option value="'.$a['ClassName'].'"'.$selected.'>'.$a['ClassCaption'].'</option>';
 					}

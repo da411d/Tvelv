@@ -2,7 +2,7 @@
 	<div class="mark_block addmark">
 	<?php
 		if($_POST['subject'] AND ($_POST['mark'] OR $_POST['info'])){
-			$status = addMark($_POST['subject'], $login, $_POST['mark'], $_POST['info']);
+			$status = marks::addMark($_POST['subject'], $login, $_POST['mark'], $_POST['info']);
 			echo '<span style="background:'.($status?"#7ADC37":"#CB2237").';padding: 4px;border-radius: 2px;">'.($status?"Готово!":"Помилка").'</span>';
 		}
 	?>
@@ -10,20 +10,20 @@
 
 		<p style="font-weight: 400;">
 		<?
-			$arr = getSubjectPermission();
+			$arr = marks::getSubjectPermission();
 			echo '<select size="1" name="subject">';
 			foreach($arr as $a){
 				if($a['SubjectName']==$_POST['Subject']){$selected='selected';}else{$selected='';}
-				echo '<option value="'.$a.'" '.$selected.'>'.getSubjectName($a).'</option>';
+				echo '<option value="'.$a.'" '.$selected.'>'.marks::getSubjectName($a).'</option>';
 			}
 			echo '</select>';
 		?>
 		</p>
-		<a href="/#viewprofile?_=<?=getLoginedUsername();?>" class="teacher"><?=getInfoAboutUser(getLoginedUsername())['Name'].' '.getInfoAboutUser(getLoginedUsername())['SecondName'];?></a>
+		<a href="/#viewprofile?_=<?=login::getLoginedUsername();?>" class="teacher"><?=user::getInfoAboutUser(login::getLoginedUsername())['Name'].' '.user::getInfoAboutUser(login::getLoginedUsername())['SecondName'];?></a>
 
 		<span class="arrow"><img src="/assets/images/arrow.svg"></span>
 
-		<a href="/#viewprofile?_=petrova" class="<?=$login;?>"><?=getInfoAboutUser($login)['Name'].' '.getInfoAboutUser($login)['SecondName'];?></a>
+		<a href="/#viewprofile?_=petrova" class="<?=$login;?>"><?=user::getInfoAboutUser($login)['Name'].' '.user::getInfoAboutUser($login)['SecondName'];?></a>
 
 		<textarea class="coment" name="info"rows="2" style="width: calc(100% - 22px);resize:vertical" placeholder="Коментар"></textarea>
 

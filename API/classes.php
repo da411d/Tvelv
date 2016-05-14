@@ -3,13 +3,13 @@ class classes{
 	//Повертає всі класи
 	public static function getAllClasses(){
 		$database = db::connect();
-		return db_get("classes", ["ClassName", "ClassCaption", "TeacherLogin"]);
+		return db::get("classes", ["ClassName", "ClassCaption", "TeacherLogin"]);
 	}
 
 	//Повертає назву класа по ID
 	public static function getClassName($param){
 		$database = db::connect();
-		return db_get("classes", ["ClassCaption"], ["ClassName[=]" => $param])[0]["ClassCaption"];
+		return db::get("classes", ["ClassCaption"], ["ClassName[=]" => $param])[0]["ClassCaption"];
 	}
 
 	//Повертає клас учня

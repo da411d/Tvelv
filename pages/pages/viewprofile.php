@@ -1,30 +1,30 @@
 <?
 $login = $_GET['_'];
-if(!getLoginedUsername()){
+if(!login::getLoginedUsername()){
 	$eval = "window.location.hash='login';";
-}elseif($login==getLoginedUsername()){
+}elseif($login==login::getLoginedUsername()){
 	$eval = "window.location.hash='profile';";
 }else{
 	$title = 'Профіль';
-	echo '<h1>'.getInfoAboutUser($login)['Name'].' '.getInfoAboutUser($login)['SecondName'];
-	if(getUserPermission($login)=='teacher'){
+	echo '<h1>'.user::getInfoAboutUser($login)['Name'].' '.user::getInfoAboutUser($login)['SecondName'];
+	if(user::getUserPermission($login)=='teacher'){
 		echo '<sup style="background:#ff7777;padding:4px;font-size:50%;color:#ffffff;">Вчитель</sup>';
-	}elseif(getUserPermission($login)=='student'){
+	}elseif(user::getUserPermission($login)=='student'){
 		echo '<sup style="background:#7777ff;padding:4px;font-size:50%;color:#ffffff;">Учень</sup>';
-	}elseif(getUserPermission($login)=='parent'){
+	}elseif(user::getUserPermission($login)=='parent'){
 		echo '<sup style="background:#77ff77;padding:4px;font-size:50%;color:#ffffff;">Батько/мама</sup>';
 	}else{
-		echo '<sup style="background:#ff7777;padding:4px;font-size:50%;color:#ffffff;">'.getUserPermission().'</sup>';
+		echo '<sup style="background:#ff7777;padding:4px;font-size:50%;color:#ffffff;">'.user::getUserPermission().'</sup>';
 	}
 	echo '</h1>';
 	echo '<div class="right_block">';
-	if(isTeacher($login)){
-		$MyMarks = getMarksByParams(['Teacher[=]' => $login]);
+	if(user::isTeacher($login)){
+		$MyMarks = marks::getMarksByParams(['Teacher[=]' => $login]);
 	}else{
-		$MyMarks = getMarksByParams(['Student[=]' => $login]);
+		$MyMarks = marks::getMarksByParams(['Student[=]' => $login]);
 	}
 	if(count($MyMarks)>0){
-			if(isTeacher($login)){
+			if(user::isTeacher($login)){
 				echo '<h1>Інформація про вчителя:</h1>';	
 			}else{
 				echo '<h1>Інформація про учня:</h1>';
@@ -53,7 +53,7 @@ if(!getLoginedUsername()){
 	}
 	echo '</div>';
 }
-if(isTeacher() AND !isTeacher($login)){
+if(user::isTeacher() AND !user::isTeacher($login)){
 	include "viewprofile_addMark.php";
 }
 include "profile_getMarkslist.php";

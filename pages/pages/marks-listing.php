@@ -26,7 +26,7 @@
 				<br>
 				<select size="1" name="subject" onchange="onChange(this)">
 				<?
-					$arr = getAllSubjects();
+					$arr = marks::getAllSubjects();
 					usort($arr, function($a, $b){return strnatcmp($a['SubjectCaption'], $b['SubjectCaption']);});
 					if($_GET['subject'] AND $_GET['subject']!=''){
 						echo '<option selected value="">Очистити</option>';
@@ -46,7 +46,9 @@
 				<br>
 				<select size="1" name="class" onchange="onChange(this)" value="<?=$_GET['class'];?>">
 					<?php
-					$arr = getAllClasses();
+					echo "123456789000";
+					$arr = classes::getAllClasses();
+					echo "123456789";
 					if($_GET['class'] AND $_GET['class']!=''){
 						echo '<option selected value="">Очистити</option>';
 					}else{
@@ -65,9 +67,9 @@
 				<select size="1" name="student" onchange="onChange(this)">
 				<?
 					if($_GET['class']){
-						$arr = getUsersByClass($_GET['class']);
+						$arr = user::getUsersByClass($_GET['class']);
 					}else{
-						$arr = getUserByList('student');
+						$arr = user::getUserByList('student');
 					}
 					usort($arr, function($a, $b){return strnatcmp($a['SecondName'], $b['SecondName']);});
 					if($_GET['student'] AND $_GET['student']!=''){
@@ -89,7 +91,7 @@
 				<br>
 				<select size="1" name="teacher" onchange="onChange(this)">
 				<?
-					$arr = getUserByList('teacher');
+					$arr = user::getUserByList('teacher');
 					usort($arr, function($a, $b){return strnatcmp($a['SecondName'], $b['SecondName']);});
 					if($_GET['teacher'] AND $_GET['teacher']!=''){
 						echo '<option selected value="">Очистити</option>';
@@ -127,11 +129,11 @@
 				if($_GET['teacher'] AND $_GET['teacher']!='')	{$arrOfParams['Teacher'] = $_GET['teacher'];}
 				if($_GET['mark'] AND $_GET['mark']!='')		{$arrOfParams['Mark'] = $_GET['mark'];}
 				if(count($arrOfParams)==0){
-					$arr = getMarksByParams([]);
+					$arr = marks::getMarksByParams([]);
 				}elseif(count($arrOfParams)==1){
-					$arr = getMarksByParams($arrOfParams);
+					$arr = marks::getMarksByParams($arrOfParams);
 				}else{
-					$arr = getMarksByParams(['AND' => $arrOfParams]);
+					$arr = marks::getMarksByParams(['AND' => $arrOfParams]);
 				}
 				if(!$arr){$arr=[];}
 				usort($arr, function($a, $b){
@@ -142,10 +144,10 @@
 				foreach ($arr as $a){
 					$time = explode('-', $a['Date']);
 					echo "<tr><td>".$time[2].'/'.$time[1].'/'.$time[0].", ".rtrim($a['Time'], ':00').
-					"<td>".getSubjectName($a['Subject']).
-					"<td>".getClassName($a['Class']).
-					"<td><a href=\"/#viewprofile?_=".$a['Student']."\">".getInfoAboutUser($a['Student'])['Name'].' '.getInfoAboutUser($a['Student'])['SecondName']."</a>".
-					"<td><a href=\"/#viewprofile?_=".$a['Teacher']."\">".getInfoAboutUser($a['Teacher'])['Name'].' '.getInfoAboutUser($a['Teacher'])['SecondName']."</a>".
+					"<td>".marks::getSubjectName($a['Subject']).
+					"<td>".classes::getClassName($a['Class']).
+					"<td><a href=\"/#viewprofile?_=".$a['Student']."\">".user::getInfoAboutUser($a['Student'])['Name'].' '.user::getInfoAboutUser($a['Student'])['SecondName']."</a>".
+					"<td><a href=\"/#viewprofile?_=".$a['Teacher']."\">".user::getInfoAboutUser($a['Teacher'])['Name'].' '.user::getInfoAboutUser($a['Teacher'])['SecondName']."</a>".
 					"<td>".$a['Mark'].
 					"<td style=\"max-width:12em\">".str_replace("\r\n", "<br>", $a['Info']);
 				}

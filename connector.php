@@ -34,7 +34,7 @@ if(file_exists(strtolower(dirname(__FILE__).'/pages/pages/'.$param.'.php'))){
 }
 
 
-if(!checkLogined() AND $param!='login'){
+if(!login::checkLogined() AND $param!='login'){
 	$title= 'Зачекайте...';
 	$main = "Помилка!";
 	$eval = "window.location.hash = 'login';";

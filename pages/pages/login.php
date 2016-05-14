@@ -1,7 +1,7 @@
 <?$title= 'Ти не ввійшов!';
 $eval = 'document.getElementById(\'nav\').innerHTML = \'<a href="#login"> <img src="/assets/images/icons/login.svg" class="icon">Вхід</a>\';';
-if(checkLogined()){
-	$eval = "window.location.hash='profile;";
+if(login::checkLogined()){
+	$eval = "window.location.hash='profile';";
 }
 
 $login = isset($_POST[_crypt('login', $_POST['secretcode'])])?$_POST[_crypt('login', $_POST['secretcode'])]:false;
@@ -12,7 +12,7 @@ function checkCaptcha($captcha_url){
 	if(file_get_contents($captcha_url)=="true"){return true;}return false;
 }
 
-if(getAttempts($login)<=2){
+if(login::getAttempts($login)<=2){
 	$allow = true;
 }else{
 	if(checkCaptcha($captcha_url)){
@@ -23,9 +23,9 @@ if(getAttempts($login)<=2){
 }
 
 if($login AND $pwd AND (!$POST['login'] AND !$POST['password'])){
-	if(isPasswordCorrect($login, $pwd) AND $allow){
-		resetAttempts($login);
-		$token = loginMe($login);
+	if(login::isPasswordCorrect($login, $pwd) AND $allow){
+		login::resetAttempts($login);
+		$token = login::loginMe($login);
 		$title = 'Зачекайте...';
 		if($_GET['_']){
 			$eval = "window.location.hash='".$_GET['_']."'; localStorage.setItem('token', '".$token."');window.location.reload();";
@@ -33,7 +33,7 @@ if($login AND $pwd AND (!$POST['login'] AND !$POST['password'])){
 			$eval = "window.location.hash='profile'; localStorage.setItem('token', '".$token."');window.location.reload();";
 		}
 	}elseif($allow){
-		addAttemptsOne($login);
+		login::addAttemptsOne($login);
 		echo "<p>Неправильний пароль!</p>";
 	}
 }
@@ -53,13 +53,13 @@ echo $keyval;
 		<p><input type="password" name="<?=_crypt('pass', $keyval);?>"><input type="hidden" name="password"></p>
 	</label>
 	<?
-		if(getAttempts($login)>2){
-			echo '<p>Ти ввійшов(-ла) невдало '.getAttempts($login).' разів. Тепер тобі треба ввести капчу.';
+		if(login::getAttempts($login)>2){
+			echo '<p>Ти ввійшов(-ла) невдало '.login::getAttempts($login).' разів. Тепер тобі треба ввести капчу.';
 			echo '<div id="VictoriaCaptcha"></div></p>';
 			$eval .= 'VictoriaCaptcha(\'VictoriaCaptcha\')';
 		}
 	?>
 	
 	<p><input type="submit"value="Ввійти!"></p>
-	<input type="hidden" name="ЩобСкучноНеБуло" value="<?=_crypt(sha1(getPasswordSalt($code['a'])).sha1(getPasswordSalt($code['a'])), '228626');?>">
+	<input type="hidden" name="ЩобСкучноНеБуло" value="<?=_crypt(sha1(login::getPasswordSalt($code['a'])).sha1(login::getPasswordSalt($code['a'])), '228626');?>">
 </form>

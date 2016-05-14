@@ -1,8 +1,8 @@
 <?$title="Оцінки";?>
 <?
-$cnt = isTeacher()?3:2;
+$cnt = user::isTeacher()?3:2;
 ?>
-<?if(isTeacher()){?>
+<?if(user::isTeacher()){?>
 <div class="card cw<?=$cnt;?>" onmousedown="CClick(this, event)">
 	<div class="img-placeholder">
 		<img src="/assets/images/red-pen.png">

@@ -1,19 +1,19 @@
 <? 
-$login = getLoginedUsername();
+$login = login::getLoginedUsername();
 
-if(!checkLogined()){
+if(!login::checkLogined()){
 	$title= 'Зачекайте...';
 	$eval = "window.location.hash = 'login';";
 }else{
 	$title = 'Профіль';
 }
-echo '<h1>Привіт, '.getInfoAboutUser($login)['Name'].' '.getInfoAboutUser($login)['SecondName'].'!</h1>';
+echo '<h1>Привіт, '.user::getInfoAboutUser($login)['Name'].' '.user::getInfoAboutUser($login)['SecondName'].'!</h1>';
 ?>
 
 <div class="right_block">
 <?
-if(getUserClassmates($login) AND !isTeacher()){
-	$myClassmates = getUserClassmates($login);
+if(user::getUserClassmates($login) AND !user::isTeacher()){
+	$myClassmates = user::getUserClassmates($login);
 	
 	
 	usort($myClassmates , function($a, $b){return strnatcmp($a['SecondName'], $b['SecondName']);});
@@ -27,15 +27,15 @@ if(getUserClassmates($login) AND !isTeacher()){
 
 
 
-if(isTeacher()){
-	$MyMarks = getMarksByParams(['Teacher[=]' => $login]);
+if(user::isTeacher()){
+	$MyMarks = marks::getMarksByParams(['Teacher[=]' => $login]);
 	
 }else{
-	$MyMarks = getMarksByParams(['Student[=]' => $login]);
+	$MyMarks = marks::getMarksByParams(['Student[=]' => $login]);
 }
 
 if(count($MyMarks)>0){
-	if(isTeacher()){
+	if(user::isTeacher()){
 		$infoHTML = '<h1>Інформація про вчителя:</h1>';	
 	}else{
 		$infoHTML = '<h1>Інформація про учня:</h1>';
@@ -65,6 +65,6 @@ if(count($MyMarks)>0){
 }
 echo '</div>';
 
-$login = getLoginedUsername();
+$login = login::getLoginedUsername();
 include "profile_getMarkslist.php";
 echo $MarksBlock;

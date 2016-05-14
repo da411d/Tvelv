@@ -3,7 +3,7 @@
 		<p>
 			<select size="1" id="class">
 			<?php
-				$arr = getAllClasses();
+				$arr = classes::getAllClasses();
 				foreach($arr as $a){
 					echo '<option value="'.$a['ClassName'].'"'.$selected.'>'.$a['ClassCaption'].'</option>';
 				}
@@ -11,7 +11,7 @@
 			</select>
 			<select size="1" id="subject">
 			<?
-				$arr = getAllSubjects();
+				$arr = marks::getAllSubjects();
 				echo '';
 				foreach($arr as $a){
 					$selected = $subject&&$a['SubjectName']==$subject?"selected":"";
