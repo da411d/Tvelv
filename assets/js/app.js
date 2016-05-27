@@ -15,12 +15,6 @@ function defaultLoader(e){
 		console.log(xhr.status + ': ' + xhr.statusText);
 	}
 	html = xhr.responseText;
-	html = trim(explode('dG2Sp6rW', html)[0], explode('dG2Sp6rW', html)[1]);
-	html = html.replace('vI24mDj3', '=');
-	html = html.replace('vI24mDj3', '=');
-
-	html = YmFzZTY0.decode(html);
-	html = explode('=====', html)[1];
 	html = JSON.parse(html);
 	loadData(html);
 }
@@ -67,12 +61,6 @@ var I = setInterval(function(){
 			console.log(xhr.status + ': ' + xhr.statusText);
 		}
 		cl = xhr.responseText;
-		cl = trim(explode('dG2Sp6rW', cl)[0], explode('dG2Sp6rW', cl)[1]);
-		cl = cl.replace('vI24mDj3', '=');
-		cl = cl.replace('vI24mDj3', '=');
-
-		cl = YmFzZTY0.decode(cl);
-		cl = explode('=====', cl)[1];
 		cl = JSON.parse(cl).main;
 		if(window.location.hash.indexOf('#login')!=0 && cl==0){
 			window.location.hash = '#login?_='+window.location.hash;
@@ -125,12 +113,6 @@ function loadStudents(e){
 			console.log(xhr.status + ': ' + xhr.statusText);
 		}
 		html = xhr.responseText;
-		html = trim(explode('dG2Sp6rW', html)[0], explode('dG2Sp6rW', html)[1]);
-		html = html.replace('vI24mDj3', '=');
-		html = html.replace('vI24mDj3', '=');
-	
-		html = YmFzZTY0.decode(html);
-		html = explode('=====', html)[1];
 		students = JSON.parse(JSON.parse(html).main);
 		loadData(html);
 		studentsHTML = '';

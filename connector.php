@@ -55,13 +55,4 @@ $request = array(
 	'response' => $response					//response
 );
 
-$return = json_encode($request);
-$return = 'XQvI24mDj3XQvI24mDj3vI24vI24====='.$return.'=====XQvI24mDj3vXQvI24mDj3vI24I24';
-$return = base64_encode($return);
-$return = rtrim($return, '=');
-$return = str_replace('=', 'vI24mDj3', $return);
-
-function getRandStr(){return rtrim(base64_encode(mt_rand()) ,'=');}$secret = getRandStr();
-
-$return = $secret.$return.'dG2Sp6rW'.$secret;
 echo $return;
