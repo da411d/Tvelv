@@ -2,6 +2,8 @@
 class user{		
 	//Отримати дані про користувача
 	public static function getInfoAboutUser($login){
+		$login = htmlspecialchars((string)$login);
+
 		$database = db::connect();
 		switch (db::get("users", ["Permission"], ["Login[=]" => $login])[0]['Permission']) {
 			case student:
@@ -19,6 +21,8 @@ class user{
 
 	//Отримати список всіх учнів/вчителів/батьків
 	public static function getUserByList($in='student'){
+		$in = htmlspecialchars((string)$in);
+
 		$database = db::connect();
 		switch ($in) {
 			case student:
@@ -40,10 +44,9 @@ class user{
 	}
 
 	//Перевіряє чи є користувач вчителем
-	public static function isTeacher($login=''){
-		if(!$login){
-			$login = login::getLoginedUsername();
-		}
+	public static function isTeacher($login=false){
+		$login = $login?htmlspecialchars((string)$login):login::getLoginedUsername();
+
 		if(db::get("users", ["Permission"], ["Login[=]" => $login])[0]['Permission']=='teacher'){
 			return 1;
 		}else{
@@ -52,10 +55,9 @@ class user{
 	}
 
 	//Повертає права користувача
-	public static function getUserPermission($login = FALSE){
-		if(!$login){
-			$login = login::getLoginedUsername();
-		}
+	public static function getUserPermission($login = false){
+		$login = $login?htmlspecialchars((string)$login):login::getLoginedUsername();
+
 		if(db::get("users", ["Permission"], ["Login[=]" => $login])[0]['Permission']){
 			return db::get("users", ["Permission"], ["Login[=]" => $login])[0]['Permission'];
 		}else{
@@ -65,11 +67,14 @@ class user{
 
 	//Повертає список учнів певного класу
 	public static function getStudentsByClass($class){
+		$class = htmlspecialchars((string)$class);
+
 		return db::get("students", ["Login", "Name", "SecondName"], ["Class[=]" => $class]);
 	}
 
 	//Повертає список однокласників
 	public static function getUserClassmates($login){
+		$login = htmlspecialchars((string)$login);
 		if(user::getUserPermission($login) == 'student'){
 			$class = db::get("students", ["Login", "Name", "SecondName", "Class"], ["Login[=]" => $login])[0]["Class"];
 		}else{

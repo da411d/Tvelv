@@ -1,7 +1,12 @@
 <?
 class marks{
 	//Додає оцінку
-	public static function addMark($subject, $student, $mark='', $info=''){
+	public static function addMark($subject, $student, $mark=false, $info=false){
+		$subject = htmlspecialchars((string)$subject);
+		$student = htmlspecialchars((string)$student);
+		$mark = $mark?htmlspecialchars((string)$mark):false;
+		$info = $mark?htmlspecialchars((string)$info):false;
+
 		$database = db::connect();
 		$teacher = user::isTeacher()?login::getLoginedUsername():false;
 
@@ -68,8 +73,9 @@ class marks{
 	}
 
 	//Повертає назву предмета по ID
-	public static function getSubjectName($param){
+	public static function getSubjectName($name){
+		$name = htmlspecialchars((string)$name);
 		$database = db::connect();
-		return db::get("subjects", ["SubjectName","SubjectCaption", "SubjectDescription"], ["SubjectName[=]" => $param])[0]["SubjectCaption"];
+		return db::get("subjects", ["SubjectName","SubjectCaption", "SubjectDescription"], ["SubjectName[=]" => $name])[0]["SubjectCaption"];
 	}
 }

@@ -2,6 +2,8 @@
 class login{
 	//Функція логінить нас на тиждень
 	public static function loginMe($login){
+		$login = htmlspecialchars((string)$login);
+
 		$key = _crypt(md5($_SERVER['REMOTE_ADDR'].$_SERVER['HTTP_USER_AGENT']).md5(date("Ym")), 'SECRET_PASS');
 		$arr = ['a' => $login, 'c' => substr(sha1(login::getPasswordSalt($login)),0,8)];
 		$code = _crypt(json_encode($arr), $key);
@@ -42,18 +44,25 @@ class login{
 
 	//Завершує всі сессії крім текучої
 	public static function leaveAllSessions($login){
+		$login = htmlspecialchars((string)$login);
+
 		login::reloadUserPassword($login);
 		return login::loginMe($login);
 	}
 
 	//Повертає сіль пароля
 	public static function getPasswordSalt($login){
+		$login = htmlspecialchars((string)$login);
+
 		$database = db::connect();
 		return db::get("users", ["Salt"], ["Login[=]" => $login])[0]["Salt"];
 	}
 
 	//Перевіряє правильність паролю
 	public static function isPasswordCorrect($login, $password){
+		$login = htmlspecialchars((string)$login);
+		$password = htmlspecialchars((string)$password);
+
 		sleep(1);
 		$database = db::connect();
 
@@ -74,6 +83,13 @@ class login{
 
 	//Реєструє користувача
 	public static function registerUser($login, $password, $permission, $name, $secondname, $class){
+		$login 			= htmlspecialchars((string)$login);
+		$password 		= htmlspecialchars((string)$password);
+		$permission 		= htmlspecialchars((string)$permission);
+		$name 			= htmlspecialchars((string)$name);
+		$secondname 		= htmlspecialchars((string)$secondname);
+		$class 			= htmlspecialchars((string)$class);
+
 		$database = db::connect();
 		$password = toQwerty($password);
 		$salt = str_replace(array("/", "=", "+"), "", base64_encode(hex2bin(   sha1(rand()).sha1(rand()).sha1(rand()).sha1(rand()).sha1(rand()).sha1(rand())   )));
@@ -110,6 +126,10 @@ class login{
 
 	//Змінити пароль
 	public static function editUserPassword($login, $password, $new){
+		$login 			= htmlspecialchars((string)$login);
+		$password 		= htmlspecialchars((string)$password);
+		$new 			= htmlspecialchars((string)$new);
+
 		$database = db::connect();
 
 		$test = db::get("users", ["Login","Password","Salt"], ["Login[=]" => $login]);
@@ -128,6 +148,8 @@ class login{
 
 	//Функція залишає пароль попереднім, але перешифровує і міняє сіль
 	public static function reloadUserPassword($login){
+		$login = htmlspecialchars((string)$login);
+
 		$database = db::connect();
 
 		$test = db::get("users", ["Login","Password","Salt"], ["Login[=]" => $login]);
@@ -144,6 +166,7 @@ class login{
 
 	//Повертає кількість невдалих спроб користувача залогінитись
 	public static function getAttempts($login){
+		$login = htmlspecialchars((string)$login);
 		$database = db::connect();
 		return db::get("users", ["Attempt"], ["Login[=]" => $login])[0]["Attempt"];
 	}
@@ -156,6 +179,7 @@ class login{
 
 	//Обнуляє лічильник невдалих спроб (коли залогінився)
 	public static function resetAttempts($login){
+		$login = htmlspecialchars((string)$login);
 		$database = db::connect();
 		return $database->update("users", ["Attempt" => 0], ["Login[=]" => $login]);
 	}
