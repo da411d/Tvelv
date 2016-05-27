@@ -1,5 +1,6 @@
 <?php 
-$dh = opendir(dirname(__FILE__).'/classes');
+$dh = opendir(dirname(__FILE__).'/classes/');
+$files = [];
 while (false !== ($filename = readdir($dh))) {
     $files[] = $filename;
 }
