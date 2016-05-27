@@ -8,12 +8,26 @@ function calback($content){
 }
 ob_start("calback");
 
+$feature = (isset($_GET['f']) AND $_GET['f'])?'/features/'.$_GET['f']:false;
 
-include(dirname(__FILE__)."/script.js");
-echo";";
-include(dirname(__FILE__)."/app.js");
-echo";";
-include(dirname(__FILE__)."/useful.js");
+if($feature){
+	$dir = dirname(__FILE__).'/'.$feature.'/';
+}else{
+	$dir = dirname(__FILE__).'/scripts/';
+}
+$dh = opendir($dir);
+$files = [];
+while (false !== ($filename = readdir($dh))) {
+    $files[] = $filename;
+}
+sort($files);
+$arr = array();
+foreach ($files as $f) { 
+	if($f AND !is_dir($f) AND !strpos(' '.$f, '!')){
+		include($dir.$f);
+		echo ";";
+	} 
+}
 
 ?>
 

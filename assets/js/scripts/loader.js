@@ -53,6 +53,11 @@ function loadData(data){
 		localStorage.setItem('token', data['token']);
 		window.location.reload();
 	}
+	if(data['scripts']){
+		for(i=0;i<data['scripts'].length;i++){
+			addScript(data['scripts'][i]);
+		}
+	}
 	loader.end();
 }
 
@@ -110,30 +115,9 @@ loader = {
 		clearInterval(document.titleLoader);
 	}
 };
-
-(function() {
-	document.addEventListener('submit', function(event) {
-		if(event.target.tagName.toLowerCase()=='form'){
-			event.preventDefault();
-			submitForm(event);
-		}
-	}, false);
-})();
-
-function loadStudents(e){
-	connect("a=ajax&in=getStudentsByClass-"+e.value, function(e){
-		xhr = e.target;
-		if (xhr.readyState != 4) return;
-		if (xhr.status != 200) {
-			console.log(xhr.status + ': ' + xhr.statusText);
-		}
-		html = xhr.responseText;
-		students = JSON.parse(JSON.parse(html).main);
-		loadData(html);
-		studentsHTML = '';
-		for(a in students){
-			studentsHTML += '<option value="'+students[a]['Login']+'">'+students[a]['SecondName']+' '+students[a]['Name']+'</option>'
-		}
-		document.getElementsByName('student')[0].innerHTML = studentsHTML;
-	});
+function addScript(s){
+	var script = document.createElement('script');
+	script.type = 'text/javascript';
+	script.src = s;
+	document.head.appendChild(script);
 }
