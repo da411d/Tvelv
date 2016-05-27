@@ -2,6 +2,7 @@
 if(!in_array(login::getLoginedUsername(), json_decode(ADMIN_ID))){
 	$eval = "window.location.hash='403;";
 }
+$_['scripts'] = ['/assets/js/script.js?f=reg'];
 ?>
 <?$title="Реєстрація";?>
 <?
@@ -20,46 +21,9 @@ if($_POST['act']== "reg" AND $_POST['login'] ){
 }
 ?>
 <form method="post">
-<input type="hidden" name="act" value="reg">
-
-<p>
-	<label>
-		<p>Логін:</p>
-		<p><input type="text" name="login" placeholder="LOGIN"required></p>
-	</label>
-</p>
-
-<p>
-	<label>
-		<p>Пароль:</p>
-		<p><input type="text" name="password" placeholder="PASSWORD"required></p>
-	</label>
-</p>
-
-<p>
-	<p>Тип акаутту</p>
-	<label><input type="radio" name="permission" value="student"required>Учень</label>
-	<label><input type="radio" name="permission" value="teacher"required>Вчитель</label>
-	<label><input type="radio" name="permission" value="parent"required>Батько</label>
-</p>
-
-<p>
-	<label>
-		<p>Ім'я</p>
-		<p><input type="text" name="name" placeholder="Name"required></p>
-	</label>
-</p>
-<p>
-	<label>
-		<p>Прізвище</p>
-		<p><input type="text" name="second" placeholder="Second name"required></p>
-	</label>
-</p>
-<p>
-	<label>
-		<p>Клас</p>
-		<p><input type="text" name="class" placeholder="Class"required></p>
-	</label>
-</p>
-<input type="submit">
+	<p><input type="radio" name="acctype" value="teacher" onchange="onChange(this)" id="t"><label for="t">Teahcer</label></p>
+	<p><input type="radio" name="acctype" value="student" onchange="onChange(this)" id="s"><label for="s">Student</label></p>
+	<div id="formContainer">
+	</div>
+	<input type="submit">
 </form>
