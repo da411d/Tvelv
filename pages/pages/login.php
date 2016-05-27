@@ -28,9 +28,11 @@ if($login AND $pwd AND (!$POST['login'] AND !$POST['password'])){
 		$token = login::loginMe($login);
 		$title = 'Зачекайте...';
 		if($_GET['_']){
-			$eval = "window.location.hash='".$_GET['_']."'; localStorage.setItem('token', '".$token."');window.location.reload();";
+			$_['token'] = $token;
+			$eval = "window.location.hash='".$_GET['_']."';";
 		}else{
-			$eval = "window.location.hash='profile'; localStorage.setItem('token', '".$token."');window.location.reload();";
+			$_['token'] = $token;
+			$eval = "window.location.hash='".$_GET['_']."';";
 		}
 	}elseif($allow){
 		login::addAttemptsOne($login);

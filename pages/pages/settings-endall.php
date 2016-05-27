@@ -1,6 +1,11 @@
 <?
 $title = "Завершити всі сессії.";
-$token = login::leaveAllSessions(login::getLoginedUsername());
-$eval = "localStorage.setItem('token', '".$token."');";
-?>
-Готово!
+if(isset($_GET['_']) AND $_GET['_']=='_'){
+	?>
+	Готово!
+	<?php
+}else{
+	$token = login::leaveAllSessions(login::getLoginedUsername());
+	$_['token'] = $token;
+	$eval = "window.location.hash='settings/endall?_=_';";
+}
