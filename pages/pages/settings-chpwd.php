@@ -16,7 +16,7 @@ if($_POST['login']==login::getLoginedUsername() AND $_POST['pass'] AND $_POST['n
 <form method="post">
 <label>
 	<p>Логін:</p>
-	<p><input type="text" name="login" value="<?=getLoginedUsername()?>" readonly></p>
+	<p><input type="text" name="login" value="<?=login::getLoginedUsername()?>" readonly></p>
 </label>
 
 <label>
