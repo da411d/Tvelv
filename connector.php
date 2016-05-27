@@ -33,26 +33,25 @@ if(file_exists(strtolower(dirname(__FILE__).'/pages/pages/'.$param.'.php'))){
 	http_response_code(404);
 }
 
+$_ = array();
 
 if(!login::checkLogined() AND $param!='login'){
-	$title= 'Зачекайте...';
-	$main = "Помилка!";
-	$eval = "window.location.hash = 'login';";
+	$_['title'] = 'Зачекайте...';
+	$_['main'] = "0";
+	$_['eval'] = "window.location.hash = 'login';";
 }else{
+	$title = "";
+	$main = "";
+	$eval = "";
+
 	ob_start();
 		include($url);
 		$main = ob_get_contents();
 	ob_end_clean();
+
+	if(isset($title) && strlen($title)>0)		{	$_['title'] = $title;		}
+	if(isset($main) && strlen($main)>0)	{	$_['main'] = $main;	}
+	if(isset($eval) && strlen($eval)>0)		{	$_['eval'] = $eval;		}
 }
-
-
-$eval = isset($eval)&&strlen($eval)>1?$eval:"";
-$response = isset($response)&&strlen($response)>1?$response:"";
-$request = array(
-	'header'     => $title,						//Header
-	'main'        => $main,						//innerHTML
-	'eval'         => $eval,						//eval
-	'response' => $response					//response
-);
-
+$return = json_encode($_);
 echo $return;
