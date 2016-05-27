@@ -1,5 +1,4 @@
 function Load(){
-	document.title = 'Завантаження';
 	if(!window.location.hash){
 		window.location.hash='#profile';
 	}
@@ -40,15 +39,19 @@ function submitForm(event){
 }
 
 function loadData(data){
-	if(data['header']){
-		document.getElementById('title').innerHTML = data['header'];
-		document.title = data['header'];
+	if(data['title']){
+		document.getElementById('title').innerHTML = data['title'];
+		document.title = data['title'];
 	}
 	if(data['main']){
 		document.getElementById('main').innerHTML = data['main'];
 	}
 	if(data['eval']){
 		eval(data['eval']);
+	}
+	if(data['token']){
+		localStorage.setItem('token', data['token']);
+		window.location.reload();
 	}
 	loader.end();
 }
@@ -63,9 +66,10 @@ var I = setInterval(function(){
 		cl = xhr.responseText;
 		cl = JSON.parse(cl).main;
 		if(window.location.hash.indexOf('#login')!=0 && cl==0){
-			window.location.hash = '#login?_='+window.location.hash;
+			window.location.hash = '#login?_='+window.location.hash.substr(1);
 		}else if(cl==1 && window.location.hash.indexOf('#login')==0){
 			window.location.hash = $_GET('_');
+			window.location.reload();
 		}
 	});
 }, 5000);
