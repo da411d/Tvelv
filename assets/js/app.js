@@ -84,6 +84,15 @@ loader = {
 		})()
 		document.getElementsByClassName('header')[0].style.marginTop = "50px";
 		document.getElementById('loader').className='';
+
+		var titleLoadInterator = 0;
+		clearInterval(document.titleLoader?document.titleLoader:-1);
+		document.titleLoader = setInterval(function(){
+			dots = "";
+			for(i=0;i<titleLoadInterator%4;i++)dots+='.';
+			document.title = 'Завантаження'+dots;
+			titleLoadInterator++;
+		}, 500);
 	},
 	end: function(){
 		document.getElementById('main').style.opacity = 1;
@@ -93,7 +102,9 @@ loader = {
 		document.getElementsByClassName('header')[0].style.marginTop = "";
 		setTimeout(function(){
 			document.getElementById('loader').className='hidden';
-		}, 500);}
+		}, 500);
+		clearInterval(document.titleLoader);
+	}
 };
 
 (function() {
