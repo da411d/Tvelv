@@ -1,6 +1,8 @@
 <?php
 header('content-type: text/js');
 include "../../_functions.php";
+include "../../_classes.php";
+include "../../_config.php";
 
 function calback($content){
 	return $content;

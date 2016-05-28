@@ -4,4 +4,5 @@ include "_classes.php";
 include "_config.php";
 set_time_limit(0);
 
-print_r(__FILE__);
+$arr = ['a'=>'1', 'b'=>'2'];
+foreach($arr as $a){echo $a;}

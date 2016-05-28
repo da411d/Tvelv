@@ -2,7 +2,7 @@
 include "_functions.php";
 include "_classes.php";
 include "_config.php";
-error_reporting(0);
+//error_reporting(0);
 
 if(isset($_GET["a"])){
 	$param = $_GET["a"];
