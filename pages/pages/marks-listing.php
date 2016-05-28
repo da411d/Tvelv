@@ -4,6 +4,7 @@
 	for (var i = 0; i < elements.length; i++) {
 		DoubleScroll(elements[i]);
 	}";
+	$_['scripts'] = ['/assets/js/script.js?f=mlist'];
 ?>
 <link rel="stylesheet" type="text/css" href="http://tvelv/assets/css/style.css?f=viewmarks" async="async">
 
