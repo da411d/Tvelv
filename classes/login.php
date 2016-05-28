@@ -82,45 +82,45 @@ class login{
 	}
 
 	//Реєструє користувача
-	public static function registerUser($login, $password, $permission, $name, $secondname, $class){
-		$login 			= htmlspecialchars((string)$login);
-		$password 		= htmlspecialchars((string)$password);
-		$permission 		= htmlspecialchars((string)$permission);
-		$name 			= htmlspecialchars((string)$name);
-		$secondname 		= htmlspecialchars((string)$secondname);
-		$class 			= htmlspecialchars((string)$class);
-
+	public static function registerUser($data){
+		foreach($data as $d){
+			$d = htmlspecialchars((string)$d);
+		}
+		$tables = [
+			'primary' => ["login","password","permission"],
+			'teacher' => ["login","name","secondname","class","subjectPermission"],
+			'student' => ["login","name","secondname","class"]
+		];
+		foreach($tables['primary'] as $n){
+			if(!(   isset($_POST[$n]) AND strlen($_POST[$n])>0   )){
+				return false;
+			}
+		}
+		foreach($tables[$permission] as $n){
+			if(!(   isset($_POST[$n]) AND strlen($_POST[$n])>0   )){
+				return false;
+			}
+		}
+		$insertData = [];
+		foreach($data as $d){
+			if(in_array($d, $tables[$permission]) AND !in_array($d, $tables['primary'])){
+				$insertData[$d] = $data[$d];
+			}
+		}
+		
 		$database = db::connect();
-		$password = toQwerty($password);
+		$data['password'] = toQwerty($data['password']);
 		$salt = str_replace(array("/", "=", "+"), "", base64_encode(hex2bin(   sha1(rand()).sha1(rand()).sha1(rand()).sha1(rand()).sha1(rand()).sha1(rand())   )));
 
-		$dbineed='students';
-		switch ($permission) {
-			case student:
-				$dbineed='students';
-				break;
-			case teacher:
-				$dbineed='teachers';
-				break;
-			case parent:
-				$dbineed='parents';
-				break;
-		}
-		if(!getInfoAboutUser($login)){
+		if(!user::getInfoAboutUser($login)){
 			$udb = $database->insert("users", [
-					"Login" => $login,
-					"Password" => _crypt($password, $salt),
+					"Login" => $data['login'],
+					"Password" => _crypt($data['password'], $salt),
 					"Salt" => $salt,
-					"Permission" => $permission
+					"Permission" => $data['permission']
 				]);
-			
-			$ddb = $database->insert($dbineed, [
-					"Login" => $login,
-					"Name" => antiXSS($name),
-					"SecondName" => $secondname,
-					"Class" => $class
-				]);
-			}
+			$ddb = $database->insert($permission.'s', $insertData);
+		}
 		if($udb AND $ddb){return true;}else{return false;}
 	}
 
